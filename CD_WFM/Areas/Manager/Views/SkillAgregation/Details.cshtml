@@ -1,0 +1,51 @@
+﻿@model WFM.Common.tbWFMSkillAgregation
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>tbWFMSkillAgregation</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.vAgregationName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.vAgregationName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.vTenantID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.vTenantID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.vTeanantSpeicalFlag)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.vTeanantSpeicalFlag)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dtCreated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dtCreated)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.iSkillAgregationID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

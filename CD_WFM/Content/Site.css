@@ -1,0 +1,69 @@
+﻿/* styles for validation helpers */
+.field-validation-error {
+    color: #b94a48;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+input.input-validation-error {
+    border: 1px solid #b94a48;
+    background-color: #ffeeee; 
+}
+
+.input-validation-error {
+    border: 1px solid #b94a48;
+    background-color: #ffeeee;
+}
+
+input[type="checkbox"].input-validation-error {
+    border: 0 none;
+}
+
+.validation-summary-errors {
+    color: red;
+    background-color: lightyellow;
+    border: 1px solid brown;
+    padding: 8px 0 0px 0;
+    font-size:smaller;    
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+
+.red {
+    color: #F00;
+}
+
+.blue {
+    color: blue;
+}
+
+.leftCaption {
+    width: 150px;
+}
+
+.sm {
+    font-size: 11px;
+    color: #505abc;
+    margin-left: 10px;
+}
+
+.p_title {
+    color: #f7600c;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.folding {
+    margin-right: 5px;
+}
+
+.thUpTitle {
+    background-color: #eff2d8;    
+    white-space: nowrap;
+    vertical-align:middle;
+}

@@ -1,0 +1,29 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+@{
+    ViewBag.Title = "エラー";
+}
+
+<section class="content-header">
+    <h1>
+        処理エラー
+        <small>エラー</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="@Url.Content("~/")"><i class="fa fa-home"></i>ホーム</a></li>        
+    </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+    <br />
+    <h3>
+        <b>申し訳ございません、要求の処理中にエラーが発生しました。</b>
+    </h3><br />
+    <p>
+        <b>ErrorMessage: </b><br />
+        @Html.Raw(@ViewBag.Message)
+    </p>
+
+</section>
+<!-- /.content -->

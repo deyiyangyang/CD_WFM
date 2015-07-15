@@ -1,0 +1,91 @@
+﻿@model WFM.Common.tbWFMSkillAgregation
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript" src="~/Content/js/plugins/duallistbox/jquery.bootstrap-duallistbox.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#selectSkillGroup').bootstrapDualListbox({
+            nonSelectedListLabel: '未選択',
+            selectedListLabel: '選択',
+            preserveSelectionOnMove: 'moved',
+            moveOnSelect: true
+        });
+    });
+</script>
+<section class="content-header">
+    <h1>
+        スキルアグリゲーション情報
+        <small>スキルアグリゲーションを創建</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="@Url.Content("~/")"><i class="fa fa-home"></i>ホーム</a></li>
+        <li class="active"><a href="@Url.Content("~/manager/shiftAgent")">スキルアグリゲーション情報</a></li>
+    </ol>
+</section>
+<section class="content">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="row">
+            <div class="col-md-9" style="margin-left:15px;">
+                <div class="box box-primary" style="width:950px;">
+                    <div class="box-header">
+                        <i class="fa fa-search"></i>
+                        <h3 class="box-title">スキルアグリゲーションの創建</h3>
+                        <div class="box-tools pull-right">
+                            <button class="btn btn-primary btn-xs" data-widget="collapse" type="button"><i class="fa fa-minus"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body" style="display: block;">
+                        <table class="table table-bordered">
+                            <tr>
+                                <th style="width: 100px;vertical-align: middle;" class="thUpTitle">
+                                    @Html.LabelFor(model => model.vAgregationName, htmlAttributes: new { @class = "control-label col-md-2" })
+                                </th>
+                                <td>
+                                    @Html.EditorFor(model => model.vAgregationName, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.vAgregationName, "", new { @class = "text-danger" })
+                                </td>
+
+
+                            </tr>
+                            <tr>
+                                <th style="width: 100px;vertical-align: middle;" class="thUpTitle">
+                                    スキルグループ
+                                </th>
+                                <td>@Html.ListBox("selectSkillGroup", (List<SelectListItem>)ViewData["lstSkillGroup"], new { style = "height:450px" })</td>
+                            </tr>
+                            <tr>
+                                <th style="width: 100px;vertical-align: middle;" class="thUpTitle"></th>
+                                <td style="text-align:center"><input type="submit" value="Create" class="btn btn-default" /></td>
+                            </tr>
+                        </table>
+                    </div><!-- /.box-body -->
+                </div>
+            </div>
+        </div>
+
+        @*<div class="col-sm-8">
+
+            </div>*@
+
+
+
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</section>
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

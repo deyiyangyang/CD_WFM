@@ -1,0 +1,6 @@
+﻿@model String
+<div style="visibility:hidden">
+    <input type="submit" name="@Model" id="@Model" style="display: none" />
+    <input type="Hidden" value="@ViewData["View_SortField"]" id="sortIndex" name="sortIndex" />
+    <input type="Hidden" value="@ViewData["View_Sort"]"  id="sort" name="sort" />
+</div>

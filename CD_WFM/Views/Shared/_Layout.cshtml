@@ -1,0 +1,324 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <title>@ViewBag.Title - @WFM.Common.AppConst.Const_SiteName</title>
+    <!-- font Awesome -->
+    <link href="@Url.Content("~/Content/css/font-awesome.min.css")" rel="stylesheet" type="text/css" />
+    <!-- Ionicons -->
+    <link href="@Url.Content("~/Content/css/ionicons.min.css")" rel="stylesheet" type="text/css" />
+    <!-- Theme style -->
+    <link href="@Url.Content("~/Content/css/AdminLTE.css")" rel="stylesheet" type="text/css" />
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/jqueryuicss")
+    @Styles.Render("~/Content/css/duallistbox/bootstrap-duallistbox.css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/common")
+
+    <script src="@Url.Content("~/Scripts/DDLValidation.js")" type="text/javascript"></script>
+    @RenderSection("scripts", required: false)
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.balloon.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.inline.js")"
+            type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/DateHelper.js")" type="text/javascript"></script>
+    <link href="@Url.Content("~/Content/validationEngine.jquery.css")"
+          rel="Stylesheet" type="text/css" />
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("form").makeValidationInline();
+
+
+            // Check Support JSON
+            if (typeof (JSON) == "undefined") {
+                // Add json2.js
+                var script = document.createElement("script");
+                document.body.appendChild(script);
+                script.type = "text/javascript";
+                script.src = '@Url.Content("~/scripts/json2.js")';
+            }
+
+        });
+
+        function CheckForLoadEvent() {
+            if (window.ExecuteOnLoad != null)
+                window.ExecuteOnLoad();
+        }
+
+        @if (Session["NeedLoginAgent"] != null && (bool)Session["NeedLoginAgent"] == true)
+        {
+            Session["NeedLoginAgent"] = false;
+
+            <text>
+        $(document).ready(function () {
+            try {
+                var objParams = new Object();
+                objParams.crmOperation = "login";
+                agentCall(objParams);
+            }
+            catch (e) {
+                //alert("Error: " + e.description);
+            }
+        });
+        </text>
+        }
+        else if (Session["NeedLogoutAgent"] != null && (bool)Session["NeedLogoutAgent"] == true)
+        {
+            Session["NeedLogoutAgent"] = false;
+
+            <text>
+        $(document).ready(function () {
+            try {
+                var objParams = new Object();
+                objParams.crmOperation = "logout";
+                agentCall(objParams);
+            }
+            catch (e) {
+                //alert("Error: " + e.description);
+            }
+        });
+        </text>
+        }
+    </script>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body class="skin-blue" onload="CheckForLoadEvent()">
+    <!-- header logo: style can be found in header.less -->
+    <header class="header">
+        <a href="@Url.Content("~/")" class="logo">
+            <!-- Add the class icon to your logo image or logo icon to add the margining -->
+            <small>
+                @WFM.Common.AppConst.Const_SiteName
+            </small>
+        </a>
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top" role="navigation">
+            <!-- Sidebar toggle button-->
+            <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+            {
+                <div class="navbar-right">
+                    <ul class="nav navbar-nav">
+                        @Html.Partial("_LoginPartial")
+                    </ul>
+                </div>
+            }
+        </nav>
+    </header>
+    <div class="wrapper row-offcanvas row-offcanvas-left">
+        <!-- Left side column. contains the logo and sidebar -->
+        <aside class="left-side sidebar-offcanvas">
+            <!-- sidebar: style can be found in sidebar.less -->
+            <section class="sidebar">
+                @if (true)//Request.IsAuthenticated)
+                {
+                    <!-- Sidebar user panel -->
+                    <div class="user-panel">
+                        <div class="pull-left image">
+                            <img src="@Url.Content("~/Content/img/avatar5.png")" class="img-circle" alt="User Image" />
+                        </div>
+                        <div class="pull-left info">
+                            <p>@Html.ActionLink("ようこそ " + @WFM.Common.AppFunction.GetUserName(Session["vTenantID"].ToString()) + " さん！", "Index", "Account")</p>
+                        </div>
+                    </div>
+                }
+                @{
+                    string areaName = "";
+                    if (HttpContext.Current.Request.RequestContext.RouteData.DataTokens["area"] != null)
+                    { areaName = HttpContext.Current.Request.RequestContext.RouteData.DataTokens["area"].ToString(); }
+                    string controllerName = HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString().ToLower();
+                    string actionName = HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString().ToLower();
+                    string strCss = "active";
+                }
+                <!-- sidebar menu: : style can be found in sidebar.less -->
+                <ul class="sidebar-menu">
+                    @if (true)//Request.IsAuthenticated)
+                    {
+                        if (controllerName.ToLower() == "home" && actionName.ToLower() == "index") { strCss = "active"; } else { strCss = ""; }
+
+                        <li class="@strCss">
+                            <a href="@Url.Content("~/")">
+                                <i class="fa fa-home"></i> <span>ホーム</span>
+                            </a>
+                        </li>
+
+                        if (areaName.ToLower() == "manager") { strCss = "active"; } else { strCss = ""; }
+
+                        <li class="@strCss  treeview">
+                            <a href="#">
+                                <i class="fa fa-laptop"></i>
+                                <span>管理</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                            <ul class="treeview-menu">
+                                @if (controllerName == "shift")
+                                {
+                                    <li class="active"><a href="~/manager/Shift"><i class="fa fa-circle-o"></i> シフト管理</a></li>
+                                }
+                                else
+                                {
+                                    <li><a href="~/manager/Shift"><i class="fa fa-circle-o"></i> シフト管理</a></li>
+                                }
+                                @if (controllerName == "skillagregation")
+                                {
+                                    <li class="active"><a href="~/manager/skillagregation"><i class="fa fa-circle-o"></i> スキルアグリゲーション</a></li>
+                                }
+                                else
+                                {
+                                    <li><a href="~/manager/skillagregation"><i class="fa fa-circle-o"></i>スキルアグリゲーション</a></li>
+                                }
+                                @if (controllerName == "aht")
+                                {
+                                    <li class="active"><a href="~/manager/AHT"><i class="fa fa-circle-o"></i>AHT確認</a></li>
+                                }
+                                else
+                                {
+                                    <li><a href="~/manager/AHT"><i class="fa fa-circle-o"></i>AHT確認</a></li>
+                                }
+                            </ul>
+                        </li>
+                        if (areaName.ToLower() == "agent") { strCss = "active"; } else { strCss = ""; }
+
+                        <li class="@strCss  treeview">
+                            <a href="#">
+                                <i class="fa fa-laptop"></i>
+                                <span>オペレータ配置</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                            <ul class="treeview-menu">
+                                @if (controllerName == "shiftagentweek")
+                                {
+                                    <li class="active"><a href="~/agent/ShiftAgentWeek"><i class="fa fa-circle-o"></i>週間スケジュール</a></li>
+                                }
+                                else
+                                {
+                                    <li><a href="~/agent/ShiftAgentWeek"><i class="fa fa-circle-o"></i>週間スケジュール</a></li>
+                                }
+
+                                @if (controllerName == "shiftagent")
+                                {
+
+                                    <li class="active"><a href="~/agent/ShiftAgent"><i class="fa fa-circle-o"></i>シフト関連</a></li>
+                                }
+                                else
+                                {
+                                    <li><a href="~/agent/ShiftAgent"><i class="fa fa-circle-o"></i>シフト関連</a></li>
+                                }
+
+                                @if (controllerName == "callprediction")
+                                {
+                                    <li class="active"><a href="~/agent/CallPrediction"><i class="fa fa-circle-o"></i>呼量予測</a></li>
+                                }
+                                else
+                                {
+                                    <li><a href="~/agent/CallPrediction"><i class="fa fa-circle-o"></i>呼量予測</a></li>
+                                }
+
+
+                            </ul>
+                        </li>
+
+                        if (areaName.ToLower() == "report") { strCss = "active"; } else { strCss = ""; }
+
+                        <li class="@strCss  treeview">
+                            <a href="#">
+                                <i class="fa fa-laptop"></i>
+                                <span>レポート</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                            <ul class="treeview-menu">
+                                @if (controllerName == "shiftreport")
+                                {
+                                    <li class="active"><a href="~/agent/ShiftReport"><i class="fa fa-circle-o"></i>シフト管理用</a></li>
+                                }
+                                else
+                                {
+                                    <li><a href="~/agent/ShiftReport"><i class="fa fa-circle-o"></i>シフト管理用</a></li>
+                                }
+
+                                @if (controllerName == "callreport")
+                                {
+                                    <li class="active"><a href="~/agent/CallReport"><i class="fa fa-circle-o"></i>予実レポート</a></li>
+                                }
+                                else
+                                {
+                                    <li><a href="~/agent/CallReport"><i class="fa fa-circle-o"></i>予実レポート</a></li>
+                                }
+                                @if (controllerName == "agentreport")
+                                {
+                                    <li class="active"><a href="~/agent/AgentReport"><i class="fa fa-circle-o"></i>オペレータ稼動状況</a></li>
+                                }
+                                else
+                                {
+                                    <li><a href="~/agent/AgentReport"><i class="fa fa-circle-o"></i>オペレータ稼動状況</a></li>
+                                }
+                            </ul>
+                        </li>
+
+
+
+
+                        if (HttpContext.Current.User.IsInRole(WFM.Common.AppConst.RolesInSite.Level_Admin))
+                        {
+                            if (controllerName.ToLower() == "staff") { strCss = "active"; } else { strCss = ""; }
+
+                            <li class="@strCss">
+                                <a href="@Url.Content("~/Staff")">
+                                    <i class="fa fa-user"></i> <span>スタッフ一覧</span>
+                                </a>
+                            </li>
+                        }
+                    }
+                    @if (controllerName.ToLower() == "home" && actionName.ToLower() == "about") { strCss = "active"; } else { strCss = ""; }
+                    <li class="@strCss">
+                        <a href="@Url.Content("~/home/about")">
+                            <i class="fa fa-info"></i> <span>バージョン情報</span>
+                        </a>
+                    </li>
+                </ul>
+            </section>
+            <!-- /.sidebar -->
+        </aside>
+        <!-- Right side column. Contains the navbar and content of the page -->
+        <aside class="right-side">
+            @RenderBody()
+        </aside><!-- /.right-side -->
+    </div><!-- ./wrapper -->
+    @*@Html.Partial("JqueryDialog", "_dialogDiv")*@
+    @*@Html.Partial("JqueryDialog", "_dialogChildDiv")*@
+    @*@Html.Partial("JqueryDialog", "_dialogChild2Div")*@
+    @*@Html.Partial("JqueryDialog", "_dialogChild3Div")*@
+    <script type="text/javascript">
+        $('.tdBalloon').balloon({
+            css: {
+                maxWidth: "17em",
+                border: "solid 1px #463974",
+                fontSize: "120%",
+                backgroundColor: "#efefef"
+            }
+        });
+    </script>
+    <div id="divAcx">
+    </div>
+
+
+    <!-- AdminLTE App -->
+    <script src="@Url.Content("~/Content/js/AdminLTE/app.js")" type="text/javascript"></script>
+</body>
+</html>

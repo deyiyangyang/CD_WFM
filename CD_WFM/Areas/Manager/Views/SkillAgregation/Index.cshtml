@@ -1,0 +1,93 @@
+﻿@using WFM.Models;
+@using WFM.Common;
+@using System.Web.UI.WebControls
+@model IEnumerable<WFM.Common.uspWFMGetSkillAgregationResult>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript">
+
+    function deleteSkillAgregation(vId) {
+        if (!confirm('削除してよろしいでしょうか？')) return;
+
+        var vUrl = '@Url.Content("~/manager/skillagregation/Delete_Ajax/")' + vId;
+
+        $.ajax({
+            url: vUrl
+        }).done(function (data) {
+            var code = data["StatusCode"];
+            if (code !== undefined && code !== null) {
+                if (code != -1) {
+                    //$("#Search").click();
+                    location.href = location.href;
+                }
+            }
+        });
+    }
+</script>
+<section class="content-header">
+    <h1>
+        スキルアグリゲーション
+        <small>データ一覧</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="@Url.Content("~/")"><i class="fa fa-home"></i>ホーム</a></li>
+        <li class="active"><a href="@Url.Content("~/manager/skillagregation")">スキルアグリゲーション情報</a></li>
+    </ol>
+</section>
+<section class="content">
+    @using (Html.BeginForm())
+    {
+
+
+        <div class="row">
+            <div class="col-md-1">
+                <div class="box box-info" style="width:120px;">
+                    <div class="box-header">
+                        <i class="fa fa-wrench"></i>
+                        <h3 class="box-title">操作</h3>
+                        <div class="box-tools pull-right">
+                            <button class="btn btn-primary btn-xs" data-widget="collapse" type="button"><i class="fa fa-minus"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body" style="display: block;">
+                        <a class="btn btn-app" href="@Url.Content("~/manager/skillagregation/create")">
+                            <i class="fa  fa-plus-square"></i> <span style="color:blue;">新規</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <table class="table table-bordered table-hover" style="margin-bottom: 0px;width:auto;">
+            <tr>
+                <th style="text-align: center; width: 220px;vertical-align:middle;">
+                    スキルアグリゲーション名
+                </th>
+                <th style="text-align: center; width: 150px;vertical-align:middle;">
+                    操作
+                </th>
+            </tr>
+            @if (Model != null && Model.Count() > 0)
+    {
+        foreach (var item in Model)
+        {
+    <tr>
+        <td style="text-align: center; width: 220px;vertical-align:middle;">
+            @Html.DisplayFor(modelItem => item.vAgregationName)
+        </td>
+        <td>
+            @Html.ActionLink("変更", "Edit", new { id = item.iSkillAgregationID }) |
+            <a onclick="deleteSkillAgregation('@item.iSkillAgregationID');" href="javascript:void(0);">削除</a>
+        </td>
+    </tr>
+        }
+    }
+
+        </table>
+    }
+
+</section>

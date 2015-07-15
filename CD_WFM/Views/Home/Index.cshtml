@@ -1,0 +1,48 @@
+﻿@using WFM.Common;
+@model IEnumerable<uspWFMGetOneWeekInboundCallResult>
+@{
+    ViewBag.Title = "Home Page";
+}
+<script src="@Url.Content("~/Scripts/Chart.js")" type="text/javascript"></script>
+<script type="text/javascript">
+    $(function ()
+    {
+        ShowLineChart();
+    });
+
+    function ShowLineChart() {
+        var options = {
+            legendTemplate: "<table class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><tr><td style=\"background-color:<%=datasets[i].strokeColor%>;width:20px\"></td><%if(datasets[i].label){%><td><%=datasets[i].label%></td><%}%></tr><%}%></table>",
+            datasetFill:false
+        }
+        var ctx = $("#IboundCallChart").get(0).getContext("2d");
+        var myChart = new Chart(ctx);
+        var url = "@Html.Raw(Url.Action("LineChart"))";
+        $.ajax({
+            cache: false,
+            async: true,
+            url: url,
+            data: "{}",
+            dataType: "json",
+            type: "get",
+
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert(XMLHttpRequest.responseText);
+            },
+            success: function (response) {
+                var lineChart = myChart.Line(response, options);
+                //var legend = lineChart.generateLegend();
+                //$("#DeliveryExpiredChartLegend").append(legend);
+            }
+        });
+    }
+</script>
+<div class="jumbotron">
+    <h2>週間着信回数</h2>
+    <canvas id="IboundCallChart" width="800" height="300"></canvas>
+
+</div>
+
+<div class="row">
+
+</div>

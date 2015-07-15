@@ -1,0 +1,37 @@
+﻿<!-- JavaScriptファイルの読み込み -->
+<script src="@Url.Content("~/Scripts/jquery.ui.datepicker-ja.min.js")"></script>
+<style type="text/css">
+    .ui-datepicker select.ui-datepicker-month, .ui-datepicker select.ui-datepicker-year
+    {
+        width: auto;
+    }
+</style>
+
+<script type="text/javascript">
+    var opt_datePicker;
+    $(document).ready(function () {
+        opt_datePicker = {
+            showButtonPanel: true,
+            changeMonth: true,
+            showMonthAfterYear: true,
+            changeYear: true,
+            showOn: "button",
+            buttonImage: "@Url.Content("~/Content/img/calendar.gif")",
+            buttonImageOnly: true,
+            beforeShow: function (input) {
+                setTimeout(function () {
+                    var buttonPane = $(input)
+                      .datepicker("widget")
+                      .find(".ui-datepicker-buttonpane");
+                    $("<button>", {
+                        text: "削除",
+                        click: function () {
+                            $.datepicker._clearDate(input);
+                        }
+                    }).appendTo(buttonPane);
+                }, 1);
+            }
+        };
+   });
+
+</script>

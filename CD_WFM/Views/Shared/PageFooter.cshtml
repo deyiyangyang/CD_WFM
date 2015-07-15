@@ -1,0 +1,25 @@
+﻿@using WFM.Common
+@using WFM.Controllers
+@model WFM.Models.PagerDataModel
+
+@if (Model.TotalRowCount <=0)
+{
+    @Html.Raw("<div style='visibility:hidden'>");
+}
+else
+{
+    @Html.Raw("<div style='margin-top: 2px;'>");
+}
+<span class="paged">総件数：@Model.TotalRowCount &nbsp;件&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="submit" value="先頭頁" name="firstPage" @if (Model.CurrentPageIndex <= 1)
+                                                        { @Html.Raw("disabled='disabled'")} />
+    <input type="submit" value="前頁" name="prePage" @if (Model.CurrentPageIndex <= 1)
+                                                    { @Html.Raw("disabled='disabled'")} />
+    Page @Html.DropDownList("ddlPageButtom", (List<SelectListItem>)ViewData[BaseController.const_PageList], new { onchange = @"changePageSize(this);$(pageChanged_Buttom).click();" }) of  @Model.TotalPageCount
+    <input type="submit" name="pageChanged_Buttom" style="display: none" />
+    <input type="submit" value="次頁" name="nextPage" @if (@Model.CurrentPageIndex == Model.TotalPageCount)
+                                                    { @Html.Raw("disabled='disabled'")}/>
+    <input type="submit" value="最終頁" name="lastPage" @if (@Model.CurrentPageIndex == Model.TotalPageCount)
+                                                        { @Html.Raw("disabled='disabled'")}/>
+</span>
+@Html.Raw("</div>")

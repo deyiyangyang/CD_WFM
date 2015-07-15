@@ -1,0 +1,557 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="NGCP0100" Class="WFMDBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=localhost;Initial Catalog=NGCP0100;User ID=sa" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="DefaultConnection" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.tbCpfAgentDetailV3" Member="tbCpfAgentDetailV3">
+    <Type Name="tbCpfAgentDetailV3">
+      <Column Name="iAgentDetailV3" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="vServerName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="iGroupID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="vLogin" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="vDisplay" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="iSessionProfileTrailID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="iAgentSessionProfileID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="iCallSessionProfileID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="iSkillGroupID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="dtLoginStart" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dtLoginEnd" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="iAgentStatus" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="dtStatusStart" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dtStatusEnd" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="vStationAddr" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="iCallStatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="iReason" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="iCallGroupID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="iCallSkillGroupID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="vTransfeeAgent" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="iMatterID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="dtCreate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbCpfAgentDetailV3OneDay" Member="tbCpfAgentDetailV3OneDay">
+    <Type Name="tbCpfAgentDetailV3OneDay">
+      <Column Name="iAgentDetailV3OneDay" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="vServerName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="iGroupID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="vLogin" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="vDisplay" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="iSessionProfileTrailID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="iAgentSessionProfileID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="iCallSessionProfileID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="iSkillGroupID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="dtLoginStart" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dtLoginEnd" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="iAgentStatus" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="dtStatusStart" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dtStatusEnd" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="vStationAddr" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="iCallStatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="iReason" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="iCallGroupID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="iCallSkillGroupID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="vTransfeeAgent" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="iMatterID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="dtCreate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbCpfCallDetailV3" Member="tbCpfCallDetailV3">
+    <Type Name="tbCpfCallDetailV3">
+      <Column Name="iCallDetailV3" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="vServerName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="iSessionProfileID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="iGroupID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="iSkillGroupID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="iConnType" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="vCalleeID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="vCallerID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="iQueueCall" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="iAbandonOfferingCall" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="iAbandonQueueCall" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="iAbandonAcdCall" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="iAbandonIvrCall" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="iCompleteCall" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="iCompletedCallPickedup" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="iFrameID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="iDropCallReason" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="iCallStatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="iTag1" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="iLanguageID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="dtCreatedCall" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dtDroppedCall" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dtBeforeIvrStart" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dtBeforeIvrEnd" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dtAcdStart" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dtAcdEnd" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dtQueStart" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dtQueEnd" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dtOfferingStart" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dtTalkStart" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dtAfterIvrStart" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dtAfterIvrEnd" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dtCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbCpfCallDetailV3OneDay" Member="tbCpfCallDetailV3OneDay">
+    <Type Name="tbCpfCallDetailV3OneDay">
+      <Column Name="iCallDetailV3OneDay" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="vServerName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="iSessionProfileID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="iGroupID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="iSkillGroupID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="iConnType" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="vCalleeID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="vCallerID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="iQueueCall" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="iAbandonOfferingCall" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="iAbandonIvrCall" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="iCompleteCall" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="iCompletedCallPickedup" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="iFrameID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="iDropCallReason" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="iCallStatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="iTag1" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="iLanguageID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="dtCreatedCall" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dtDroppedCall" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dtBeforeIvrStart" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dtBeforeIvrEnd" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dtAcdStart" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dtAcdEnd" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dtQueStart" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dtQueEnd" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dtOfferingStart" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dtTalkStart" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dtAfterIvrStart" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dtAfterIvrEnd" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dtCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbCpfIvrDetailV3" Member="tbCpfIvrDetailV3">
+    <Type Name="tbCpfIvrDetailV3">
+      <Column Name="iIvrDetailV3" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="vServerName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="iSessionProfileID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="iSessionProfileTrailID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="iGroupID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="vCallerID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="dtCreatedCall" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dtDroppedCall" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="iIvrSkillGroupID" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="vAgentID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="vFunction" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="dtIvrStart" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dtIvrEnd" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dtCreated" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbCpfIvrDetailV3OneDay" Member="tbCpfIvrDetailV3OneDay">
+    <Type Name="tbCpfIvrDetailV3OneDay">
+      <Column Name="iIvrDetailV3OneDay" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="vServerName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="iSessionProfileID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="iSessionProfileTrailID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="iGroupID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="vCallerID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="dtCreatedCall" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dtDroppedCall" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="iIvrSkillGroupID" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="vFunction" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="dtIvrStart" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dtIvrEnd" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dtCreated" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbCPFGroupProfile" Member="tbCPFGroupProfile">
+    <Type Name="tbCPFGroupProfile">
+      <Column Name="iGroupProfileID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="vGroupName" Type="System.String" DbType="VarChar(64) NOT NULL" CanBeNull="false" />
+      <Column Name="vCountry" Type="System.String" DbType="VarChar(64)" CanBeNull="true" />
+      <Column Name="vCompany" Type="System.String" DbType="VarChar(64)" CanBeNull="true" />
+      <Column Name="vZipCode" Type="System.String" DbType="VarChar(64)" CanBeNull="true" />
+      <Column Name="vState" Type="System.String" DbType="VarChar(64)" CanBeNull="true" />
+      <Column Name="vAddress1" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="vAddress2" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="vDepartment" Type="System.String" DbType="VarChar(128)" CanBeNull="true" />
+      <Column Name="iSupplimentID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="iGroupIdentity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="iDefaultGroup" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="vMemo" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="dtUpdate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dtCreate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbCPFGroupPersonalProfile" Member="tbCPFGroupPersonalProfile">
+    <Type Name="tbCPFGroupPersonalProfile">
+      <Column Name="iGroupPersonalProfileID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="iPersonalType" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="iPersonalProfileID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="iGroupProfileID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="iPriorityLevel" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="iDefaultStatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="vMemo" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="dtUpdate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dtCreate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbCPFPersonalProfile" Member="tbCPFPersonalProfile">
+    <Type Name="tbCPFPersonalProfile">
+      <Column Name="iPersonalProfileID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="vFirstName" Type="System.String" DbType="VarChar(64)" CanBeNull="true" />
+      <Column Name="vFamilyName" Type="System.String" DbType="VarChar(64) NOT NULL" CanBeNull="false" />
+      <Column Name="vKanaName" Type="System.String" DbType="VarChar(64)" CanBeNull="true" />
+      <Column Name="vDesignation" Type="System.String" DbType="VarChar(64)" CanBeNull="true" />
+      <Column Name="iSex" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dtBirthDay" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="iTitleLevel" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="vDisplayName" Type="System.String" DbType="VarChar(128) NOT NULL" CanBeNull="false" />
+      <Column Name="vNickName" Type="System.String" DbType="VarChar(64)" CanBeNull="true" />
+      <Column Name="vPrivateCountry" Type="System.String" DbType="VarChar(64)" CanBeNull="true" />
+      <Column Name="vPrivateZipCode" Type="System.String" DbType="VarChar(64)" CanBeNull="true" />
+      <Column Name="vPrivateState" Type="System.String" DbType="VarChar(64)" CanBeNull="true" />
+      <Column Name="vPrivateAddress1" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="vPrivateAddress2" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="vOfficeCountry" Type="System.String" DbType="VarChar(64)" CanBeNull="true" />
+      <Column Name="vOfficeCompany" Type="System.String" DbType="VarChar(64)" CanBeNull="true" />
+      <Column Name="vOfficeZipCode" Type="System.String" DbType="VarChar(64)" CanBeNull="true" />
+      <Column Name="vOfficeState" Type="System.String" DbType="VarChar(64)" CanBeNull="true" />
+      <Column Name="vOfficeAddress1" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="vOfficeAddress2" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="vOfficeDepartment" Type="System.String" DbType="VarChar(128)" CanBeNull="true" />
+      <Column Name="iSupplimentID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="vMemo" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="vLogin" Type="System.String" DbType="VarChar(64) NOT NULL" CanBeNull="false" />
+      <Column Name="vPassword" Type="System.String" DbType="VarChar(64)" CanBeNull="true" />
+      <Column Name="dtUpdate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dtCreate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbWFMFactor" Member="tbWFMFactor">
+    <Type Name="tbWFMFactor">
+      <Column Name="iFactorID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="vTeanantID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="vTeanantSpecialFlag" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="dtStartDay" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dtEndDay" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dtCreated" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbWFMFactorDetail" Member="tbWFMFactorDetail">
+    <Type Name="tbWFMFactorDetail">
+      <Column Name="iFactorDetailID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="iFactorID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="dtDay" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="f00" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f01" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f02" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f03" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f10" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f11" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f12" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f13" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f20" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f21" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f22" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f23" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f30" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f31" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f32" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f33" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f40" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f41" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f42" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f43" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f50" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f51" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f52" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f53" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f60" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f61" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f62" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f63" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f70" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f71" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f72" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f73" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f80" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f81" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f82" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f83" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f90" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f91" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f92" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f93" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f100" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f101" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f102" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f103" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f110" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f111" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f112" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f113" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f120" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f121" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f122" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f123" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f130" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f131" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f132" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f133" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f140" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f141" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f142" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f143" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f150" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f151" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f152" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f153" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f160" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f161" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f162" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f163" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f170" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f171" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f172" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f173" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f180" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f181" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f182" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f183" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f190" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f191" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f192" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f193" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f200" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f201" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f202" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f203" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f210" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f211" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f212" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f213" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f220" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f221" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f222" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f223" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f230" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f231" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f232" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="f233" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="dtCreated" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbWFMSkillAgregation" Member="tbWFMSkillAgregation">
+    <Type Name="tbWFMSkillAgregation">
+      <Column Name="iSkillAgregationID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="vAgregationName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="vTenantID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="vTeanantSpeicalFlag" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="dtCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbWFMSkillAgregationCall" Member="tbWFMSkillAgregationCall">
+    <Type Name="tbWFMSkillAgregationCall">
+      <Column Name="iSkillAgregationCallID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="iSkillAgregationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="iCountOfInboundCall" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="iCountOfInboundCompletedCall" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="dtSum" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dtCreated" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbWFMSkillGroup" Member="tbWFMSkillGroup">
+    <Type Name="tbWFMSkillGroup">
+      <Column Name="iSkillGroupID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="iSkillAgregationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="dtCreated" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbWFMShift" Member="tbWFMShift">
+    <Type Name="tbWFMShift">
+      <Column Name="iShiftID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="vShiftName" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="vTenantID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="vStartTime" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="vEndTime" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="vTenantSpecialFlag" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="vExtraFiled1" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="vExtraFiled2" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="vExtraFiled3" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="vExtraFiled4" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="vExtraFiled5" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="dtCreated" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="" Member="tblDataPaged">
+    <Type Name="tblDataPaged">
+      <Column Name="TotalRowCount" Type="System.Int32" CanBeNull="false" />
+      <Column Name="TotalPageCount" Type="System.Int32" CanBeNull="false" />
+      <Column Name="CurPageIndex" Type="System.Int32" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="" Member="tblAgentWeekShift">
+    <Type Name="tblAgentWeekShift">
+      <Column Name="vAgentID" Type="System.String" CanBeNull="false" />
+      <Column Name="vDisplayName" Type="System.String" CanBeNull="false" />
+      <Column Name="sunShift" Type="System.Int32" CanBeNull="false" />
+      <Column Name="monShift" Type="System.Int32" CanBeNull="false" />
+      <Column Name="tueShift" Type="System.Int32" CanBeNull="false" />
+      <Column Name="wedShift" Type="System.Int32" CanBeNull="false" />
+      <Column Name="thurShift" Type="System.Int32" CanBeNull="false" />
+      <Column Name="friShift" Type="System.Int32" CanBeNull="false" />
+      <Column Name="satShift" Type="System.Int32" CanBeNull="false" />
+      <Column Name="sunShiftName" Type="System.String" CanBeNull="false" />
+      <Column Name="monShiftName" Type="System.String" CanBeNull="false" />
+      <Column Name="tueShiftName" Type="System.String" CanBeNull="false" />
+      <Column Name="wedShiftName" Type="System.String" CanBeNull="false" />
+      <Column Name="thurShiftName" Type="System.String" CanBeNull="false" />
+      <Column Name="friShiftName" Type="System.String" CanBeNull="false" />
+      <Column Name="satShiftName" Type="System.String" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbWFMShiftAgentSpeical" Member="tbWFMShiftAgentSpeical">
+    <Type Name="tbWFMShiftAgentSpeical">
+      <Column Name="iShiftAgentSpeicalID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="iShiftID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="vAgentID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="dtDay" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="onWeekday" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="dtCreated" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbWFMShiftAgentWeek" Member="tbWFMShiftAgentWeek">
+    <Type Name="tbWFMShiftAgentWeek">
+      <Column Name="iShiftAgentWeekID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="iShiftID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="vAgentID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="onWeekday" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="dtcreated" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="" Member="tblWFMAgentAndShifName">
+    <Type Name="tblWFMAgentAndShifName" Id="ID1">
+      <Column Name="vAgentID" Type="System.String" CanBeNull="false" />
+      <Column Name="vDisplayName" Type="System.String" CanBeNull="false" />
+      <Column Name="vShiftName1" Type="System.String" CanBeNull="false" />
+      <Column Name="vShiftName2" Type="System.String" CanBeNull="false" />
+      <Column Name="vShiftName3" Type="System.String" CanBeNull="false" />
+      <Column Name="vShiftName4" Type="System.String" CanBeNull="false" />
+      <Column Name="vShiftName5" Type="System.String" CanBeNull="false" />
+      <Column Name="vShiftName6" Type="System.String" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Function Name="dbo.uspWFMGetTenantName" Method="uspWFMGetTenantName">
+    <Parameter Name="vTenantID" Type="System.String" DbType="VarChar(32)" />
+    <ElementType Name="uspWFMGetTenantNameResult">
+      <Column Name="vDisplayName" Type="System.String" DbType="VarChar(128) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.uspWFMGetOneWeekInboundCall" Method="uspWFMGetOneWeekInboundCall">
+    <Parameter Name="vTenantID" Type="System.String" DbType="VarChar(32)" />
+    <ElementType Name="uspWFMGetOneWeekInboundCallResult">
+      <Column Name="dtCreatedCall" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="iCountOfInboundCall" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.uspWFMInsertShift" Method="uspWFMInsertShift">
+    <Parameter Name="vShiftName" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="vTenantID" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="vStartTime" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="vEndTime" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="vTenantSpecialFlag" Type="System.String" DbType="VarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.uspWFMUpdateShift" Method="uspWFMUpdateShift">
+    <Parameter Name="iShiftID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="vShiftName" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="vStartTime" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="vEndTime" Type="System.String" DbType="VarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.uspWFMGetShift" Method="uspWFMGetShift">
+    <Parameter Name="vTenantID" Type="System.String" DbType="VarChar(32)" />
+    <Parameter Name="vTenantSpecialFlag" Type="System.String" DbType="VarChar(20)" />
+    <ElementType Name="uspWFMGetShiftResult">
+      <Column Name="iShiftID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="vShiftName" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="vStartTime" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="vEndTime" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.uspWFMGetSingleShift" Method="uspWFMGetSingleShift">
+    <Parameter Name="iShiftID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="uspWFMGetSingleShiftResult">
+      <Column Name="iShiftID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="vShiftName" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="vStartTime" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="vEndTime" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.uspWFMGetAgent" Method="uspWFMGetAgent">
+    <Parameter Name="vTenantID" Type="System.String" DbType="VarChar(32)" />
+    <ElementType Name="uspWFMGetAgentResult">
+      <Column Name="vLogin" Type="System.String" DbType="VarChar(64) NOT NULL" CanBeNull="false" />
+      <Column Name="vDisplayName" Type="System.String" DbType="VarChar(128) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.uspWFMGetAgentAndShiftName" Method="uspWFMGetAgentAndShiftName">
+    <Parameter Name="vTenantID" Type="System.String" DbType="VarChar(32)" />
+    <ElementType IdRef="ID1" />
+  </Function>
+  <Function Name="dbo.uspWFMInsertShiftAgentWeek" Method="uspWFMInsertShiftAgentWeek">
+    <Parameter Name="vAgentArr" Type="System.String" DbType="VarChar(4000)" />
+    <Parameter Name="vWeekDay" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="iShiftID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.uspWFMGetSkillGroup" Method="uspWFMGetSkillGroup">
+    <Parameter Name="vTenantID" Type="System.String" DbType="VarChar(32)" />
+    <ElementType Name="uspWFMGetSkillGroupResult">
+      <Column Name="iGroupProfileID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="vCompany" Type="System.String" DbType="VarChar(64)" CanBeNull="true" />
+      <Column Name="iSkillAgregationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.uspWFMInsertSkillAgregation" Method="uspWFMInsertSkillAgregation">
+    <Parameter Name="vSkillAgregationName" Type="System.String" DbType="VarChar(64)" />
+    <Parameter Name="vSkillGroupIDArr" Type="System.String" DbType="VarChar(4000)" />
+    <Parameter Name="vTenantID" Type="System.String" DbType="VarChar(32)" />
+    <Parameter Name="vTeanantSpeicalFlag" Type="System.String" DbType="VarChar(32)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.uspWFMGetSkillAgregation" Method="uspWFMGetSkillAgregation">
+    <Parameter Name="vTenantID" Type="System.String" DbType="VarChar(32)" />
+    <Parameter Name="vTenantSpecialFlag" Type="System.String" DbType="VarChar(20)" />
+    <ElementType Name="uspWFMGetSkillAgregationResult">
+      <Column Name="iSkillAgregationID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="vAgregationName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.uspWFMGetSingleSkillAgregation" Method="uspWFMGetSingleSkillAgregation">
+    <Parameter Name="iSkillAgregationID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="uspWFMGetSingleSkillAgregationResult">
+      <Column Name="iSkillAgregationID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="vAgregationName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.uspWFMUpdateSkillAgregation" Method="uspWFMUpdateSkillAgregation">
+    <Parameter Name="iSkillAgregationID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="vSkillAgregationName" Type="System.String" DbType="VarChar(64)" />
+    <Parameter Name="vSkillGroupIDArr" Type="System.String" DbType="VarChar(4000)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.uspWFMDelSingleSkillAgregation" Method="uspWFMDelSingleSkillAgregation">
+    <Parameter Name="iSkillAgregationID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.uspWFMInsertOrUpdateShiftAgentSpecial" Method="uspWFMInsertOrUpdateShiftAgentSpecial">
+    <Parameter Name="vAgentID" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="dtST" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="dtEnd" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="iShiftID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.uspWFMUpdateShiftAgentWeek" Method="uspWFMUpdateShiftAgentWeek">
+    <Parameter Name="vAgentID" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="vWeekDay" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="iShiftID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+</Database>

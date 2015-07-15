@@ -1,0 +1,154 @@
+﻿@using WFM.Common;
+@using WFM.Models;
+@using System.Web.UI.WebControls
+@model IEnumerable<tblAgentWeekShift>
+@{
+    string TenantID = ViewBag.vTenantID;
+    string TenantFlag = ViewBag.vTenantSpeciaFlag;
+    string controllerName = HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString().ToLower();
+}
+@Html.Partial("DatePickerScript")
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#txtStartdate').datepicker(opt_datePicker);
+
+        $('#txtStartdate').datepicker('setDate', new Date());
+        if ("shiftagent" == "@controllerName")
+        {
+            InitWeekTitle();
+        }
+        
+    });
+
+
+    function InitWeekTitle() {
+        var currentDate = new Date($("#txtStartdate").val());
+
+        //0:日曜日,1:月曜日,2:火曜日,3:水曜日,4:木曜日,5:金曜日,6:土曜日
+        var currentWeekDay = currentDate.getDay();
+        var myWeekDays = new Array()
+        myWeekDays[0] = currentDate.DateAdd('d', 0 - currentWeekDay);
+        myWeekDays[1] = currentDate.DateAdd('d', 1 - currentWeekDay);
+        myWeekDays[2] = currentDate.DateAdd('d', 2 - currentWeekDay);
+        myWeekDays[3] = currentDate.DateAdd('d', 3 - currentWeekDay);
+        myWeekDays[4] = currentDate.DateAdd('d', 4 - currentWeekDay);
+        myWeekDays[5] = currentDate.DateAdd('d', 5 - currentWeekDay);
+        myWeekDays[6] = currentDate.DateAdd('d', 6 - currentWeekDay);
+        $("#weekSch").find("th").each(function (index, em) {
+            if (index != 0 && index != 1) {
+                var old = $(em).html();
+                $(em).html(old.substr(0, 4) + ((myWeekDays[index - 2].getMonth() * 1) + 1) + "/" + myWeekDays[index - 2].getDate());
+            }
+        }
+        );
+    }
+
+</script>
+
+@Html.Partial("SortScript")
+<section class="content">
+    @using (Html.BeginForm())
+    {
+        @Html.Partial("SortHeader", AppConst.Const_Default_SortAction)
+        <div class="row">
+            <div class="col-md-9" style="margin-left:15px;">
+                <div class="box box-primary" style="width:650px;">
+                    <div class="box-header">
+                        <i class="fa fa-search"></i>
+                        <h3 class="box-title">検索条件</h3>
+                        <div class="box-tools pull-right">
+                            <button class="btn btn-primary btn-xs" data-widget="collapse" type="button"><i class="fa fa-minus"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body" style="display: block;">
+                        <table class="table table-bordered">
+                            <tr>
+                                <th style="width: 100px;vertical-align: middle;" class="thUpTitle">
+                                    日付
+                                </th>
+                                <td>
+                                    @Html.TextBox("txtStartdate", null, new { maxLength = "10", @readonly = "readonly", style = "width:110px;readonly;margin-right:5px;", @class = "form-control" })
+
+                                </td>
+                                <th class="thUpTitle" style="width: 50px;vertical-align: middle;">エージェントID</th>
+                                <td>
+                                    @Html.DropDownList("ddlAgentID", (List<SelectListItem>)ViewData["lstAgent"], new { @class = "form-control" })
+                                </td>
+                                <td style="vertical-align:middle;text-align:center;">
+                                    <button type="submit" id="Search" name="Search" class="btn btn-primary" style="width: 100px;"><i class="fa fa-search"></i> 検索</button>
+                                </td>
+                            </tr>
+                        </table>
+                    </div><!-- /.box-body -->
+                </div>
+            </div>
+        </div>
+        @Html.Partial("PagerHeader", (PagerDataModel)ViewBag.PagerDataModel)
+        <table class="table table-bordered table-hover" style="margin-bottom: 0px;width:auto;" id="weekSch">
+            <tr>
+                <th>
+                    エージェントID
+                </th>
+                <th>
+                    エージェント名
+                </th>
+                <th id="sun">日曜日</th>
+                <th id="mon">月曜日</th>
+                <th id="tue">火曜日</th>
+                <th id="wed">水曜日</th>
+                <th id="thur">木曜日</th>
+                <th id="fri">金曜日</th>
+                <th id="sat">土曜日</th>
+
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.vAgentID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.vDisplayName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.sunShiftName)
+                        @*@Html.RadioButtonListFor(modelItem => item.sunShift, item.vAgentID, "Shift", TenantID, TenantFlag, RepeatDirection.Vertical)*@
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.monShiftName)
+                        @*@Html.RadioButtonListFor(modelItem => item.monShift, item.vAgentID, "Shift", TenantID, TenantFlag, RepeatDirection.Vertical)*@
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.tueShiftName)
+                        @*@Html.RadioButtonListFor(modelItem => item.tueShift, item.vAgentID, "Shift", TenantID, TenantFlag, RepeatDirection.Vertical)*@
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.wedShiftName)
+                        @*@Html.RadioButtonListFor(modelItem => item.wedShift, item.vAgentID, "Shift", TenantID, TenantFlag, RepeatDirection.Vertical)*@
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.thurShiftName)
+                        @*@Html.RadioButtonListFor(modelItem => item.thurShift, item.vAgentID, "Shift", TenantID, TenantFlag, RepeatDirection.Vertical)*@
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.friShiftName)
+                        @*@Html.RadioButtonListFor(modelItem => item.friShift, item.vAgentID, "Shift", TenantID, TenantFlag, RepeatDirection.Vertical)*@
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.satShiftName)
+                        @*@Html.RadioButtonListFor(modelItem => item.satShift, item.vAgentID, "Shift", TenantID, TenantFlag, RepeatDirection.Vertical)*@
+                    </td>
+                    <td>
+                        @Html.ActionLink("変更", "Edit", new { vAgentID = item.vAgentID, vAgentName = item.vDisplayName })
+                    </td>
+                </tr>
+            }
+        </table>
+        @Html.Partial("PageFooter", (PagerDataModel)ViewBag.PagerDataModel)
+    }
+
+</section>

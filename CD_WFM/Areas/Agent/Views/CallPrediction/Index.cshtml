@@ -1,0 +1,87 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.Partial("DatePickerScript")
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#txtTargetdate').datepicker(opt_datePicker);
+        $('#txtTargetdate').datepicker('setDate', (new Date()).DateAdd('d', 1));
+        $('#txtTargetdate').datepicker("option",'minDate', (new Date()).DateAdd('d', 1));
+        $("#Search").onclick(function () {
+            var vUrl = '@Url.Content("~/CallPrediction/Search_Ajax/")';
+            var ctx = $("#IboundCallPredictionChart").get(0).getContext("2d");
+            var myChart = new Chart(ctx);
+            var options = {
+                legendTemplate: "<table class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><tr><td style=\"background-color:<%=datasets[i].strokeColor%>;width:20px\"></td><%if(datasets[i].label){%><td><%=datasets[i].label%></td><%}%></tr><%}%></table>",
+                datasetFill: false
+            }
+            $.ajax({
+                url: vUrl,
+                data:{txtTargetdate:$("#txtTargetdate").val(),checkType:1},
+                dataType: "json",
+                type: "get",
+                beforeSend: function () { $("#msg").html("loading..."); },
+                success: function (data) {
+                    $("#msg").html("");
+                    var lineChart = myChart.Line(response, options);
+                }
+            });
+        });
+    });
+</script>
+<section class="content-header">
+    <h1>
+        呼量予測
+        <small>データ一覧</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="@Url.Content("~/")"><i class="fa fa-home"></i>ホーム</a></li>
+        <li class="active"><a href="@Url.Content("~/CallPrediction")">呼量予測</a></li>
+    </ol>
+</section>
+<section class="content">
+    <div class="row">
+        <table class="table table-bordered">
+            <tr>
+                <th style="width: 100px;vertical-align: middle;" class="thUpTitle">
+                    予測日付
+                </th>
+                <td colspan="2">
+                    @Html.TextBox("txtTargetdate", null, new { maxLength = "10", @readonly = "readonly", style = "width:110px;readonly;margin-right:5px;", @class = "form-control" })
+
+                </td>
+            </tr>
+            <tr>
+                <th class="thUpTitle" style="width: 50px;vertical-align: middle;">予測Type</th>
+                <td >
+                    <div>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" id="chkWeekdayType" value="1"> 曜日
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" id="chkHolidayType" value="2"> 休日
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" id="chkPromotionType" value="3"> セールス
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" id="chkCustomType" value="4"> 自由選択
+                        </label>
+                        
+                    </div>
+                </td>
+                <td style="vertical-align:middle;text-align:center;">
+                    <button type="button" id="Search" name="Search" class="btn btn-primary" style="width: 100px;"><i class="fa fa-search"></i> 予測</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+
+    <div class="jumbotron">
+        <div id="msg"></div>
+        <canvas id="IboundCallPredictionChart" width="800" height="300"></canvas>
+    </div>
+</section>

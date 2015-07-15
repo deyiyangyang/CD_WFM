@@ -1,0 +1,89 @@
+﻿@using WFM.Common;
+@model IEnumerable<uspWFMGetShiftResult>
+
+@{
+    ViewBag.Title = "シフト一覧";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="content-header">
+    <h1>
+        シフト
+        <small>データ一覧</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="@Url.Content("~/")"><i class="fa fa-home"></i>ホーム</a></li>
+        <li class="active"><a href="@Url.Content("~/manager/shift")">シフト情報</a></li>
+    </ol>
+</section>
+
+<section class="content">
+    @using (Html.BeginForm())
+    {
+        <div class="row">
+            <div class="col-md-1">
+                <div class="box box-info" style="width:120px;">
+                    <div class="box-header">
+                        <i class="fa fa-wrench"></i>
+                        <h3 class="box-title">操作</h3>
+                        <div class="box-tools pull-right">
+                            <button class="btn btn-primary btn-xs" data-widget="collapse" type="button"><i class="fa fa-minus"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body" style="display: block;">
+                        <a class="btn btn-app" href="@Url.Content("~/manager/shift/create")">
+                            <i class="fa  fa-plus-square"></i> <span style="color:blue;">新規</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">シフト</h3>
+            </div>
+            <div class="box-body">
+                <table class="table table-bordered table-hover" style="margin-bottom: 0px;width:auto;">
+                    <tr>
+                        <th style="text-align: center; width: 120px;vertical-align:middle;">
+                            @*@Html.DisplayNameFor(model => model.vShiftName)*@
+                            シフト名
+                        </th>
+                        <th style="text-align: center; width: 120px;vertical-align:middle;">
+                            @*@Html.DisplayNameFor(model => model.vStartTime)*@
+                            開始時間
+                        </th>
+                        <th style="text-align: center; width: 120px;vertical-align:middle;">
+
+                            @*@Html.DisplayNameFor(model => model.vEndTime)*@
+                            終了時間
+                        </th>
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.vShiftName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.vStartTime)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.vEndTime)
+                            </td>
+                            <td>
+                               
+                                <a class="btn btn-app" href="/manager/Shift/Edit/@item.iShiftID">
+                                    <i class="fa fa-edit"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            </div>
+        </div>
+    }
+</section>

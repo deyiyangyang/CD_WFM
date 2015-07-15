@@ -1,0 +1,108 @@
+﻿@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Html.Partial("DatePickerScript")
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#chkWeekAll").on("ifClicked", function () {
+            if ($("#chkWeekAll").is(':checked')) {
+                $(".chkweek").each(function (index, em) {
+                    $(em).iCheck('uncheck');
+                });
+            }
+            else {
+                $(".chkweek").each(function (index, em) {
+                    $(em).iCheck('check');
+                });
+            }
+        });
+        $(".chkweek").each(function (index, em) {
+            $(em).on("ifUnchecked", function () {
+                $("#chkWeekAll").iCheck('uncheck');
+            });
+            $(em).on("ifChecked", function () {
+                calculateAllWeekday();
+            });
+        });
+    });
+
+    function calculateAllWeekday() {
+        var result = 0;
+        $(".chkweek").each(function (index, em) {
+            if ($(em).is(':checked')) {
+                result++;
+            }
+        });
+
+        if (result == 7) {
+            $("#chkWeekAll").iCheck('check');
+        }
+
+    }
+</script>
+<section class="content-header">
+    <h1>
+        オペレータ配置
+        <small>スケジュール変更</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="@Url.Content("~/")"><i class="fa fa-home"></i>ホーム</a></li>
+        <li class="active"><a href="@Url.Content("~/agent/shiftAgen")">エジェートスケジュール情報</a></li>
+    </ol>
+</section>
+<section class="content">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <input type="hidden" name="vAgentID" value="@ViewBag.vAgentID" />
+        <div class="row">
+            <div class="col-md-9" style="margin-left:15px;">
+                <div class="box box-primary" style="width:950px;">
+                    <div class="box-header">
+                        <i class="fa fa-search"></i>
+                        <h3 class="box-title">エジェートスケジュール変更</h3>
+                        <div class="box-tools pull-right">
+                            <button class="btn btn-primary btn-xs" data-widget="collapse" type="button"><i class="fa fa-minus"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body" style="display: block;">
+                        <table class="table table-bordered">
+                            <tr><th style="width: 100px;vertical-align: middle;" class="thUpTitle">エジェート</th><td style="vertical-align:middle;">@ViewBag.vAgentID  @ViewBag.vAgentName</td></tr>
+                            <tr>
+                                <th style="width: 100px;vertical-align: middle;" class="thUpTitle">
+                                    曜日
+                                </th>
+                                <td>
+                                    <label class="checkbox-inline"><input type="checkbox" class="chkweekAll" id="chkWeekAll" name="chkWeekAll" /> 全部</label>
+                                    <label class="checkbox-inline"><input type="checkbox" class="chkweek" id="chkSun" name="chkSun" value="0" /> 日曜日</label>
+                                    <label class="checkbox-inline"><input type="checkbox" class="chkweek" id="chkMon" name="chkMon" value="1" /> 月曜日</label>
+                                    <label class="checkbox-inline"><input type="checkbox" class="chkweek" id="chkTue" name="chkTue" value="2" /> 火曜日</label>
+                                    <label class="checkbox-inline"><input type="checkbox" class="chkweek" id="chkWed" name="chkWed" value="3" /> 水曜日</label>
+                                    <label class="checkbox-inline"><input type="checkbox" class="chkweek" id="chkThur" name="chkThur" value="4" /> 木曜日</label>
+                                    <label class="checkbox-inline"><input type="checkbox" class="chkweek" id="chkFri" name="chkFri" value="5" /> 金曜日</label>
+                                    <label class="checkbox-inline"><input type="checkbox" class="chkweek" id="chkSat" name="chkSat" value="6" /> 土曜日</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th style="width: 100px;vertical-align: middle;" class="thUpTitle">
+                                    シフト
+                                </th>
+                                <td>
+                                    @Html.DropDownList("ddlShift", (List<SelectListItem>)ViewData["lstShift"], new { @class = "form-control" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <th style="width: 100px;vertical-align: middle;" class="thUpTitle"></th>
+                                <td style="text-align:center">
+                                    <input type="submit" value="保存" class="btn btn-default" />
+                                    @Html.ActionLink("戻る", "index", null, new { @class = "btn btn-default btn-lg active", role = "button" })
+                                </td>
+                            </tr>
+                        </table>
+                    </div><!-- /.box-body -->
+                </div>
+            </div>
+        </div>
+    }
+</section>

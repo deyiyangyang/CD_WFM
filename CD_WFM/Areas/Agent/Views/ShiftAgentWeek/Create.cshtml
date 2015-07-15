@@ -1,0 +1,22 @@
+﻿@model WFM.Common.tbWFMShiftAgentWeek
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="content-header">
+    <h1>
+        オペレータ配置
+        <small>週間スケジュール</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="@Url.Content("~/")"><i class="fa fa-home"></i>ホーム</a></li>
+        <li class="active"><a href="@Url.Content("~/agent/shiftAgentWeek")">週間スケジュール情報</a></li>
+    </ol>
+</section>
+@Html.Partial("CreateAgentShiftPartial")
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
