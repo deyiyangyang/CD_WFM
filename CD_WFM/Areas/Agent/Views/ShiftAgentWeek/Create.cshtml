@@ -15,7 +15,123 @@
         <li class="active"><a href="@Url.Content("~/agent/shiftAgentWeek")">週間スケジュール情報</a></li>
     </ol>
 </section>
-@Html.Partial("CreateAgentShiftPartial")
+
+<script type="text/javascript" src="~/Content/js/plugins/duallistbox/jquery.bootstrap-duallistbox.js"></script>
+<script type="text/javascript">
+    var uncheckedAllCanUse = true;
+    $(document).ready(function () {
+        $('#selectAgent').bootstrapDualListbox({
+            nonSelectedListLabel: '未選択',
+            selectedListLabel: '選択',
+            preserveSelectionOnMove: 'moved',
+            moveOnSelect: true
+        });
+
+        $("#chkWeekAll").on("ifClicked", function () {
+            if ($("#chkWeekAll").is(':checked')) {
+                $(".chkweek").each(function (index, em) {
+                    $(em).iCheck('uncheck');
+                });
+            }
+            else {
+                $(".chkweek").each(function (index, em) {
+                    $(em).iCheck('check');
+                });
+            }
+        });
+        $(".chkweek").each(function (index, em) {
+            $(em).on("ifUnchecked", function () {
+                $("#chkWeekAll").iCheck('uncheck');
+            });
+            $(em).on("ifChecked", function () {
+                calculateAllWeekday();
+            });
+        });
+    });
+
+    function calculateAllWeekday() {
+        var result = 0;
+        $(".chkweek").each(function (index, em) {
+            if ($(em).is(':checked')) {
+                result++;
+            }
+        });
+
+        if (result == 7) {
+            $("#chkWeekAll").iCheck('check');
+        }
+
+    }
+
+</script>
+<section class="content">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="row">
+            <div class="col-md-9" style="margin-left:15px;">
+                <div class="box box-primary" style="width:950px;">
+                    <div class="box-header">
+                        <i class="fa fa-search"></i>
+                        <h3 class="box-title">スケジュール創建</h3>
+                        <div class="box-tools pull-right">
+                            <button class="btn btn-primary btn-xs" data-widget="collapse" type="button"><i class="fa fa-minus"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body" style="display: block;">
+                        <table class="table table-bordered">
+                            <tr>
+                                <th style="width: 100px;vertical-align: middle;" class="thUpTitle">
+                                    曜日
+                                </th>
+                                <td>
+                                    <label class="checkbox-inline"><input type="checkbox" class="chkweekAll" id="chkWeekAll" name="chkWeekAll" /> 全部</label>
+                                    <label class="checkbox-inline"><input type="checkbox" class="chkweek" id="chkSun" name="chkSun" value="0" /> 日曜日</label>
+                                    <label class="checkbox-inline"><input type="checkbox" class="chkweek" id="chkMon" name="chkMon" value="1" /> 月曜日</label>
+                                    <label class="checkbox-inline"><input type="checkbox" class="chkweek" id="chkTue" name="chkTue" value="2" /> 火曜日</label>
+                                    <label class="checkbox-inline"><input type="checkbox" class="chkweek" id="chkWed" name="chkWed" value="3" /> 水曜日</label>
+                                    <label class="checkbox-inline"><input type="checkbox" class="chkweek" id="chkThur" name="chkThur" value="4" /> 木曜日</label>
+                                    <label class="checkbox-inline"><input type="checkbox" class="chkweek" id="chkFri" name="chkFri" value="5" /> 金曜日</label>
+                                    <label class="checkbox-inline"><input type="checkbox" class="chkweek" id="chkSat" name="chkSat" value="6" /> 土曜日</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th style="width: 100px;vertical-align: middle;" class="thUpTitle">
+                                    シフト
+                                </th>
+                                <td>
+                                    @Html.DropDownList("ddlShift", (List<SelectListItem>)ViewData["lstShift"], new { @class = "form-control" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <th style="width: 100px;vertical-align: middle;" class="thUpTitle">
+                                    エージェント
+                                </th>
+                                <td>@Html.ListBox("selectAgent", (List<SelectListItem>)ViewData["lstAgent"], new { style = "height:450px" })</td>
+                            </tr>
+                            <tr>
+                                <th style="width: 100px;vertical-align: middle;" class="thUpTitle"></th>
+                                <td style="text-align:center">
+                                    <input type="submit" value="保存" class="btn btn-primary" />
+                                    @Html.ActionLink("戻る", "index", null, new { @class = "btn  btn-primary" })
+                                </td>
+                            </tr>
+                        </table>
+                    </div><!-- /.box-body -->
+                </div>
+            </div>
+        </div>
+
+        @*<div class="col-sm-8">
+
+            </div>*@
+
+
+
+    }
+
+</section>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

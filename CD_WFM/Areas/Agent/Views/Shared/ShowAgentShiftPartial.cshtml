@@ -13,11 +13,10 @@
         $('#txtStartdate').datepicker(opt_datePicker);
 
         $('#txtStartdate').datepicker('setDate', new Date());
-        if ("shiftagent" == "@controllerName")
-        {
+        if ("shiftagent" == "@controllerName") {
             InitWeekTitle();
         }
-        
+
     });
 
 
@@ -63,19 +62,26 @@
                     <div class="box-body" style="display: block;">
                         <table class="table table-bordered">
                             <tr>
-                                <th style="width: 100px;vertical-align: middle;" class="thUpTitle">
-                                    日付
-                                </th>
-                                <td>
-                                    @Html.TextBox("txtStartdate", null, new { maxLength = "10", @readonly = "readonly", style = "width:110px;readonly;margin-right:5px;", @class = "form-control" })
+                                @if ("shiftagent" == controllerName)
+                                {
+                                    <th style="width: 100px;vertical-align: middle;" class="thUpTitle">
+                                        日付
+                                    </th>
+                                    <td>
+                                        @Html.TextBox("txtStartdate", null, new { maxLength = "10", @readonly = "readonly", style = "width:110px;readonly;margin-right:5px;", @class = "form-control" })
 
-                                </td>
+                                    </td>
+                                }
                                 <th class="thUpTitle" style="width: 50px;vertical-align: middle;">エージェントID</th>
                                 <td>
                                     @Html.DropDownList("ddlAgentID", (List<SelectListItem>)ViewData["lstAgent"], new { @class = "form-control" })
                                 </td>
                                 <td style="vertical-align:middle;text-align:center;">
                                     <button type="submit" id="Search" name="Search" class="btn btn-primary" style="width: 100px;"><i class="fa fa-search"></i> 検索</button>
+                                    @if ("shiftagentweek" == controllerName)
+                                    {
+                                        @Html.ActionLink("週間シフト創建", "create", null,new {@class="btn  btn-primary"})
+                                    }
                                 </td>
                             </tr>
                         </table>

@@ -1,0 +1,50 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="content-header">
+    <h1>
+        データ同期
+        <small>当日分のデータを取る</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="@Url.Content("~/")"><i class="fa fa-home"></i>ホーム</a></li>
+        <li class="active"><a href="@Url.Content("~/data/dataSynchro")">データ同期</a></li>
+    </ol>
+</section>
+<section class="content">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="row">
+            <div class="col-md-9" style="margin-left:15px;">
+                <div class="box box-primary" style="width:950px;">
+                    <div class="box-header">
+                        <i class="fa fa-search"></i>
+                        <h3 class="box-title">データ同期</h3>
+                        <div class="box-tools pull-right">
+                            <button class="btn btn-primary btn-xs" data-widget="collapse" type="button"><i class="fa fa-minus"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body" style="display: block;">
+                        <table class="table table-bordered">
+                            <tr>
+                                <th style="width: 100px;vertical-align: middle;" class="thUpTitle">
+                                    前回同期時間
+                                </th>
+                                <td style="vertical-align:middle; width:500px">@ViewBag.UpdatedTime</td>
+                                <td style="text-align:center;width:100px">
+                                    <input type="submit" value="同期" class="btn btn-default" />
+                                </td>
+
+                            </tr>
+
+                        </table>
+                    </div><!-- /.box-body -->
+                </div>
+            </div>
+        </div>
+    }
+</section>
+

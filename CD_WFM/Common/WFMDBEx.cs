@@ -28,6 +28,34 @@ namespace WFM.Common
             return ((IMultipleResults)(result.ReturnValue));
         }
 
+        [global::System.Data.Linq.Mapping.FunctionAttribute(Name = "dbo.uspWFMSearchShiftAgentWeekPaged")]
+        [ResultType(typeof(tblAgentWeekShift))]
+        [ResultType(typeof(tblDataPaged))]
+        public IMultipleResults uspWFMSearchShiftAgentWeekPaged([global::System.Data.Linq.Mapping.ParameterAttribute(Name = "IN_pageIndex", DbType = "Int")] System.Nullable<int> iN_pageIndex, [global::System.Data.Linq.Mapping.ParameterAttribute(Name = "IN_onePageRows", DbType = "Int")] System.Nullable<int> iN_onePageRows, [global::System.Data.Linq.Mapping.ParameterAttribute(Name = "IN_orderBy", DbType = "NVarChar(255)")] string iN_orderBy, [global::System.Data.Linq.Mapping.ParameterAttribute(Name = "IN_sort", DbType = "NVarChar(5)")] string iN_sort, [global::System.Data.Linq.Mapping.ParameterAttribute(Name = "IN_vTenantID", DbType = "VarChar(32)")] string iN_vTenantID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name = "IN_vTenantSpecialFlag", DbType = "VarChar(20)")] string iN_vTenantSpecialFlag, string iN_vAgentID)
+        {
+            IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), iN_pageIndex, iN_onePageRows, iN_orderBy, iN_sort, iN_vTenantID, iN_vTenantSpecialFlag, iN_vAgentID);
+            return ((IMultipleResults)(result.ReturnValue));
+        }
+
+
+        [global::System.Data.Linq.Mapping.FunctionAttribute(Name = "dbo.uspWFMSearchAHTGroupBySkillPaged")]
+        [ResultType(typeof(tblAgentAHT))]
+        [ResultType(typeof(tblDataPaged))]
+        public IMultipleResults uspWFMSearchAHTGroupBySkillPaged([global::System.Data.Linq.Mapping.ParameterAttribute(Name = "IN_pageIndex", DbType = "Int")] System.Nullable<int> iN_pageIndex, [global::System.Data.Linq.Mapping.ParameterAttribute(Name = "IN_onePageRows", DbType = "Int")] System.Nullable<int> iN_onePageRows, [global::System.Data.Linq.Mapping.ParameterAttribute(Name = "IN_orderBy", DbType = "NVarChar(255)")] string iN_orderBy, [global::System.Data.Linq.Mapping.ParameterAttribute(Name = "IN_sort", DbType = "NVarChar(5)")] string iN_sort, [global::System.Data.Linq.Mapping.ParameterAttribute(Name = "IN_vTenantID", DbType = "VarChar(32)")] string iN_vTenantID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name = "IN_dtStart", DbType = "DateTime")] System.Nullable<System.DateTime> iN_dtStart, [global::System.Data.Linq.Mapping.ParameterAttribute(Name = "IN_dtEnd", DbType = "DateTime")] System.Nullable<System.DateTime> iN_dtEnd, [global::System.Data.Linq.Mapping.ParameterAttribute(Name = "IN_vTenantSpecialFlag", DbType = "VarChar(20)")] string iN_vTenantSpecialFlag, [global::System.Data.Linq.Mapping.ParameterAttribute(Name = "IN_vAgentID", DbType = "VarChar(32)")] string iN_vAgentID)
+        {
+            IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), iN_pageIndex, iN_onePageRows, iN_orderBy, iN_sort, iN_vTenantID, iN_dtStart, iN_dtEnd, iN_vTenantSpecialFlag, iN_vAgentID);
+            return ((IMultipleResults)(result.ReturnValue));
+        }
+
+        [global::System.Data.Linq.Mapping.FunctionAttribute(Name = "dbo.uspWFMSearchAHTGroupBySkillAgregationPaged")]
+        [ResultType(typeof(tblAgentAHT))]
+        [ResultType(typeof(tblDataPaged))]
+        public IMultipleResults uspWFMSearchAHTGroupBySkillAgregationPaged([global::System.Data.Linq.Mapping.ParameterAttribute(Name = "IN_pageIndex", DbType = "Int")] System.Nullable<int> iN_pageIndex, [global::System.Data.Linq.Mapping.ParameterAttribute(Name = "IN_onePageRows", DbType = "Int")] System.Nullable<int> iN_onePageRows, [global::System.Data.Linq.Mapping.ParameterAttribute(Name = "IN_orderBy", DbType = "NVarChar(255)")] string iN_orderBy, [global::System.Data.Linq.Mapping.ParameterAttribute(Name = "IN_sort", DbType = "NVarChar(5)")] string iN_sort, [global::System.Data.Linq.Mapping.ParameterAttribute(Name = "IN_vTenantID", DbType = "VarChar(32)")] string iN_vTenantID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name = "IN_dtStart", DbType = "DateTime")] System.Nullable<System.DateTime> iN_dtStart, [global::System.Data.Linq.Mapping.ParameterAttribute(Name = "IN_dtEnd", DbType = "DateTime")] System.Nullable<System.DateTime> iN_dtEnd, [global::System.Data.Linq.Mapping.ParameterAttribute(Name = "IN_vTenantSpecialFlag", DbType = "VarChar(20)")] string iN_vTenantSpecialFlag, [global::System.Data.Linq.Mapping.ParameterAttribute(Name = "IN_vAgentID", DbType = "VarChar(32)")] string iN_vAgentID)
+        {
+            IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), iN_pageIndex, iN_onePageRows, iN_orderBy, iN_sort, iN_vTenantID, iN_dtStart, iN_dtEnd, iN_vTenantSpecialFlag, iN_vAgentID);
+            return ((IMultipleResults)(result.ReturnValue));
+        }
+
     //    [Function(Name = "dbo.SearchClientPaged")]
     //    [ResultType(typeof(tbCPFPersonalProfile))]
     //    [ResultType(typeof(tblDataPaged))]

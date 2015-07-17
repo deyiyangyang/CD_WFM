@@ -270,6 +270,14 @@ namespace WFM.Common
 			}
 		}
 		
+		public System.Data.Linq.Table<tblAgentAHT> tblAgentAHT
+		{
+			get
+			{
+				return this.GetTable<tblAgentAHT>();
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.uspWFMGetTenantName")]
 		public ISingleResult<uspWFMGetTenantNameResult> uspWFMGetTenantName([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string vTenantID)
 		{
@@ -387,6 +395,25 @@ namespace WFM.Common
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), vAgentID, vWeekDay, iShiftID);
 			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.uspWFMSearchAHTGroupBySkillPaged")]
+		public void uspWFMSearchAHTGroupBySkillPaged([global::System.Data.Linq.Mapping.ParameterAttribute(Name="IN_pageIndex", DbType="Int")] System.Nullable<int> iN_pageIndex, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IN_onePageRows", DbType="Int")] System.Nullable<int> iN_onePageRows, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IN_orderBy", DbType="NVarChar(255)")] string iN_orderBy, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IN_sort", DbType="NVarChar(5)")] string iN_sort, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IN_vTenantID", DbType="VarChar(32)")] string iN_vTenantID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IN_dtStart", DbType="DateTime")] System.Nullable<System.DateTime> iN_dtStart, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IN_dtEnd", DbType="DateTime")] System.Nullable<System.DateTime> iN_dtEnd, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IN_vTenantSpecialFlag", DbType="VarChar(20)")] string iN_vTenantSpecialFlag, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IN_vAgentID", DbType="VarChar(32)")] string iN_vAgentID)
+		{
+			this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), iN_pageIndex, iN_onePageRows, iN_orderBy, iN_sort, iN_vTenantID, iN_dtStart, iN_dtEnd, iN_vTenantSpecialFlag, iN_vAgentID);
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.uspWFMSearchAHTGroupBySkillAgregationPaged")]
+		public void uspWFMSearchAHTGroupBySkillAgregationPaged([global::System.Data.Linq.Mapping.ParameterAttribute(Name="IN_pageIndex", DbType="Int")] System.Nullable<int> iN_pageIndex, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IN_onePageRows", DbType="Int")] System.Nullable<int> iN_onePageRows, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IN_orderBy", DbType="NVarChar(255)")] string iN_orderBy, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IN_sort", DbType="NVarChar(5)")] string iN_sort, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IN_vTenantID", DbType="VarChar(32)")] string iN_vTenantID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IN_dtStart", DbType="DateTime")] System.Nullable<System.DateTime> iN_dtStart, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IN_dtEnd", DbType="DateTime")] System.Nullable<System.DateTime> iN_dtEnd, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IN_vTenantSpecialFlag", DbType="VarChar(20)")] string iN_vTenantSpecialFlag, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IN_vAgentID", DbType="VarChar(32)")] string iN_vAgentID)
+		{
+			this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), iN_pageIndex, iN_onePageRows, iN_orderBy, iN_sort, iN_vTenantID, iN_dtStart, iN_dtEnd, iN_vTenantSpecialFlag, iN_vAgentID);
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.uspWFMGetDataSynchro")]
+		public ISingleResult<uspWFMGetDataSynchroResult> uspWFMGetDataSynchro([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string vTenantID)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), vTenantID);
+			return ((ISingleResult<uspWFMGetDataSynchroResult>)(result.ReturnValue));
 		}
 	}
 	
@@ -9422,6 +9449,285 @@ namespace WFM.Common
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="")]
+	public partial class tblAgentAHT
+	{
+		
+		private string _vAgentID;
+		
+		private string _vDisplayName;
+		
+		private string _vGroupName;
+		
+		private string _vSkillGroupName;
+		
+		private string _vSkillAgregationName;
+		
+		private int _iTotalInBoundTalkDru;
+		
+		private int _iCountInBoundTalk;
+		
+		private int _iAvgInBoundTalk;
+		
+		private int _iTotalWorktimeDru;
+		
+		private int _iCountWorktime;
+		
+		private int _iAvgWorktime;
+		
+		private int _iTotalHoldDru;
+		
+		private int _iCountHold;
+		
+		private int _iAvgHold;
+		
+		private int _AHT;
+		
+		public tblAgentAHT()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_vAgentID", CanBeNull=false)]
+		public string vAgentID
+		{
+			get
+			{
+				return this._vAgentID;
+			}
+			set
+			{
+				if ((this._vAgentID != value))
+				{
+					this._vAgentID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_vDisplayName", CanBeNull=false)]
+		public string vDisplayName
+		{
+			get
+			{
+				return this._vDisplayName;
+			}
+			set
+			{
+				if ((this._vDisplayName != value))
+				{
+					this._vDisplayName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_vGroupName", CanBeNull=false)]
+		public string vGroupName
+		{
+			get
+			{
+				return this._vGroupName;
+			}
+			set
+			{
+				if ((this._vGroupName != value))
+				{
+					this._vGroupName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_vSkillGroupName", CanBeNull=false)]
+		public string vSkillGroupName
+		{
+			get
+			{
+				return this._vSkillGroupName;
+			}
+			set
+			{
+				if ((this._vSkillGroupName != value))
+				{
+					this._vSkillGroupName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_vSkillAgregationName", CanBeNull=false)]
+		public string vSkillAgregationName
+		{
+			get
+			{
+				return this._vSkillAgregationName;
+			}
+			set
+			{
+				if ((this._vSkillAgregationName != value))
+				{
+					this._vSkillAgregationName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_iTotalInBoundTalkDru")]
+		public int iTotalInBoundTalkDru
+		{
+			get
+			{
+				return this._iTotalInBoundTalkDru;
+			}
+			set
+			{
+				if ((this._iTotalInBoundTalkDru != value))
+				{
+					this._iTotalInBoundTalkDru = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_iCountInBoundTalk")]
+		public int iCountInBoundTalk
+		{
+			get
+			{
+				return this._iCountInBoundTalk;
+			}
+			set
+			{
+				if ((this._iCountInBoundTalk != value))
+				{
+					this._iCountInBoundTalk = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_iAvgInBoundTalk")]
+		public int iAvgInBoundTalk
+		{
+			get
+			{
+				return this._iAvgInBoundTalk;
+			}
+			set
+			{
+				if ((this._iAvgInBoundTalk != value))
+				{
+					this._iAvgInBoundTalk = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_iTotalWorktimeDru")]
+		public int iTotalWorktimeDru
+		{
+			get
+			{
+				return this._iTotalWorktimeDru;
+			}
+			set
+			{
+				if ((this._iTotalWorktimeDru != value))
+				{
+					this._iTotalWorktimeDru = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_iCountWorktime")]
+		public int iCountWorktime
+		{
+			get
+			{
+				return this._iCountWorktime;
+			}
+			set
+			{
+				if ((this._iCountWorktime != value))
+				{
+					this._iCountWorktime = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_iAvgWorktime")]
+		public int iAvgWorktime
+		{
+			get
+			{
+				return this._iAvgWorktime;
+			}
+			set
+			{
+				if ((this._iAvgWorktime != value))
+				{
+					this._iAvgWorktime = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_iTotalHoldDru")]
+		public int iTotalHoldDru
+		{
+			get
+			{
+				return this._iTotalHoldDru;
+			}
+			set
+			{
+				if ((this._iTotalHoldDru != value))
+				{
+					this._iTotalHoldDru = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_iCountHold")]
+		public int iCountHold
+		{
+			get
+			{
+				return this._iCountHold;
+			}
+			set
+			{
+				if ((this._iCountHold != value))
+				{
+					this._iCountHold = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_iAvgHold")]
+		public int iAvgHold
+		{
+			get
+			{
+				return this._iAvgHold;
+			}
+			set
+			{
+				if ((this._iAvgHold != value))
+				{
+					this._iAvgHold = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AHT")]
+		public int AHT
+		{
+			get
+			{
+				return this._AHT;
+			}
+			set
+			{
+				if ((this._AHT != value))
+				{
+					this._AHT = value;
+				}
+			}
+		}
+	}
+	
 	public partial class uspWFMGetTenantNameResult
 	{
 		
@@ -9841,6 +10147,32 @@ namespace WFM.Common
 				if ((this._vAgregationName != value))
 				{
 					this._vAgregationName = value;
+				}
+			}
+		}
+	}
+	
+	public partial class uspWFMGetDataSynchroResult
+	{
+		
+		private System.Nullable<System.DateTime> _dtUpdated;
+		
+		public uspWFMGetDataSynchroResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dtUpdated", DbType="DateTime")]
+		public System.Nullable<System.DateTime> dtUpdated
+		{
+			get
+			{
+				return this._dtUpdated;
+			}
+			set
+			{
+				if ((this._dtUpdated != value))
+				{
+					this._dtUpdated = value;
 				}
 			}
 		}

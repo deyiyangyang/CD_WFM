@@ -122,5 +122,11 @@
         <elementListCompartment Id="51479c4f-42be-497e-9a65-59703d19def3" absoluteBounds="14.515, 6.21, 1.9700000000000002, 1.7164815266927083" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
+    <classShape Id="7d7fbfc4-1661-49df-bcac-020fe397a124" absoluteBounds="6.875, 1.625, 2, 3.5700402832031246">
+      <DataClassMoniker Name="/WFMDBDataContext/tblAgentAHT" />
+      <nestedChildShapes>
+        <elementListCompartment Id="59922065-e625-4f39-9e80-a8f1ca7784ba" absoluteBounds="6.89, 2.085, 1.9700000000000002, 3.010040283203125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
   </nestedChildShapes>
 </ordesignerObjectsDiagram>

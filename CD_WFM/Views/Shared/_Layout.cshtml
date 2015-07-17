@@ -157,7 +157,12 @@
                                 <i class="fa fa-home"></i> <span>ホーム</span>
                             </a>
                         </li>
-
+                        if (areaName.ToLower() == "data") { strCss = "active"; } else { strCss = ""; }
+                        <li class="@strCss">
+                            <a href="@Url.Content("~/data/datasynchro")">
+                                <i class="fa fa-home"></i> <span>データ同期</span>
+                            </a>
+                        </li>
                         if (areaName.ToLower() == "manager") { strCss = "active"; } else { strCss = ""; }
 
                         <li class="@strCss  treeview">
@@ -204,21 +209,21 @@
                             <ul class="treeview-menu">
                                 @if (controllerName == "shiftagentweek")
                                 {
-                                    <li class="active"><a href="~/agent/ShiftAgentWeek"><i class="fa fa-circle-o"></i>週間スケジュール</a></li>
+                                    <li class="active"><a href="~/agent/ShiftAgentWeek"><i class="fa fa-circle-o"></i>週間シフト</a></li>
                                 }
                                 else
                                 {
-                                    <li><a href="~/agent/ShiftAgentWeek"><i class="fa fa-circle-o"></i>週間スケジュール</a></li>
+                                    <li><a href="~/agent/ShiftAgentWeek"><i class="fa fa-circle-o"></i>週間シフト</a></li>
                                 }
 
                                 @if (controllerName == "shiftagent")
                                 {
 
-                                    <li class="active"><a href="~/agent/ShiftAgent"><i class="fa fa-circle-o"></i>シフト関連</a></li>
+                                    <li class="active"><a href="~/agent/ShiftAgent"><i class="fa fa-circle-o"></i>関連シフト</a></li>
                                 }
                                 else
                                 {
-                                    <li><a href="~/agent/ShiftAgent"><i class="fa fa-circle-o"></i>シフト関連</a></li>
+                                    <li><a href="~/agent/ShiftAgent"><i class="fa fa-circle-o"></i>関連シフト</a></li>
                                 }
 
                                 @if (controllerName == "callprediction")

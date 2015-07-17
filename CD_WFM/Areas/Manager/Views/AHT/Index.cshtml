@@ -1,0 +1,194 @@
+﻿@using WFM.Common;
+@using WFM.Models;
+@model IEnumerable<tblAgentAHT>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.Partial("DatePickerScript")
+@Html.Partial("SortScript")
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#dtStart').datepicker(opt_datePicker);
+        $('#dtEnd').datepicker(opt_datePicker);
+        $('#dtStart').datepicker('setDate', new Date());
+        $('#dtEnd').datepicker('setDate', new Date());
+
+        if ("@ViewBag.RadioChecked" == "byAgregation") {
+            $("#byAgregation").attr("checked", 'checked');
+        }
+        else {
+            $("#bySkill").attr("checked", 'checked');
+        }
+    });
+</script>
+<section class="content">
+    @using (Html.BeginForm())
+    {
+        @Html.Partial("SortHeader", AppConst.Const_Default_SortAction)
+        <div class="row">
+            <div class="col-md-9" style="margin-left:15px;">
+                <div class="box box-primary" style="width:650px;">
+                    <div class="box-header">
+                        <i class="fa fa-search"></i>
+                        <h3 class="box-title">検索条件</h3>
+                        <div class="box-tools pull-right">
+                            <button class="btn btn-primary btn-xs" data-widget="collapse" type="button"><i class="fa fa-minus"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body" style="display: block;">
+                        <table class="table table-bordered">
+                            <tr>
+                                <th style="width: 100px;vertical-align: middle;" class="thUpTitle">
+                                    日付
+                                </th>
+                                <td style="vertical-align:middle;" colspan="2">
+                                    @Html.TextBox("dtStart", null, new { maxLength = "10", @readonly = "readonly", style = "width:110px;readonly;margin-right:5px;", @class = "form-control" })
+                                    ～
+                                    @Html.TextBox("dtEnd", null, new { maxLength = "10", @readonly = "readonly", style = "width:110px;readonly;margin-right:5px;", @class = "form-control" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="thUpTitle" style="width: 50px;vertical-align: middle;">エージェントID</th>
+                                <td colspan="2">
+                                    @Html.DropDownList("ddlAgentID", (List<SelectListItem>)ViewData["lstAgent"], new { @class = "form-control" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="thUpTitle" style="width: 50px;vertical-align: middle;">グループ条件</th>
+                                <td>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="groupRadioOptions" id="bySkill" value="bySkill" checked="checked">スキルグループ
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="groupRadioOptions" id="byAgregation" value="byAgregation">スキルアグリゲーショ
+                                    </label>
+                                </td>
+                                <td style="vertical-align:middle;text-align:center;">
+                                    <button type="submit" id="Search" name="Search" class="btn btn-primary" style="width: 100px;"><i class="fa fa-search"></i> 検索</button>
+                                </td>
+                            </tr>
+                        </table>
+                    </div><!-- /.box-body -->
+                </div>
+            </div>
+        </div>
+        @Html.Partial("PagerHeader", (PagerDataModel)ViewBag.PagerDataModel)
+        <table class="table table-bordered table-hover" style="margin-bottom: 0px;width:auto;" id="weekSch">
+            <tr>
+                <th>
+                    エジェートID
+                </th>
+                <th>
+                    エジェート名
+                </th>
+                <th>
+                    局番グループ
+                </th>
+                @if (ViewBag.RadioChecked != "byAgregation")
+                {
+                    <th>
+                        スキルグループ
+                    </th>
+                }
+                @if (ViewBag.RadioChecked == "byAgregation")
+                {
+                    <th>
+                        スキルアグリゲーショ
+                    </th>
+                }
+                @*<th>
+                    着信通話時間
+                </th>
+                <th>
+                    着信通話回数
+                </th>*@
+                <th>
+                    着信平均通話時間
+                </th>
+                @*<th>
+                    後処理時間
+                </th>
+                <th>
+                    後処理回数
+                </th>*@
+                <th>
+                    平均後処理時間
+                </th>
+                @*<th>
+                    保留時間
+                </th>
+                <th>
+                    保留回数
+                </th*@>
+                <th>
+                    平均保留時間
+                </th>
+                <th>
+                    AHT
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.vAgentID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.vDisplayName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.vGroupName)
+                    </td>
+                    @if (ViewBag.RadioChecked != "byAgregation")
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.vSkillGroupName)
+                        </td>
+                    }
+                    @if (ViewBag.RadioChecked == "byAgregation")
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.vSkillAgregationName)
+                        </td>
+                    }
+                    @*<td>
+                        @Html.DisplayFor(modelItem => item.iTotalInBoundTalkDru)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.iCountInBoundTalk)
+                    </td>*@
+                    <td>
+                        @Html.DisplayFor(modelItem => item.iAvgInBoundTalk)
+                    </td>
+                    @*<td>
+                        @Html.DisplayFor(modelItem => item.iTotalWorktimeDru)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.iCountWorktime)
+                    </td>*@
+                    <td>
+                        @Html.DisplayFor(modelItem => item.iAvgWorktime)
+                    </td>
+                    @*<td>
+                        @Html.DisplayFor(modelItem => item.iTotalHoldDru)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.iCountHold)
+                    </td>*@
+                    <td>
+                        @Html.DisplayFor(modelItem => item.iAvgHold)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AHT)
+                    </td>
+                </tr>
+            }
+        </table>
+        @Html.Partial("PageFooter", (PagerDataModel)ViewBag.PagerDataModel)
+    }
+
+</section>
