@@ -35,7 +35,7 @@
                                 </th>
                                 <td style="vertical-align:middle; width:500px">@ViewBag.UpdatedTime</td>
                                 <td style="text-align:center;width:100px">
-                                    <input type="submit" value="同期" class="btn btn-default" />
+                                    <input type="button" value="同期" class="btn btn-default" onclick="doUpdate()" />
                                 </td>
 
                             </tr>
@@ -43,8 +43,33 @@
                         </table>
                     </div><!-- /.box-body -->
                 </div>
+                <div id="warning"></div>
             </div>
         </div>
     }
 </section>
+<script type="text/javascript">
+    function doUpdate() {
+        var vUrl = '@Url.Content("~/data/datasynchro/Update_Ajax/")';
+
+        $.ajax({
+            url: vUrl,
+            beforeSend: function () {
+                $('#warning').text('processing, please wait!');
+            }
+        }).done(function (data) {
+            var code = data["StatusCode"];
+            if (code !== undefined && code !== null) {
+                if (code != -1) {
+                    location.href = location.href;
+                }
+                else
+                {
+                    $('#warning').text('system error!');
+                }
+            }
+        });
+
+    }
+</script>
 
