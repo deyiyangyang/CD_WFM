@@ -442,8 +442,8 @@
       <Column Name="vAgentID" Type="System.String" CanBeNull="false" />
       <Column Name="vDisplayName" Type="System.String" CanBeNull="false" />
       <Column Name="vGroupName" Type="System.String" CanBeNull="false" />
-      <Column Member="vSkillGroupName" Type="System.String" CanBeNull="false" />
-      <Column Member="vSkillAgregationName" Type="System.String" CanBeNull="false" />
+      <Column Name="vSkillGroupName" Type="System.String" CanBeNull="false" />
+      <Column Name="vSkillAgregationName" Type="System.String" CanBeNull="false" />
       <Column Name="iTotalInBoundTalkDru" Type="System.Int32" CanBeNull="false" />
       <Column Name="iCountInBoundTalk" Type="System.Int32" CanBeNull="false" />
       <Column Name="iAvgInBoundTalk" Type="System.Int32" CanBeNull="false" />
@@ -573,28 +573,6 @@
     <Parameter Name="iShiftID" Type="System.Int32" DbType="Int" />
     <Return Type="System.Int32" />
   </Function>
-  <Function Name="dbo.uspWFMSearchAHTGroupBySkillPaged" Method="uspWFMSearchAHTGroupBySkillPaged">
-    <Parameter Name="IN_pageIndex" Parameter="iN_pageIndex" Type="System.Int32" DbType="Int" />
-    <Parameter Name="IN_onePageRows" Parameter="iN_onePageRows" Type="System.Int32" DbType="Int" />
-    <Parameter Name="IN_orderBy" Parameter="iN_orderBy" Type="System.String" DbType="NVarChar(255)" />
-    <Parameter Name="IN_sort" Parameter="iN_sort" Type="System.String" DbType="NVarChar(5)" />
-    <Parameter Name="IN_vTenantID" Parameter="iN_vTenantID" Type="System.String" DbType="VarChar(32)" />
-    <Parameter Name="IN_dtStart" Parameter="iN_dtStart" Type="System.DateTime" DbType="DateTime" />
-    <Parameter Name="IN_dtEnd" Parameter="iN_dtEnd" Type="System.DateTime" DbType="DateTime" />
-    <Parameter Name="IN_vTenantSpecialFlag" Parameter="iN_vTenantSpecialFlag" Type="System.String" DbType="VarChar(20)" />
-    <Parameter Name="IN_vAgentID" Parameter="iN_vAgentID" Type="System.String" DbType="VarChar(32)" />
-  </Function>
-  <Function Name="dbo.uspWFMSearchAHTGroupBySkillAgregationPaged" Method="uspWFMSearchAHTGroupBySkillAgregationPaged">
-    <Parameter Name="IN_pageIndex" Parameter="iN_pageIndex" Type="System.Int32" DbType="Int" />
-    <Parameter Name="IN_onePageRows" Parameter="iN_onePageRows" Type="System.Int32" DbType="Int" />
-    <Parameter Name="IN_orderBy" Parameter="iN_orderBy" Type="System.String" DbType="NVarChar(255)" />
-    <Parameter Name="IN_sort" Parameter="iN_sort" Type="System.String" DbType="NVarChar(5)" />
-    <Parameter Name="IN_vTenantID" Parameter="iN_vTenantID" Type="System.String" DbType="VarChar(32)" />
-    <Parameter Name="IN_dtStart" Parameter="iN_dtStart" Type="System.DateTime" DbType="DateTime" />
-    <Parameter Name="IN_dtEnd" Parameter="iN_dtEnd" Type="System.DateTime" DbType="DateTime" />
-    <Parameter Name="IN_vTenantSpecialFlag" Parameter="iN_vTenantSpecialFlag" Type="System.String" DbType="VarChar(20)" />
-    <Parameter Name="IN_vAgentID" Parameter="iN_vAgentID" Type="System.String" DbType="VarChar(32)" />
-  </Function>
   <Function Name="dbo.uspWFMGetDataSynchro" Method="uspWFMGetDataSynchro">
     <Parameter Name="vTenantID" Type="System.String" DbType="VarChar(32)" />
     <ElementType Name="uspWFMGetDataSynchroResult">
@@ -611,6 +589,7 @@
     <Parameter Name="vTenant" Type="System.String" DbType="VarChar(32)" />
     <Parameter Name="dtSt" Type="System.String" DbType="VarChar(32)" />
     <Parameter Name="dtEnd" Type="System.String" DbType="VarChar(32)" />
+    <Return Type="System.Int32" />
   </Function>
   <Function Name="dbo.uspWFMUpdateOrInsertDataSynchro" Method="uspWFMUpdateOrInsertDataSynchro">
     <Parameter Name="vTenantID" Type="System.String" DbType="VarChar(32)" />

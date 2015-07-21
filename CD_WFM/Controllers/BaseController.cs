@@ -291,8 +291,15 @@ namespace WFM.Controllers
             Session[const_Session_Tenant_Key] = "05038181424";
             Session[const_Session_TenantSpecial_Key] = "";
             base.OnActionExecuting(filterContext);
+
+            AppLog.WriteLog(string.Format("Action Start! Action=[{0}], Controller=[{1}]，TenantID=[{2}]", filterContext.ActionDescriptor.ActionName, filterContext.ActionDescriptor.ControllerDescriptor.ControllerName, Session[const_Session_Tenant_Key] == null ? "noTenantID" : Session[const_Session_Tenant_Key].ToString()));
         }
 
+        protected override void OnActionExecuted(ActionExecutedContext filterContext)
+        {
+            base.OnActionExecuted(filterContext);
+            AppLog.WriteLog(string.Format("Action End! Action=[{0}], Controller=[{1}]，TenantID=[{2}]", filterContext.ActionDescriptor.ActionName, filterContext.ActionDescriptor.ControllerDescriptor.ControllerName, Session[const_Session_Tenant_Key] == null ? "noTenantID" : Session[const_Session_Tenant_Key].ToString()));
+        }
         protected void GetAgentList(string strAgentID, bool hasExtraHeader,bool isShowDisplayName)
         {
             List<SelectListItem> lstItem = new List<SelectListItem>();

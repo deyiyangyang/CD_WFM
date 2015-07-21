@@ -41,6 +41,7 @@ namespace WFM.Areas.Data.Controllers
             }
             catch (Exception ex)
             {
+                AppLog.WriteLog("DataSynchroController:Update_Ajax system error:"+ex.Message+ex.StackTrace);
                 return Json(new { StatusCode = AppConst.Enum_JsonStatus.Error }, JsonRequestBehavior.AllowGet);
             }
         }

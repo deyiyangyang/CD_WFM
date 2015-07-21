@@ -396,7 +396,6 @@ namespace WFM.Common
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), vAgentID, vWeekDay, iShiftID);
 			return ((int)(result.ReturnValue));
 		}
-
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.uspWFMGetDataSynchro")]
 		public ISingleResult<uspWFMGetDataSynchroResult> uspWFMGetDataSynchro([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string vTenantID)
@@ -413,9 +412,10 @@ namespace WFM.Common
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.uspRptForCallDetailV3OneDay")]
-		public void uspRptForCallDetailV3OneDay([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string vTenant, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string dtSt, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string dtEnd)
+		public int uspRptForCallDetailV3OneDay([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string vTenant, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string dtSt, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string dtEnd)
 		{
-			this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), vTenant, dtSt, dtEnd);
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), vTenant, dtSt, dtEnd);
+			return ((int)(result.ReturnValue));
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.uspWFMUpdateOrInsertDataSynchro")]

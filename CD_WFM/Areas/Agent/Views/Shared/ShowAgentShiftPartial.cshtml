@@ -80,7 +80,9 @@
                                     <button type="submit" id="Search" name="Search" class="btn btn-primary" style="width: 100px;"><i class="fa fa-search"></i> 検索</button>
                                     @if ("shiftagentweek" == controllerName)
                                     {
-                                        @Html.ActionLink("週間シフト創建", "create", null,new {@class="btn  btn-primary"})
+                                        <a class="btn btn-primary" href="/Agent/ShiftAgentWeek/create">
+                                            <i class="fa fa-plus-square-o"></i><span> 週間シフト創建</span>
+                                        </a>
                                     }
                                 </td>
                             </tr>
