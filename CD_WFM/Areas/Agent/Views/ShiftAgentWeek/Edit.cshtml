@@ -95,8 +95,11 @@
                             <tr>
                                 <th style="width: 100px;vertical-align: middle;" class="thUpTitle"></th>
                                 <td style="text-align:center">
-                                    <input type="submit" value="保存" class="btn btn-default" />
-                                    @Html.ActionLink("戻る", "index", null, new { @class = "btn btn-default btn-lg active", role = "button" })
+                                    <input type="submit" value="保存" class="btn btn-primary" />
+
+                                    <a class="btn btn-primary" href="/agent/shiftAgentWeek">
+                                        <i class="fa  fa-undo"></i><span> 戻る</span>
+                                    </a>
                                 </td>
                             </tr>
                         </table>

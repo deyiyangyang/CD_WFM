@@ -1,13 +1,13 @@
-﻿@using WFM.Models;
+﻿@*@using WFM.Models;
 @using WFM.Common;
 @using System.Web.UI.WebControls
-@model IEnumerable<tblAgentWeekShift>
+@model IEnumerable<tblAgentWeekShift>*@
 
 @{
     ViewBag.Title = "シフトエージェント情報";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    string TenantID = ViewBag.vTenantID;
-    string TenantFlag = ViewBag.vTenantSpeciaFlag;
+    //string TenantID = ViewBag.vTenantID;
+    //string TenantFlag = ViewBag.vTenantSpeciaFlag;
 }
 
 @Html.Partial("ShowAgentShiftPartial")

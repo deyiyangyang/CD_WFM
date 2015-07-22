@@ -34,7 +34,7 @@
         myWeekDays[5] = currentDate.DateAdd('d', 5 - currentWeekDay);
         myWeekDays[6] = currentDate.DateAdd('d', 6 - currentWeekDay);
         $("#weekSch").find("th").each(function (index, em) {
-            if (index != 0 && index != 1) {
+            if (index != 0 && index != 1 && index != 9) {
                 var old = $(em).html();
                 $(em).html(old.substr(0, 4) + ((myWeekDays[index - 2].getMonth() * 1) + 1) + "/" + myWeekDays[index - 2].getDate());
             }

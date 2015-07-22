@@ -9,7 +9,7 @@
         $('#txtTargetdate').datepicker(opt_datePicker);
         $('#txtTargetdate').datepicker('setDate', (new Date()).DateAdd('d', 1));
         $('#txtTargetdate').datepicker("option",'minDate', (new Date()).DateAdd('d', 1));
-        $("#Search").onclick(function () {
+        $("#Search").click(function () {
             var vUrl = '@Url.Content("~/CallPrediction/Search_Ajax/")';
             var ctx = $("#IboundCallPredictionChart").get(0).getContext("2d");
             var myChart = new Chart(ctx);
