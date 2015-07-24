@@ -128,5 +128,11 @@
         <elementListCompartment Id="59922065-e625-4f39-9e80-a8f1ca7784ba" absoluteBounds="6.89, 2.085, 1.9700000000000002, 3.010040283203125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
+    <classShape Id="1e9d76a3-78e8-4b00-a3fe-c9c52f85b643" absoluteBounds="3.625, 2.75, 2, 1.9068933105468746">
+      <DataClassMoniker Name="/WFMDBDataContext/tblPedictionCall" />
+      <nestedChildShapes>
+        <elementListCompartment Id="e4c3cf7a-dc68-4d3b-8392-0f07949819d2" absoluteBounds="3.64, 3.21, 1.9700000000000002, 1.346893310546875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
   </nestedChildShapes>
 </ordesignerObjectsDiagram>

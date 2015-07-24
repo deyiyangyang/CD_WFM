@@ -27,7 +27,7 @@ namespace WFM.Areas.Agent.Controllers
             ViewBag.vTenantSpeciaFlag = this.TenantSpecialFlag;
 
 
-            GetAgentList("-1", true, false);
+            GetAgentListForDDL("-1", true, false);
             //初期時の並び順
             m_SortField = (int)SortFields.vAgentID;
 
@@ -106,7 +106,7 @@ namespace WFM.Areas.Agent.Controllers
 
             m_SortField = nSortIndex;
             m_Sort = nSort;
-            GetAgentList(ddlAgentID, true, false);
+            GetAgentListForDDL(ddlAgentID, true, false);
             List<tblAgentWeekShift> lstData = SearchData(pageIndex, ddlPageSize, pageTotal, DateTime.Parse(txtStartdate), ddlAgentID);
 
             //ページ情報

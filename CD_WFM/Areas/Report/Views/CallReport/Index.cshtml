@@ -1,0 +1,198 @@
+﻿@using WFM.Common;
+@using WFM.Models;
+@model IEnumerable<WFM.Common.tblPedictionCall>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.Partial("DatePickerScript")
+@Html.Partial("SortScript")
+<script type="text/javascript" src="~/Content/js/plugins/duallistbox/jquery.bootstrap-duallistbox.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#dtStart').datepicker(opt_datePicker);
+        $('#dtEnd').datepicker(opt_datePicker);
+        $('#dtStart').datepicker('setDate', new Date());
+        $('#dtEnd').datepicker('setDate', new Date());
+
+        $('#selectSkillGroup').bootstrapDualListbox({
+            nonSelectedListLabel: '未選択',
+            selectedListLabel: '選択',
+            preserveSelectionOnMove: 'moved',
+            moveOnSelect: true
+        });
+
+        $('#selectSkillAgregation').bootstrapDualListbox({
+            nonSelectedListLabel: '未選択',
+            selectedListLabel: '選択',
+            preserveSelectionOnMove: 'moved',
+            moveOnSelect: true
+        });
+
+        if ("@ViewBag.RadioChecked" == "byAgregation") {
+            $("#byAgregation").attr("checked", 'checked');
+            showAgregation();
+        }
+        else {
+            $("#bySkill").attr("checked", 'checked');
+            showSkill();
+        }
+
+        $("#bySkill").on("ifClicked", function () {
+            if ($("#bySkill").is(':checked')) {
+                showAgregation();
+            }
+            else {
+
+                showSkill();
+            }
+        });
+
+        $("#byAgregation").on("ifClicked", function () {
+            if ($("#byAgregation").is(':checked')) {
+
+                showSkill();
+            }
+            else {
+                showAgregation();
+            }
+        });
+    });
+
+    function showAgregation() {
+        //$("#trSkill").css("visibility", "hidden");
+        //$("#trSkillAgregation").css("visibility", "visible");
+
+        $("#trSkill").css("display", "none");
+        $("#trSkillAgregation").removeAttr("style");
+    }
+
+    function showSkill() {
+        //$("#trSkill").css("visibility", "visible");
+        //$("#trSkillAgregation").css("visibility", "hidden");
+
+        $("#trSkill").removeAttr("style");
+        $("#trSkillAgregation").css("display", "none");
+    }
+</script>
+
+<section class="content">
+    @using (Html.BeginForm())
+    {
+        @Html.Partial("SortHeader", AppConst.Const_Default_SortAction)
+        <div class="row">
+            <div class="col-md-9" style="margin-left:15px;">
+                <div class="box box-primary" style="width:650px;">
+                    <div class="box-header">
+                        <i class="fa fa-search"></i>
+                        <h3 class="box-title">検索条件</h3>
+                        <div class="box-tools pull-right">
+                            <button class="btn btn-primary btn-xs" data-widget="collapse" type="button"><i class="fa fa-minus"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body" style="display: block;">
+                        <table class="table table-bordered">
+                            <tr>
+                                <th style="width: 160px;vertical-align: middle;" class="thUpTitle">
+                                    日付
+                                </th>
+                                <td style="vertical-align:middle;">
+                                    @Html.TextBox("dtStart", null, new { maxLength = "10", @readonly = "readonly", style = "width:110px;readonly;margin-right:5px;", @class = "form-control" })
+                                    ～
+                                    @Html.TextBox("dtEnd", null, new { maxLength = "10", @readonly = "readonly", style = "width:110px;readonly;margin-right:5px;", @class = "form-control" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="thUpTitle" style="width: 50px;vertical-align: middle;">帳票タイプ</th>
+                                <td>
+                                    @Html.DropDownList("ddlDateType", (List<SelectListItem>)ViewData["lstDateType"], new { @class = "form-control" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="thUpTitle" style="width: 50px;vertical-align: middle;">グループ条件</th>
+                                <td>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="groupRadioOptions" id="bySkill" value="bySkill" checked="checked">スキルグループ
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="groupRadioOptions" id="byAgregation" value="byAgregation">スキルアグリゲーショ
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr id="trSkill">
+                                <th class="thUpTitle" style="width: 50px;vertical-align: middle;">スキルグループ</th>
+                                <td>@Html.ListBox("selectSkillGroup", (List<SelectListItem>)ViewData["lstSkillGroup"], new { style = "height:200px" })</td>
+                            </tr>
+                            <tr id="trSkillAgregation">
+                                <th class="thUpTitle" style="width: 50px;vertical-align: middle;">スキルアグリゲーショ</th>
+                                <td>@Html.ListBox("selectSkillAgregation", (List<SelectListItem>)ViewData["lstSkillAgregation"], new { style = "height:200px" })</td>
+                            </tr>
+                            <tr>
+                                <th></th>
+                                <td style="vertical-align:middle;text-align:center;">
+                                    <button type="submit" id="Search" name="Search" class="btn btn-primary" style="width: 100px;"><i class="fa fa-search"></i> 検索</button>
+                                </td>
+                            </tr>
+                        </table>
+                    </div><!-- /.box-body -->
+                </div>
+            </div>
+        </div>
+        @Html.Partial("PagerHeader", (PagerDataModel)ViewBag.PagerDataModel)
+    }
+</section>
+@*<table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.vDatepart)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.vCompany)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.vCompany2)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.iRealCountOfInCall)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.iPredictionCountOfInCall)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.vRate)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+    {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.vDatepart)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.vCompany)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.vCompany2)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.iRealCountOfInCall)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.iPredictionCountOfInCall)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.vRate)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                    </td>
+                </tr>
+    }
+
+        </table>*@

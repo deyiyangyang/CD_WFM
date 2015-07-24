@@ -278,6 +278,14 @@ namespace WFM.Common
 			}
 		}
 		
+		public System.Data.Linq.Table<tblPedictionCall> tblPedictionCall
+		{
+			get
+			{
+				return this.GetTable<tblPedictionCall>();
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.uspWFMGetTenantName")]
 		public ISingleResult<uspWFMGetTenantNameResult> uspWFMGetTenantName([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string vTenantID)
 		{
@@ -9732,6 +9740,123 @@ namespace WFM.Common
 				if ((this._AHT != value))
 				{
 					this._AHT = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="")]
+	public partial class tblPedictionCall
+	{
+		
+		private string _vDatepart;
+		
+		private string _vCompany;
+		
+		private string _vCompany2;
+		
+		private int _iRealCountOfInCall;
+		
+		private int _iPredictionCountOfInCall;
+		
+		private string _vRate;
+		
+		public tblPedictionCall()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_vDatepart", CanBeNull=false)]
+		public string vDatepart
+		{
+			get
+			{
+				return this._vDatepart;
+			}
+			set
+			{
+				if ((this._vDatepart != value))
+				{
+					this._vDatepart = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_vCompany", CanBeNull=false)]
+		public string vCompany
+		{
+			get
+			{
+				return this._vCompany;
+			}
+			set
+			{
+				if ((this._vCompany != value))
+				{
+					this._vCompany = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_vCompany2", CanBeNull=false)]
+		public string vCompany2
+		{
+			get
+			{
+				return this._vCompany2;
+			}
+			set
+			{
+				if ((this._vCompany2 != value))
+				{
+					this._vCompany2 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_iRealCountOfInCall")]
+		public int iRealCountOfInCall
+		{
+			get
+			{
+				return this._iRealCountOfInCall;
+			}
+			set
+			{
+				if ((this._iRealCountOfInCall != value))
+				{
+					this._iRealCountOfInCall = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_iPredictionCountOfInCall")]
+		public int iPredictionCountOfInCall
+		{
+			get
+			{
+				return this._iPredictionCountOfInCall;
+			}
+			set
+			{
+				if ((this._iPredictionCountOfInCall != value))
+				{
+					this._iPredictionCountOfInCall = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_vRate", CanBeNull=false)]
+		public string vRate
+		{
+			get
+			{
+				return this._vRate;
+			}
+			set
+			{
+				if ((this._vRate != value))
+				{
+					this._vRate = value;
 				}
 			}
 		}

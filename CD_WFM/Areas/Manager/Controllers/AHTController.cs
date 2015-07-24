@@ -25,7 +25,7 @@ namespace WFM.Areas.Manager.Controllers
         public ActionResult Index(string dtStart, string dtEnd, string groupRadioOptions)
         {
             bool isGroupBySkill = true;
-            GetAgentList("-1", true, false);
+            GetAgentListForDDL("-1", true, false);
             //初期時の並び順
             m_SortField = (int)SortFields.vAgentID;
 
@@ -62,7 +62,7 @@ namespace WFM.Areas.Manager.Controllers
             bool isGroupBySkill = true;
             m_SortField = nSortIndex;
             m_Sort = nSort;
-            GetAgentList(ddlAgentID, true, false);
+            GetAgentListForDDL(ddlAgentID, true, false);
 
             if (groupRadioOptions == "byAgregation")
             {

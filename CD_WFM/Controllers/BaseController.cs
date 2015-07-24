@@ -300,7 +300,14 @@ namespace WFM.Controllers
             base.OnActionExecuted(filterContext);
             AppLog.WriteLog(string.Format("Action End! Action=[{0}], Controller=[{1}]，TenantID=[{2}]", filterContext.ActionDescriptor.ActionName, filterContext.ActionDescriptor.ControllerDescriptor.ControllerName, Session[const_Session_Tenant_Key] == null ? "noTenantID" : Session[const_Session_Tenant_Key].ToString()));
         }
-        protected void GetAgentList(string strAgentID, bool hasExtraHeader,bool isShowDisplayName)
+
+        /// <summary>
+        /// get agents show in dropdown list 
+        /// </summary>
+        /// <param name="strAgentID">selected agentid</param>
+        /// <param name="hasExtraHeader"> whether has 指定なし </param>
+        /// <param name="isShowDisplayName">AgentID + Agent Display name</param>
+        protected void GetAgentListForDDL(string strAgentID, bool hasExtraHeader, bool isShowDisplayName)
         {
             List<SelectListItem> lstItem = new List<SelectListItem>();
             List<uspWFMGetAgentResult> lstAgent = new List<uspWFMGetAgentResult>();
@@ -323,7 +330,11 @@ namespace WFM.Controllers
             ViewData["lstAgent"] = lstItem;
         }
 
-        protected void GetSkillGroupList(int skillAgregationID)
+        /// <summary>
+        /// get all the skill group 
+        /// </summary>
+        /// <param name="skillAgregationID">skill group in current skill agregation </param>
+        protected void GetSkillGroupListForDDL(int skillAgregationID)
         {
             List<SelectListItem> lstItem = new List<SelectListItem>();
             List<uspWFMGetSkillGroupResult> lstSkillGroup = new List<uspWFMGetSkillGroupResult>();
@@ -339,6 +350,35 @@ namespace WFM.Controllers
             ViewData["lstSkillGroup"] = lstItem;
         }
 
+        /// <summary>
+        /// get skill agregation for list box control
+        /// </summary>
+        protected void GetSkillAgregationListForDDL()
+        {
+            List<SelectListItem> lstItem = new List<SelectListItem>();
+
+            List<uspWFMGetSkillAgregationResult> lstSkillAgregation = new List<uspWFMGetSkillAgregationResult>();
+            using (WFMDBDataContext db = new WFMDBDataContext())
+            {
+                lstSkillAgregation = db.uspWFMGetSkillAgregation(this.TenantID, this.TenantSpecialFlag).ToList();
+            }
+            foreach (var item in lstSkillAgregation)
+            {
+                lstItem.Add(new SelectListItem { Text = item.vAgregationName, Value = item.iSkillAgregationID.ToString() });
+            }
+            ViewData["lstSkillAgregation"] = lstItem;
+        }
+
+        protected void GetDateTypForDDL()
+        {
+            List<SelectListItem> lstItem = new List<SelectListItem>();
+            lstItem.Add(new SelectListItem { Text = "日別", Value = "dd", Selected = true });
+            lstItem.Add(new SelectListItem { Text = "時別", Value = "hh" });
+            lstItem.Add(new SelectListItem { Text = "月別", Value = "mm" });
+            lstItem.Add(new SelectListItem { Text = "曜日別", Value = "dw" });
+            lstItem.Add(new SelectListItem { Text = "週別", Value = "ww" });
+            ViewData["lstDateType"] = lstItem;
+        }
         protected void GetAgentListWithShiftName(string strAgentID, bool hasExtraHeader, bool isShowDisplayName)
         {
             List<SelectListItem> lstItem = new List<SelectListItem>();
@@ -352,13 +392,13 @@ namespace WFM.Controllers
             {
                 lstAgent = db.uspWFMGetAgentAndShiftName(this.TenantID).ToList();
             }
-            
+
             foreach (var item in lstAgent)
             {
                 string shiftName = "";
-                if(!string.IsNullOrEmpty(item.vShiftName1))
+                if (!string.IsNullOrEmpty(item.vShiftName1))
                 {
-                    shiftName += ","+item.vShiftName1;
+                    shiftName += "," + item.vShiftName1;
                 }
                 if (!string.IsNullOrEmpty(item.vShiftName2))
                 {
@@ -388,7 +428,7 @@ namespace WFM.Controllers
                 if (!isShowDisplayName)
                     lstItem.Add(new SelectListItem { Text = item.vAgentID, Value = item.vAgentID, Selected = (item.vAgentID.Equals(strAgentID)) });
                 else
-                    lstItem.Add(new SelectListItem { Text = item.vAgentID + "_" + item.vDisplayName + shiftName, Disabled= !string.IsNullOrEmpty(shiftName), Value = item.vAgentID, Selected = (item.vAgentID.Equals(strAgentID)) });
+                    lstItem.Add(new SelectListItem { Text = item.vAgentID + "_" + item.vDisplayName + shiftName, Disabled = !string.IsNullOrEmpty(shiftName), Value = item.vAgentID, Selected = (item.vAgentID.Equals(strAgentID)) });
             }
             ViewData["lstAgent"] = lstItem;
         }
@@ -404,7 +444,7 @@ namespace WFM.Controllers
 
             using (WFMDBDataContext db = new WFMDBDataContext())
             {
-                lstShift = db.uspWFMGetShift(this.TenantID,this.TenantSpecialFlag).ToList();
+                lstShift = db.uspWFMGetShift(this.TenantID, this.TenantSpecialFlag).ToList();
             }
             foreach (var item in lstShift)
             {

@@ -56,6 +56,16 @@ namespace WFM.Common
             return ((IMultipleResults)(result.ReturnValue));
         }
 
+        [global::System.Data.Linq.Mapping.FunctionAttribute(Name = "dbo.uspWFMRptOfInboundCall")]
+        [ResultType(typeof(tblPedictionCall))]
+        [ResultType(typeof(tblDataPaged))]
+        public IMultipleResults uspWFMRptOfInboundCall([global::System.Data.Linq.Mapping.ParameterAttribute(Name = "IN_pageIndex", DbType = "Int")] System.Nullable<int> iN_pageIndex, [global::System.Data.Linq.Mapping.ParameterAttribute(Name = "IN_onePageRows", DbType = "Int")] System.Nullable<int> iN_onePageRows, [global::System.Data.Linq.Mapping.ParameterAttribute(Name = "IN_orderBy", DbType = "NVarChar(255)")] string iN_orderBy, [global::System.Data.Linq.Mapping.ParameterAttribute(Name = "IN_sort", DbType = "NVarChar(5)")] string iN_sort, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType = "VarChar(32)")] string vTenantID, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType = "DateTime")] System.Nullable<System.DateTime> dtST, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType = "DateTime")] System.Nullable<System.DateTime> dtEND, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType = "VarChar(16)")] string type, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType = "VarChar(1000)")] string vSkillIDs, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType = "VarChar(1000)")] string iSkillAgregationIDs)
+        {
+            IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), iN_pageIndex, iN_onePageRows, iN_orderBy, iN_sort, vTenantID, dtST, dtEND, type, vSkillIDs, iSkillAgregationIDs);
+            return ((IMultipleResults)(result.ReturnValue));
+        }
+
+
     //    [Function(Name = "dbo.SearchClientPaged")]
     //    [ResultType(typeof(tbCPFPersonalProfile))]
     //    [ResultType(typeof(tblDataPaged))]

@@ -897,6 +897,7 @@
     <Content Include="Areas\Manager\Views\AHT\Index.cshtml" />
     <Content Include="Areas\Data\Views\web.config" />
     <Content Include="Areas\Data\Views\DataSynchro\Index.cshtml" />
+    <Content Include="Areas\Report\Views\CallReport\Index.cshtml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\common.js" />
     <Content Include="Scripts\dateformat.js" />
@@ -967,7 +968,6 @@
     <Folder Include="Areas\Manager\Views\Shared\" />
     <Folder Include="Areas\Report\Models\" />
     <Folder Include="Areas\Report\Views\AgentReport\" />
-    <Folder Include="Areas\Report\Views\CallReport\" />
     <Folder Include="Areas\Report\Views\Shared\" />
     <Folder Include="Areas\Report\Views\ShiftReport\" />
   </ItemGroup>

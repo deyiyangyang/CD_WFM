@@ -456,6 +456,16 @@
       <Column Name="AHT" Type="System.Int32" CanBeNull="false" />
     </Type>
   </Table>
+  <Table Name="" Member="tblPedictionCall">
+    <Type Name="tblPedictionCall">
+      <Column Name="vDatepart" Type="System.String" CanBeNull="false" />
+      <Column Name="vCompany" Type="System.String" CanBeNull="false" />
+      <Column Name="vCompany2" Type="System.String" CanBeNull="false" />
+      <Column Name="iRealCountOfInCall" Type="System.Int32" CanBeNull="false" />
+      <Column Name="iPredictionCountOfInCall" Type="System.Int32" CanBeNull="false" />
+      <Column Name="vRate" Type="System.String" CanBeNull="false" />
+    </Type>
+  </Table>
   <Function Name="dbo.uspWFMGetTenantName" Method="uspWFMGetTenantName">
     <Parameter Name="vTenantID" Type="System.String" DbType="VarChar(32)" />
     <ElementType Name="uspWFMGetTenantNameResult">

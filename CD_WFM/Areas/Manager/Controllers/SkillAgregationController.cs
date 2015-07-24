@@ -25,7 +25,7 @@ namespace WFM.Areas.Manager.Controllers
 
         public ActionResult Create()
         {
-            GetSkillGroupList(0);
+            GetSkillGroupListForDDL(0);
             return View();
         }
 
@@ -52,7 +52,7 @@ namespace WFM.Areas.Manager.Controllers
             {
                 result = db.uspWFMGetSingleSkillAgregation(id).FirstOrDefault();
             }
-            GetSkillGroupList(id);
+            GetSkillGroupListForDDL(id);
             if (result != null)
             {
                 SkillAgregationModel model = new SkillAgregationModel() { SkillAgregationID = result.iSkillAgregationID, SkillAgregationName = result.vAgregationName };
