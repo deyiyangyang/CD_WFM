@@ -20,6 +20,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -175,7 +176,9 @@
     <Compile Include="Areas\Manager\Models\AgentAhtModel.cs" />
     <Compile Include="Areas\Manager\Models\ShiftMode.cs" />
     <Compile Include="Areas\Manager\Models\SkillAgregationModel.cs" />
+    <Compile Include="Areas\Report\Controllers\AgentDetailController.cs" />
     <Compile Include="Areas\Report\Controllers\AgentReportController.cs" />
+    <Compile Include="Areas\Report\Controllers\CallDetailController.cs" />
     <Compile Include="Areas\Report\Controllers\CallReportController.cs" />
     <Compile Include="Areas\Report\Controllers\ShiftReportController.cs" />
     <Compile Include="Areas\Report\ReportAreaRegistration.cs" />
@@ -898,6 +901,9 @@
     <Content Include="Areas\Data\Views\web.config" />
     <Content Include="Areas\Data\Views\DataSynchro\Index.cshtml" />
     <Content Include="Areas\Report\Views\CallReport\Index.cshtml" />
+    <Content Include="Areas\Report\Views\CallDetail\Index.cshtml" />
+    <Content Include="Areas\Report\Views\AgentDetail\Index.cshtml" />
+    <None Include="Properties\PublishProfiles\WFM.pubxml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\common.js" />
     <Content Include="Scripts\dateformat.js" />
@@ -960,6 +966,9 @@
     <Content Include="Views\Shared\SortHeader.cshtml" />
     <Content Include="Views\Shared\SortScript.cshtml" />
     <Content Include="Views\Shared\DatePickerScript.cshtml" />
+    <Content Include="Views\Shared\NoResultFound.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Account\ChangeTenant.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

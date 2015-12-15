@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "このシステムについて";
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        バージョン情報
+        <small>サイトについて</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="@Url.Content("~/")"><i class="fa fa-home"></i>ホーム</a></li>
+        <li class="active"><a href="@Url.Content("~/home/about")">バージョン情報</a></li>
+    </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+    <p>
+        このシステムは&nbsp;<a href="http://www.comdesign.co.jp/" target="_blank">株式会社コムデザイン</a> &nbsp;から提供しています。
+        <br />
+        <br />
+        バージョン：@ViewBag.Version
+        <br />
+        <br />
+        @if (!Request.IsAuthenticated)
+        {
+            @:利用者ログイン画面は、@Html.ActionLink("ここへ", "Login", "Account") ログインしてください。
+        }
+    </p>
+
+</section>
+<!-- /.content -->
+<div style="height:300px;">
+</div>

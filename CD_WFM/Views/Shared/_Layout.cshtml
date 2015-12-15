@@ -245,6 +245,23 @@
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
+                                @if (controllerName == "calldetail")
+                                {
+                                    <li class="active"><a href="~/report/calldetail"><i class="fa fa-circle-o"></i>通話詳細</a></li>
+                                }
+                                else
+                                {
+                                    <li><a href="~/report/calldetail"><i class="fa fa-circle-o"></i>通話詳細</a></li>
+                                }
+                                @if (controllerName == "agentdetail")
+                                {
+                                    <li class="active"><a href="~/report/agentdetail"><i class="fa fa-circle-o"></i>エージェント詳細</a></li>
+                                }
+                                else
+                                {
+                                    <li><a href="~/report/agentdetail"><i class="fa fa-circle-o"></i>エージェント詳細</a></li>
+                                }
+
                                 @if (controllerName == "shiftreport")
                                 {
                                     <li class="active"><a href="~/report/ShiftReport"><i class="fa fa-circle-o"></i>シフト管理用</a></li>

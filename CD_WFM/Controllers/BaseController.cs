@@ -288,7 +288,8 @@ namespace WFM.Controllers
 
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            Session[const_Session_Tenant_Key] = "05038181424";
+            if (Session[const_Session_Tenant_Key] == null)
+                Session[const_Session_Tenant_Key] = "05058085468";
             Session[const_Session_TenantSpecial_Key] = "";
             base.OnActionExecuting(filterContext);
 
@@ -334,7 +335,7 @@ namespace WFM.Controllers
         /// get all the skill group 
         /// </summary>
         /// <param name="skillAgregationID">skill group in current skill agregation </param>
-        protected void GetSkillGroupListForDDL(int skillAgregationID)
+        protected void GetSkillGroupListForDDL(int skillAgregationID, bool hasExtraHeader = false)
         {
             List<SelectListItem> lstItem = new List<SelectListItem>();
             List<uspWFMGetSkillGroupResult> lstSkillGroup = new List<uspWFMGetSkillGroupResult>();
@@ -342,6 +343,10 @@ namespace WFM.Controllers
             using (WFMDBDataContext db = new WFMDBDataContext())
             {
                 lstSkillGroup = db.uspWFMGetSkillGroup(this.TenantID).ToList();
+            }
+            if (hasExtraHeader)
+            {
+                lstItem.Insert(0, new SelectListItem { Text = "指定なし", Value = "0" });
             }
             foreach (var item in lstSkillGroup)
             {
@@ -351,10 +356,34 @@ namespace WFM.Controllers
         }
 
         /// <summary>
+        /// get all the skill group 
+        /// </summary>
+        /// <param name="selectedGroupIDs">these group ids are seleted </param>
+        protected void GetSkillGroupListNoWithSkillAgregationForDDL(string selectedGroupIDs)
+        {
+            if (string.IsNullOrEmpty(selectedGroupIDs)) selectedGroupIDs = "None";
+            List<SelectListItem> lstItem = new List<SelectListItem>();
+            List<uspWFMGetSkillGroupResult> lstSkillGroup = new List<uspWFMGetSkillGroupResult>();
+
+            using (WFMDBDataContext db = new WFMDBDataContext())
+            {
+                lstSkillGroup = db.uspWFMGetSkillGroup(this.TenantID).ToList();
+            }
+            foreach (var item in lstSkillGroup)
+            {
+                if (lstItem.Find(p => p.Value == item.iGroupProfileID.ToString()) != null)
+                    continue;
+                lstItem.Add(new SelectListItem { Text = item.vCompany, Value = item.iGroupProfileID.ToString(), Selected = selectedGroupIDs.Contains(item.iGroupProfileID.ToString()) });
+            }
+            ViewData["lstSkillGroup"] = lstItem;
+        }
+
+        /// <summary>
         /// get skill agregation for list box control
         /// </summary>
-        protected void GetSkillAgregationListForDDL()
+        protected void GetSkillAgregationListForDDL(string selectedAgregationIDs)
         {
+            if (string.IsNullOrEmpty(selectedAgregationIDs)) selectedAgregationIDs = "None";
             List<SelectListItem> lstItem = new List<SelectListItem>();
 
             List<uspWFMGetSkillAgregationResult> lstSkillAgregation = new List<uspWFMGetSkillAgregationResult>();
@@ -364,19 +393,24 @@ namespace WFM.Controllers
             }
             foreach (var item in lstSkillAgregation)
             {
-                lstItem.Add(new SelectListItem { Text = item.vAgregationName, Value = item.iSkillAgregationID.ToString() });
+                lstItem.Add(new SelectListItem { Text = item.vAgregationName, Value = item.iSkillAgregationID.ToString(), Selected = selectedAgregationIDs.Contains(item.iSkillAgregationID.ToString()) });
             }
             ViewData["lstSkillAgregation"] = lstItem;
         }
 
-        protected void GetDateTypForDDL()
+        /// <summary>
+        /// set date group condition for dropdown list
+        /// </summary>
+        /// <param name="dateTypeValue"></param>
+        protected void GetDateTypForDDL(string dateTypeValue)
         {
+            if (string.IsNullOrEmpty(dateTypeValue)) dateTypeValue = "dd";
             List<SelectListItem> lstItem = new List<SelectListItem>();
-            lstItem.Add(new SelectListItem { Text = "日別", Value = "dd", Selected = true });
-            lstItem.Add(new SelectListItem { Text = "時別", Value = "hh" });
-            lstItem.Add(new SelectListItem { Text = "月別", Value = "mm" });
-            lstItem.Add(new SelectListItem { Text = "曜日別", Value = "dw" });
-            lstItem.Add(new SelectListItem { Text = "週別", Value = "ww" });
+            lstItem.Add(new SelectListItem { Text = "日別", Value = "dd", Selected = "dd".Equals(dateTypeValue) });
+            lstItem.Add(new SelectListItem { Text = "時別", Value = "hh", Selected = "hh".Equals(dateTypeValue) });
+            lstItem.Add(new SelectListItem { Text = "月別", Value = "mm", Selected = "mm".Equals(dateTypeValue) });
+            lstItem.Add(new SelectListItem { Text = "曜日別", Value = "dw", Selected = "dw".Equals(dateTypeValue) });
+            lstItem.Add(new SelectListItem { Text = "週別", Value = "ww", Selected = "ww".Equals(dateTypeValue) });
             ViewData["lstDateType"] = lstItem;
         }
         protected void GetAgentListWithShiftName(string strAgentID, bool hasExtraHeader, bool isShowDisplayName)

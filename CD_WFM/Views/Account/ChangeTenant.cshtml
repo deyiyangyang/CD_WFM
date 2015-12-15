@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "ChangeTenant";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ChangeTenant</h2>
+
+<section class="content">
+    @using (Html.BeginForm("ChangeTenant", "Account", FormMethod.Post, new { id = "ChangeTenant", @class = "form-group" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="row">
+            <div class="col-md-9">
+                <div class="form-group col-md2">
+                    <label>current tenant is: @Session["vTenantID"].ToString()</label>
+                </div>
+                <div>
+                    <label>New Tenant:</label>
+                    @Html.TextBox("tenant")
+                </div>
+                <a href="javascript:document.getElementById('ChangeTenant').submit()">確認</a>
+               
+            </div>
+        </div>
+        
+    }
+    </section>

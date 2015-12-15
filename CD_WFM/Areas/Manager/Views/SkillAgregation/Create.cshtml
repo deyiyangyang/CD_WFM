@@ -12,7 +12,9 @@
             nonSelectedListLabel: '未選択',
             selectedListLabel: '選択',
             preserveSelectionOnMove: 'moved',
-            moveOnSelect: true
+            moveOnSelect: true,
+            showFilterInputs: false,
+            infoText: false
         });
     });
 </script>
@@ -45,7 +47,7 @@
                         <table class="table table-bordered">
                             <tr>
                                 <th style="width: 100px;vertical-align: middle;" class="thUpTitle">
-                                    @Html.LabelFor(model => model.vAgregationName, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <label class="control-label col-md-2" for="vAgregationName">スキルアグリゲーション名</label>
                                 </th>
                                 <td>
                                     @Html.EditorFor(model => model.vAgregationName, new { htmlAttributes = new { @class = "form-control" } })
@@ -62,7 +64,11 @@
                             </tr>
                             <tr>
                                 <th style="width: 100px;vertical-align: middle;" class="thUpTitle"></th>
-                                <td style="text-align:center"><input type="submit" value="Create" class="btn btn-default" /></td>
+                                <td style="text-align:center"><input type="submit" value="新規" class="btn btn-primary" />
+                                    <a class="btn btn-primary" href="/Manager/skillagregation">
+                                        <i class="fa  fa-undo"></i><span> 戻る</span>
+                                    </a>
+                                </td>
                             </tr>
                         </table>
                     </div><!-- /.box-body -->
@@ -77,10 +83,6 @@
 
 
     }
-
-    <div>
-        @Html.ActionLink("Back to List", "Index")
-    </div>
 </section>
 
 

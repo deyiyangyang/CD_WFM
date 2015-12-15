@@ -422,6 +422,18 @@ namespace WFM.Controllers
 
             base.Dispose(disposing);
         }
+         [AllowAnonymous]
+       public ActionResult ChangeTenant()
+        {
+            return View();
+        }
+         [AllowAnonymous]
+        [HttpPost]
+       public ActionResult ChangeTenant(string tenant)
+       {
+           Session["vTenantID"] = tenant;
+           return View();
+       }
 
         #region ヘルパー
         // 外部ログインの追加時に XSRF の防止に使用します

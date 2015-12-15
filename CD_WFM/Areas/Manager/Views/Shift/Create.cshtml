@@ -5,54 +5,81 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>シフトの新規</h2>
 
-
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.ShiftName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ShiftName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ShiftName, "", new { @class = "text-danger" })
-            </div>
-        </div>
+<section class="content-header">
+    <h1>
+        シフト情報
+        <small>シフトを創建</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="@Url.Content("~/")"><i class="fa fa-home"></i>ホーム</a></li>
+        <li class="active"><a href="@Url.Content("~/manager/shift")">シフト情報</a></li>
+    </ol>
+</section>
+<section class="content">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
 
 
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.StartTime, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.StartTime, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.StartTime, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    <div class="row">
+        <div class="col-md-9" style="margin-left:15px;">
+            <div class="box box-primary" style="width:950px;">
+                <div class="box-header">
+                    <i class="fa fa-edit "></i>
+                    <h3 class="box-title">シフト創建</h3>
+                    <div class="box-tools pull-right">
+                        <button class="btn btn-primary btn-xs" data-widget="collapse" type="button"><i class="fa fa-minus"></i></button>
+                    </div>
+                </div>
+                <div class="box-body" style="display: block;">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th style="width: 100px;vertical-align: middle;" class="thUpTitle">
+                                @Html.LabelFor(model => model.ShiftName, htmlAttributes: new { @class = "control-label col-md-2" })
+                            </th>
+                            <td>
+                                @Html.EditorFor(model => model.ShiftName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.ShiftName, "", new { @class = "text-danger" })
+                            </td>
+                        </tr>
+                        <tr>
+                            <th style="width: 100px;vertical-align: middle;" class="thUpTitle">
+                                @Html.LabelFor(model => model.StartTime, htmlAttributes: new { @class = "control-label col-md-2" })
+                            </th>
+                            <td>
+                                @Html.EditorFor(model => model.StartTime, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.StartTime, "", new { @class = "text-danger" })
+                            </td>
+                            
+                        </tr>
+                        <tr>
+                            <th style="width: 100px;vertical-align: middle;" class="thUpTitle">
+                                @Html.LabelFor(model => model.EndTime, htmlAttributes: new { @class = "control-label col-md-2" })
+                            </th>
+                            <td>
+                                @Html.EditorFor(model => model.EndTime, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.EndTime, "", new { @class = "text-danger" })
+                            </td>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.EndTime, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.EndTime, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.EndTime, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                        </tr>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                        <tr>
+                            <th style="width: 100px;vertical-align: middle;" class="thUpTitle"></th>
+                            <td style="text-align:center">
+                                <input type="submit" value="新規" class="btn btn-primary" />
+                                <a class="btn btn-primary" href="/Manager/shift">
+                                    <i class="fa  fa-undo"></i><span> 戻る</span>
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                </div><!-- /.box-body -->
             </div>
         </div>
     </div>
-}
+        
+    }
 
-<div>
-    @Html.ActionLink("戻る", "Index")
-</div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+</section>

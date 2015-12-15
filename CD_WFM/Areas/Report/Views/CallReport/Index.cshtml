@@ -14,21 +14,29 @@
     $(document).ready(function () {
         $('#dtStart').datepicker(opt_datePicker);
         $('#dtEnd').datepicker(opt_datePicker);
-        $('#dtStart').datepicker('setDate', new Date());
-        $('#dtEnd').datepicker('setDate', new Date());
+        if (!$('#dtStart').val())
+        {
+            $('#dtStart').datepicker('setDate', new Date());
+        }
+        if (!$('#dtEnd').val())
+            $('#dtEnd').datepicker('setDate', new Date());
 
         $('#selectSkillGroup').bootstrapDualListbox({
             nonSelectedListLabel: '未選択',
             selectedListLabel: '選択',
             preserveSelectionOnMove: 'moved',
-            moveOnSelect: true
+            moveOnSelect: true,
+            showFilterInputs: false,
+            infoText: false
         });
 
         $('#selectSkillAgregation').bootstrapDualListbox({
             nonSelectedListLabel: '未選択',
             selectedListLabel: '選択',
             preserveSelectionOnMove: 'moved',
-            moveOnSelect: true
+            moveOnSelect: true,
+            showFilterInputs: false,
+            infoText: false
         });
 
         if ("@ViewBag.RadioChecked" == "byAgregation") {
@@ -141,33 +149,40 @@
             </div>
         </div>
         @Html.Partial("PagerHeader", (PagerDataModel)ViewBag.PagerDataModel)
-    }
-</section>
-@*<table class="table">
+
+        <table class="table">
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.vDatepart)
+                    時間Type
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.vCompany)
+                    局番グループ
+                </th>
+                @if (ViewBag.RadioChecked != "byAgregation")
+                {
+                    <th>
+                        スキルグループ
+                    </th>
+                }
+                @if (ViewBag.RadioChecked == "byAgregation")
+                {
+                    <th>
+                        スキルアグリゲーショ
+                    </th>
+                }
+                <th>
+                    実績着信数
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.vCompany2)
+                    予測着信数
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.iRealCountOfInCall)
+                    達成率
                 </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.iPredictionCountOfInCall)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.vRate)
-                </th>
-                <th></th>
             </tr>
 
             @foreach (var item in Model)
-    {
+            {
                 <tr>
                     <td>
                         @Html.DisplayFor(modelItem => item.vDatepart)
@@ -187,12 +202,16 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.vRate)
                     </td>
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </tr>
+            }
+            @if (Model.Count() <= 0)
+            {
+                <tr>
+                    <td colspan="10">
+                        @Html.Partial("NoResultFound")
                     </td>
                 </tr>
+            }
+        </table>
     }
-
-        </table>*@
+</section>

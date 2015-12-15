@@ -10,61 +10,47 @@ using WFM.Controllers;
 
 namespace WFM.Areas.Report.Controllers
 {
-    public class CallReportController : BaseController
+    public class AgentDetailController : BaseController
     {
-        //検索からの一覧のソートフィールドリスト
-        private static string[] const_SortFields = { "vCompany2" };
+        private static string[] const_SortFields = { "dtStatusStart" };
 
-        // GET: Report/CallReport
-        public ActionResult Index(string dtStart, string dtEnd, string groupRadioOptions)
+        // GET: Report/CallDetail
+        public ActionResult Index(string dtStart, string dtEnd, string vCalleeid)
         {
-            bool isGroupBySkill = true;
-            GetSkillGroupListNoWithSkillAgregationForDDL("");
-            GetSkillAgregationListForDDL("");
-            GetDateTypForDDL("");
-
+            GetAgentListForDDL("-1", true, false);
             if (dtStart == null)
                 dtStart = DateTime.Now.ToString(AppConst.Const_Format_YMD);
 
             if (dtEnd == null)
                 dtEnd = DateTime.Now.ToString(AppConst.Const_Format_YMD);
 
-            if (groupRadioOptions == "byAgregation")
-            {
-                isGroupBySkill = false;
-                ViewBag.RadioChecked = "byAgregation";
-            }
-
-            List<tblPedictionCall> lstData = SearchData("1", m_CurrentPageSize.ToString(), "1", DateTime.Parse(dtStart), DateTime.Parse(dtEnd), "dd", "", "");
+            List<tblAgentDetailV3> lstData = SearchData("1", m_CurrentPageSize.ToString(), "1", DateTime.Parse(dtStart), DateTime.Parse(dtEnd), null);
             //ページ情報
             CalcPagerData();
             return View(lstData);
         }
 
 
+
         [HttpPost]
         [ValidateInput(false)]
         [MultiActionAttribute("firstPage,nextPage,prePage,lastPage,pageChanged,pageChanged_Buttom,Search,pageSizeChanged")]
-        public ActionResult Search(string pageIndex, string ddlPageSize, string pageTotal, string sortIndex, string sort, string dtStart, string dtEnd, string ddlDateType, string groupRadioOptions)
+        public ActionResult Search(string pageIndex, string ddlPageSize, string pageTotal, string sortIndex, string sort, string dtStart, string dtEnd, string lstAgent)
         {
+            List<tblAgentDetailV3> lstData = new List<tblAgentDetailV3>();
             int nSortIndex = 0;
             int nSort = 0;
             int.TryParse(sortIndex, out nSortIndex);
             int.TryParse(sort, out nSort);
-            string skillGroupIDs = Request.Form["selectSkillGroup"];
-            string skillAgregationIDs = Request.Form["selectSkillAgregation"];
+            string vlogin = Request.Form["lstAgent"];
+            if (string.IsNullOrEmpty(vlogin))
+                GetAgentListForDDL(vlogin, true, false);
+            else
+                GetAgentListForDDL("-1", true, false);
             m_SortField = nSortIndex;
             m_Sort = nSort;
-            GetSkillGroupListNoWithSkillAgregationForDDL(skillGroupIDs);
-            GetSkillAgregationListForDDL(skillAgregationIDs);
-            GetDateTypForDDL(ddlDateType);
-            if (groupRadioOptions == "byAgregation")
-            {
-                ViewBag.RadioChecked = "byAgregation";
-            }
 
-            List<tblPedictionCall> lstData = SearchData(pageIndex, ddlPageSize, pageTotal, DateTime.Parse(dtStart), DateTime.Parse(dtEnd), ddlDateType, skillGroupIDs, skillAgregationIDs);
-
+                lstData = SearchData(pageIndex, ddlPageSize, pageTotal, DateTime.Parse(dtStart), DateTime.Parse(dtEnd), vlogin);
 
             //ページ情報
             CalcPagerData();
@@ -73,9 +59,9 @@ namespace WFM.Areas.Report.Controllers
         }
 
         //検索処理
-        private List<tblPedictionCall> SearchData(string pageIndex, string pageSize, string pageTotal, DateTime dtST, DateTime dtEnd, string dateType, string vSkillIDs, string vSkillAgregationIDs)
+        private List<tblAgentDetailV3> SearchData(string pageIndex, string pageSize, string pageTotal, DateTime dtST, DateTime dtEnd, string vLogin)
         {
-            List<tblPedictionCall> result = new List<tblPedictionCall>();
+            List<tblAgentDetailV3> result = new List<tblAgentDetailV3>();
 
             int currentPageIndex = m_CurPageIndex;
             int currentPageSize = m_CurrentPageSize;
@@ -95,10 +81,10 @@ namespace WFM.Areas.Report.Controllers
 
             using (WFMDBDataContext db = new WFMDBDataContext())
             {
-                IMultipleResults results = db.uspWFMRptOfInboundCall(m_CurPageIndex, m_CurrentPageSize, strSortField, strSort,
-                    this.TenantID, dtST, dtEnd, dateType, vSkillIDs, vSkillAgregationIDs);
+                IMultipleResults results = db.uspWFMGetAgentDetailV3(m_CurPageIndex, m_CurrentPageSize, strSortField, strSort,
+                    this.TenantID, dtST.ToString("yyyy/MM/dd"), dtEnd.ToString("yyyy/MM/dd"), vLogin);
 
-                result = results.GetResult<tblPedictionCall>().ToList();
+                result = results.GetResult<tblAgentDetailV3>().ToList();
                 tblDataPaged tblPage = results.GetResult<tblDataPaged>().FirstOrDefault();
 
                 m_TotalRowCount = tblPage.TotalRowCount;

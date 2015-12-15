@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 using WFM.Common;
@@ -56,10 +57,19 @@ namespace WFM.Controllers
             return this.Json(line, JsonRequestBehavior.AllowGet);
         }
 
+
+
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
-
+            try
+            {
+                System.Version version = Assembly.GetExecutingAssembly().GetName().Version;
+                ViewBag.Version = version.Major + "." + version.Minor + "." + version.Build;
+            }
+            catch (Exception)
+            {
+                ViewBag.Version = "1.0.0";
+            }
             return View();
         }
 
