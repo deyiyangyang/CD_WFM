@@ -1,0 +1,221 @@
+﻿@using WFM.Common;
+@using WFM.Models;
+@model IEnumerable<WFM.Common.tblCallDetailV3>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int index = 0;
+    int currentIndex = 0;
+
+}
+@Html.Partial("DatePickerScript")
+@Html.Partial("SortScript")
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#dtStart').datepicker(opt_datePicker);
+        $('#dtEnd').datepicker(opt_datePicker);
+        if (!$('#dtStart').val()) {
+            $('#dtStart').datepicker('setDate', new Date());
+        }
+        if (!$('#dtEnd').val())
+            $('#dtEnd').datepicker('setDate', new Date());
+        $("#iConntype").val("@ViewBag.iConntype");
+        $("#iCompletedCall").val("@ViewBag.iCompletedCall");
+    });
+
+</script>
+<section class="content">
+    @using (Html.BeginForm())
+    {
+        @Html.Partial("SortHeader", AppConst.Const_Default_SortAction)
+        <div class="row">
+            <div class="col-md-10" style="margin-left:15px;">
+                <div class="box box-primary" >
+                    <div class="box-header">
+                        <i class="fa fa-search"></i>
+                        <h3 class="box-title">検索条件</h3>
+                        <div class="box-tools pull-right">
+                            <button class="btn btn-primary btn-xs" data-widget="collapse" type="button"><i class="fa fa-minus"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body" style="display: block;">
+                        <table class="table table-bordered">
+                            <tr>
+                                <th class="thUpTitle">
+                                    日付
+                                </th>
+                                <td>
+                                    @Html.TextBox("dtStart", null, new { maxLength = "10", @readonly = "readonly", style = "width:110px;readonly;margin-right:5px;", @class = "form-control" })
+                                    ～
+                                    @Html.TextBox("dtEnd", null, new { maxLength = "10", @readonly = "readonly", style = "width:110px;readonly;margin-right:5px;", @class = "form-control" })
+                                </td>
+                                <th class="thUpTitle" style="width: 50px;vertical-align: middle;">スキルグループ</th>
+                                <td>@Html.DropDownList("selectSkillGroup", (List<SelectListItem>)ViewData["lstSkillGroup"], new { @class = "form-control", style = "width:150px" })</td>
+                                <th class="thUpTitle" style="width: 50px;vertical-align: middle;">受信番号</th>
+                                <td>@Html.TextBox("vCalleeid", null, new { maxLength = "15", style = "width:110px;margin-right:5px;", @class = "form-control" })</td>
+                                <td style="vertical-align:middle;text-align:center;" rowspan="2">
+                                    <button type="submit" id="Search" name="Search" class="btn btn-primary" style="width: 100px;"><i class="fa fa-search"></i> 検索</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>iSessionProfileID</th>
+                                <td><input type="text" value="@ViewBag.iSessionProfileID" name="iSessionProfileID" class = "form-control" /></td>
+                                <th>発着信</th>
+                                <td><select id="iConntype" name="iConntype" class = "form-control" style="width:150px" ><option value="-1">指定なし</option><option value="0">着信</option><option value="1">発信</option></select></td>
+                                <th>完了呼</th>
+                                <td><select id="iCompletedCall" name="iCompletedCall" class = "form-control"><option value="-1">指定なし</option><option value="1">完了</option><option value="0">未完了</option></select></td>
+                            </tr>
+                        </table>
+                    </div><!-- /.box-body -->
+                </div>
+            </div>
+        </div>
+        @Html.Partial("PagerHeader", (PagerDataModel)ViewBag.PagerDataModel)
+
+        <table class="table table-bordered table-striped table-hover table-condensed text-center">
+            <tr>
+                <th>
+                    ID
+                </th>
+                <th>
+                    iSessionProfileID
+                </th>
+                <th>
+                    局番グループ
+                </th>
+                <th>
+                    スキルグループ
+                </th>
+
+                <th>
+                    iConnType
+                </th>
+                <th>
+                    vCalleeID
+                </th>
+                <th>
+                    vCallerID
+                </th>
+                <th>
+                    iQueueCall
+                </th>
+
+                <th>
+                    iCompleteCall
+                </th>
+                <th>
+                    iCompletedCallPickedup
+                </th>
+                <th>
+                    dtCreatedCall
+                </th>
+
+                <th>
+                    dtAcdStart
+                </th>
+                <th>
+                    dtOfferingStart
+                </th>
+                <th>
+                    dtTalkStart
+                </th>
+                <th>
+                    dtDroppedCall
+                </th>
+                <th>
+                    iHasTrans
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                index++;
+                currentIndex = (((PagerDataModel)ViewBag.PagerDataModel).CurrentPageIndex - 1) * ((PagerDataModel)ViewBag.PagerDataModel).CurrentPageSize + index;
+                <tr>
+                    <td>
+                        @currentIndex
+                    </td>
+                    <td>
+                        @item.iSessionProfileID
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.vGroupName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.vSkillGroupName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.iConnType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.vCalleeID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.vCallerID)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.iQueueCall)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.iCompleteCall)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.iCompletedCallPickedup)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.dtCreatedCall)
+                    </td>
+                    @if (item.dtAcdStart == null)
+                    {
+                        <td>null</td>
+                    }
+                    else
+                    {
+                        <td>
+                            @item.dtAcdStart.Value.ToString()
+                        </td>
+                    }
+
+                    @if (item.dtOfferingStart == null)
+                    {
+                        <td>null</td>
+                    }
+                    else
+                    {
+                        <td>
+                            @item.dtOfferingStart.Value.ToString()
+                        </td>
+                    }
+
+                    @if (item.dtTalkStart == null)
+                    {
+                        <td>null</td>
+                    }
+                    else
+                    {
+                        <td>
+                            @item.dtTalkStart.Value.ToString()
+                        </td>
+                    }
+                    <td>
+                        @Html.DisplayFor(modelItem => item.dtDroppedCall)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.iHasTrans)
+                    </td>
+
+
+                </tr>
+            }
+            @if (Model.Count() <= 0)
+            {
+                <tr>
+                    <td colspan="16">
+                        @Html.Partial("NoResultFound")
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+</section>

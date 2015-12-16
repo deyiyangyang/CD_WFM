@@ -212,6 +212,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Report\Views\CallDetail\Index.cshtml" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css\AdminLTE.css" />
@@ -901,7 +902,6 @@
     <Content Include="Areas\Data\Views\web.config" />
     <Content Include="Areas\Data\Views\DataSynchro\Index.cshtml" />
     <Content Include="Areas\Report\Views\CallReport\Index.cshtml" />
-    <Content Include="Areas\Report\Views\CallDetail\Index.cshtml" />
     <Content Include="Areas\Report\Views\AgentDetail\Index.cshtml" />
     <None Include="Properties\PublishProfiles\WFM.pubxml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
