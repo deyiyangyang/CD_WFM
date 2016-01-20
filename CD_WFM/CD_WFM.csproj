@@ -903,6 +903,8 @@
     <Content Include="Areas\Data\Views\DataSynchro\Index.cshtml" />
     <Content Include="Areas\Report\Views\CallReport\Index.cshtml" />
     <Content Include="Areas\Report\Views\AgentDetail\Index.cshtml" />
+    <Content Include="Areas\Report\Views\ShiftReport\Index.cshtml" />
+    <Content Include="Areas\Report\Views\AgentReport\Index.cshtml" />
     <None Include="Properties\PublishProfiles\WFM.pubxml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\common.js" />
@@ -976,9 +978,7 @@
     <Folder Include="Areas\Data\Views\Shared\" />
     <Folder Include="Areas\Manager\Views\Shared\" />
     <Folder Include="Areas\Report\Models\" />
-    <Folder Include="Areas\Report\Views\AgentReport\" />
     <Folder Include="Areas\Report\Views\Shared\" />
-    <Folder Include="Areas\Report\Views\ShiftReport\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
