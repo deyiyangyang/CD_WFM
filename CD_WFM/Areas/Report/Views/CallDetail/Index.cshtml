@@ -88,7 +88,7 @@
                 </th>
 
                 <th>
-                    iConnType
+                    発信
                 </th>
                 <th>
                     vCalleeID
@@ -97,21 +97,21 @@
                     vCallerID
                 </th>
                 <th>
-                    iQueueCall
+                    待ち呼
                 </th>
 
                 <th>
-                    iCompleteCall
+                    完了呼
                 </th>
                 <th>
-                    iCompletedCallPickedup
+                    応答時間
                 </th>
                 <th>
-                    dtCreatedCall
+                    創建時間
                 </th>
 
                 <th>
-                    dtAcdStart
+                    ACD分配
                 </th>
                 <th>
                     dtOfferingStart
@@ -120,7 +120,10 @@
                     dtTalkStart
                 </th>
                 <th>
-                    dtDroppedCall
+                    切断時間
+                </th>
+                <th>
+                    転送
                 </th>
             </tr>
 
@@ -199,7 +202,9 @@
                         @Html.DisplayFor(modelItem => item.dtDroppedCall)
                     </td>
       
-
+                    <td>
+                        @Html.DisplayFor(modelItem => item.iHasTrans)
+                    </td>
 
                 </tr>
             }

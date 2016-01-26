@@ -132,6 +132,9 @@
                 <th>
                     AHT
                 </th>
+                <th>
+                    CPH
+                </th>
             </tr>
 
             @foreach (var item in Model)
@@ -187,6 +190,9 @@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.AHT)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CPH)
                     </td>
                 </tr>
             }        

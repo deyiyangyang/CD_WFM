@@ -391,6 +391,7 @@
       <Column Name="iCountHold" Type="System.Int32" CanBeNull="false" />
       <Column Name="iAvgHold" Type="System.Int32" CanBeNull="false" />
       <Column Name="AHT" Type="System.Int32" CanBeNull="false" />
+      <Column Member="CPH" Type="System.Double" CanBeNull="false" />
     </Type>
   </Table>
   <Table Name="" Member="tblPedictionCall">

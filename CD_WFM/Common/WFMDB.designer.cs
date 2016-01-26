@@ -8120,6 +8120,8 @@ namespace WFM.Common
 		
 		private int _AHT;
 		
+		private double _CPH;
+		
 		public tblAgentAHT()
 		{
 		}
@@ -8360,6 +8362,22 @@ namespace WFM.Common
 				if ((this._AHT != value))
 				{
 					this._AHT = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CPH")]
+		public double CPH
+		{
+			get
+			{
+				return this._CPH;
+			}
+			set
+			{
+				if ((this._CPH != value))
+				{
+					this._CPH = value;
 				}
 			}
 		}
