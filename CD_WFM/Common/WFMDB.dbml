@@ -391,7 +391,7 @@
       <Column Name="iCountHold" Type="System.Int32" CanBeNull="false" />
       <Column Name="iAvgHold" Type="System.Int32" CanBeNull="false" />
       <Column Name="AHT" Type="System.Int32" CanBeNull="false" />
-      <Column Member="CPH" Type="System.Double" CanBeNull="false" />
+      <Column Name="CPH" Type="System.Double" CanBeNull="false" />
     </Type>
   </Table>
   <Table Name="" Member="tblPedictionCall">
@@ -535,6 +535,12 @@
       <Column Name="dtStatusStart" Type="System.DateTime" CanBeNull="false" />
       <Column Name="dtStatusEnd" Type="System.DateTime" CanBeNull="false" />
       <Column Name="iCallSessionProfileID" Type="System.Int32" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="" Member="tblChart">
+    <Type Name="tblChart" Id="ID4">
+      <Column Member="dtCreatedCall" Type="System.DateTime" CanBeNull="false" />
+      <Column Member="iCountOfInboundCall" Type="System.Int32" CanBeNull="false" />
     </Type>
   </Table>
   <Function Name="dbo.uspWFMGetTenantName" Method="uspWFMGetTenantName">
@@ -702,5 +708,10 @@
     <Parameter Name="iConntype" Type="System.Int32" DbType="Int" />
     <Parameter Name="iCompletedCall" Type="System.Int32" DbType="Int" />
     <ElementType IdRef="ID3" />
+  </Function>
+  <Function Name="dbo.uspWFMGetHistoryInboundCallForChart" Method="uspWFMGetHistoryInboundCallForChart">
+    <Parameter Name="vTenantID" Type="System.String" DbType="VarChar(32)" />
+    <Parameter Name="type" Type="System.String" DbType="VarChar(32)" />
+    <ElementType IdRef="ID4" />
   </Function>
 </Database>

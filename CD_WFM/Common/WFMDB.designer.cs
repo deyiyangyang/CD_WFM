@@ -302,6 +302,14 @@ namespace WFM.Common
 			}
 		}
 		
+		public System.Data.Linq.Table<tblChart> tblChart
+		{
+			get
+			{
+				return this.GetTable<tblChart>();
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.uspWFMGetTenantName")]
 		public ISingleResult<uspWFMGetTenantNameResult> uspWFMGetTenantName([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string vTenantID)
 		{
@@ -447,6 +455,27 @@ namespace WFM.Common
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), vTenantID);
 			return ((int)(result.ReturnValue));
+		}
+		
+        //[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.uspWFMGetAgentDetailV3")]
+        //public ISingleResult<tblAgentDetailV3> uspWFMGetAgentDetailV3([global::System.Data.Linq.Mapping.ParameterAttribute(Name="IN_pageIndex", DbType="Int")] System.Nullable<int> iN_pageIndex, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IN_onePageRows", DbType="Int")] System.Nullable<int> iN_onePageRows, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IN_orderBy", DbType="NVarChar(255)")] string iN_orderBy, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IN_sort", DbType="NVarChar(5)")] string iN_sort, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string vTenant1, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string dtSt1, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string dtEnd1, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string vLogin1)
+        //{
+        //    IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), iN_pageIndex, iN_onePageRows, iN_orderBy, iN_sort, vTenant1, dtSt1, dtEnd1, vLogin1);
+        //    return ((ISingleResult<tblAgentDetailV3>)(result.ReturnValue));
+        //}
+		
+        //[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.uspWFMGetCallDetailV3")]
+        //public ISingleResult<tblCallDetailV3> uspWFMGetCallDetailV3([global::System.Data.Linq.Mapping.ParameterAttribute(Name="IN_pageIndex", DbType="Int")] System.Nullable<int> iN_pageIndex, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IN_onePageRows", DbType="Int")] System.Nullable<int> iN_onePageRows, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IN_orderBy", DbType="NVarChar(255)")] string iN_orderBy, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IN_sort", DbType="NVarChar(5)")] string iN_sort, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string vTenant1, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string dtSt1, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string dtEnd1, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> iSkillGroupID1, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string vCalleeID1, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string vCallerID1, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> iSessionProfileID, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> iConntype, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> iCompletedCall)
+        //{
+        //    IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), iN_pageIndex, iN_onePageRows, iN_orderBy, iN_sort, vTenant1, dtSt1, dtEnd1, iSkillGroupID1, vCalleeID1, vCallerID1, iSessionProfileID, iConntype, iCompletedCall);
+        //    return ((ISingleResult<tblCallDetailV3>)(result.ReturnValue));
+        //}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.uspWFMGetHistoryInboundCallForChart")]
+		public ISingleResult<tblChart> uspWFMGetHistoryInboundCallForChart([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string vTenantID, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string type)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), vTenantID, type);
+			return ((ISingleResult<tblChart>)(result.ReturnValue));
 		}
 	}
 	
@@ -11259,6 +11288,51 @@ namespace WFM.Common
 				if ((this._iCallSessionProfileID != value))
 				{
 					this._iCallSessionProfileID = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="")]
+	public partial class tblChart
+	{
+		
+		private System.DateTime _dtCreatedCall;
+		
+		private int _iCountOfInboundCall;
+		
+		public tblChart()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dtCreatedCall")]
+		public System.DateTime dtCreatedCall
+		{
+			get
+			{
+				return this._dtCreatedCall;
+			}
+			set
+			{
+				if ((this._dtCreatedCall != value))
+				{
+					this._dtCreatedCall = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_iCountOfInboundCall")]
+		public int iCountOfInboundCall
+		{
+			get
+			{
+				return this._iCountOfInboundCall;
+			}
+			set
+			{
+				if ((this._iCountOfInboundCall != value))
+				{
+					this._iCountOfInboundCall = value;
 				}
 			}
 		}
