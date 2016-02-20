@@ -6,17 +6,18 @@
 <script src="@Url.Content("~/Scripts/Chart.js")" type="text/javascript"></script>
 <script type="text/javascript">
     $(function () {
-        ShowLineChart("IboundCallChart", "mm");
+        ShowLineChart("IboundCallChartMM", "mm");
         ShowLineChart("IboundCallChartDay", "dd");
         ShowLineChart("IboundCallChartWeekDay", "dw");
     });
 
-    function ShowLineChart(element,type) {
+    function ShowLineChart(element, type) {
         var options = {
             legendTemplate: "<table class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><tr><td style=\"background-color:<%=datasets[i].strokeColor%>;width:20px\"></td><%if(datasets[i].label){%><td><%=datasets[i].label%></td><%}%></tr><%}%></table>",
             datasetFill: false
         }
         var obj = "#" + element;
+        var objLegent = "#" + element + "Legend";
         var ctx = $(obj).get(0).getContext("2d");
         var myChart = new Chart(ctx);
         var url = "@Html.Raw(Url.Action("LineChart", new { type = "param" }))";
@@ -34,25 +35,27 @@
             },
             success: function (response) {
                 var lineChart = myChart.Line(response, options);
+                var legend = lineChart.generateLegend();
+                $(objLegent).append(legend);
             }
         });
     }
 </script>
 
-<div class="row">
-    <div class=" col-lg-12">
-        <h2>月間着信回数 @ViewBag.UpdatedTime まで </h2>
-        <canvas id="IboundCallChart" width="1200" height="300"></canvas>
+<div style="width:100%;height:100%;position:relative">
+    <h2>月間着信回数 @ViewBag.UpdatedTime まで </h2>
+    <div class=" col-lg-11">
+        <canvas id="IboundCallChartMM" class=" col-lg-12" style="height:300px"></canvas>
     </div>
-
-</div>
-<div class="row">
-    <div class=" col-lg-6">
-        <h2>同じ日の着信回数</h2>
-        <canvas id="IboundCallChartDay" width="600" height="300"></canvas>
+    <div id="IboundCallChartMMLegend" class=" col-lg-1"></div>
+    <h3 class="col-lg-6">同じ日の着信回数</h3>
+    <h3 class="col-lg-6">同じ曜日の着信回数</h3>
+    <div class=" col-lg-5">
+        <canvas id="IboundCallChartDay" class=" col-lg-12" style="height:300px"></canvas>
     </div>
-    <div class=" col-lg-6">
-        <h2>同じ曜日の着信回数</h2>
-        <canvas id="IboundCallChartWeekDay" width="600" height="300"></canvas>
+    <div id="IboundCallChartDayLegend" class=" col-lg-1"></div>
+    <div class=" col-lg-5">
+        <canvas id="IboundCallChartWeekDay" class=" col-lg-12" style="height:300px"></canvas>
     </div>
+    <div id="IboundCallChartWeekDayLegend" class=" col-lg-1"></div>
 </div>

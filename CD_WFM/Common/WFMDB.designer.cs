@@ -57,9 +57,6 @@ namespace WFM.Common
     partial void InserttbWFMFactorDetail(tbWFMFactorDetail instance);
     partial void UpdatetbWFMFactorDetail(tbWFMFactorDetail instance);
     partial void DeletetbWFMFactorDetail(tbWFMFactorDetail instance);
-    partial void InserttbWFMSkillAgregation(tbWFMSkillAgregation instance);
-    partial void UpdatetbWFMSkillAgregation(tbWFMSkillAgregation instance);
-    partial void DeletetbWFMSkillAgregation(tbWFMSkillAgregation instance);
     partial void InserttbWFMSkillAgregationCall(tbWFMSkillAgregationCall instance);
     partial void UpdatetbWFMSkillAgregationCall(tbWFMSkillAgregationCall instance);
     partial void DeletetbWFMSkillAgregationCall(tbWFMSkillAgregationCall instance);
@@ -78,6 +75,9 @@ namespace WFM.Common
     partial void InserttbCpfCallDetailV3OneDay1(tbCpfCallDetailV3OneDay1 instance);
     partial void UpdatetbCpfCallDetailV3OneDay1(tbCpfCallDetailV3OneDay1 instance);
     partial void DeletetbCpfCallDetailV3OneDay1(tbCpfCallDetailV3OneDay1 instance);
+    partial void InserttbWFMAggregation(tbWFMAggregation instance);
+    partial void UpdatetbWFMAggregation(tbWFMAggregation instance);
+    partial void DeletetbWFMAggregation(tbWFMAggregation instance);
     #endregion
 		
 		public WFMDBDataContext() : 
@@ -179,14 +179,6 @@ namespace WFM.Common
 			get
 			{
 				return this.GetTable<tbWFMFactorDetail>();
-			}
-		}
-		
-		public System.Data.Linq.Table<tbWFMSkillAgregation> tbWFMSkillAgregation
-		{
-			get
-			{
-				return this.GetTable<tbWFMSkillAgregation>();
 			}
 		}
 		
@@ -310,6 +302,14 @@ namespace WFM.Common
 			}
 		}
 		
+		public System.Data.Linq.Table<tbWFMAggregation> tbWFMAggregation
+		{
+			get
+			{
+				return this.GetTable<tbWFMAggregation>();
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.uspWFMGetTenantName")]
 		public ISingleResult<uspWFMGetTenantNameResult> uspWFMGetTenantName([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string vTenantID)
 		{
@@ -345,13 +345,6 @@ namespace WFM.Common
 			return ((ISingleResult<uspWFMGetShiftResult>)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.uspWFMGetSingleShift")]
-		public ISingleResult<uspWFMGetSingleShiftResult> uspWFMGetSingleShift([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> iShiftID)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), iShiftID);
-			return ((ISingleResult<uspWFMGetSingleShiftResult>)(result.ReturnValue));
-		}
-		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.uspWFMGetAgent")]
 		public ISingleResult<uspWFMGetAgentResult> uspWFMGetAgent([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string vTenantID)
 		{
@@ -370,48 +363,6 @@ namespace WFM.Common
 		public int uspWFMInsertShiftAgentWeek([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(4000)")] string vAgentArr, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string vWeekDay, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> iShiftID)
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), vAgentArr, vWeekDay, iShiftID);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.uspWFMGetSkillGroup")]
-		public ISingleResult<uspWFMGetSkillGroupResult> uspWFMGetSkillGroup([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string vTenantID)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), vTenantID);
-			return ((ISingleResult<uspWFMGetSkillGroupResult>)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.uspWFMInsertSkillAgregation")]
-		public int uspWFMInsertSkillAgregation([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(64)")] string vSkillAgregationName, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(4000)")] string vSkillGroupIDArr, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string vTenantID, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string vTeanantSpeicalFlag)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), vSkillAgregationName, vSkillGroupIDArr, vTenantID, vTeanantSpeicalFlag);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.uspWFMGetSkillAgregation")]
-		public ISingleResult<uspWFMGetSkillAgregationResult> uspWFMGetSkillAgregation([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string vTenantID, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(20)")] string vTenantSpecialFlag)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), vTenantID, vTenantSpecialFlag);
-			return ((ISingleResult<uspWFMGetSkillAgregationResult>)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.uspWFMGetSingleSkillAgregation")]
-		public ISingleResult<uspWFMGetSingleSkillAgregationResult> uspWFMGetSingleSkillAgregation([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> iSkillAgregationID)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), iSkillAgregationID);
-			return ((ISingleResult<uspWFMGetSingleSkillAgregationResult>)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.uspWFMUpdateSkillAgregation")]
-		public int uspWFMUpdateSkillAgregation([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> iSkillAgregationID, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(64)")] string vSkillAgregationName, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(4000)")] string vSkillGroupIDArr)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), iSkillAgregationID, vSkillAgregationName, vSkillGroupIDArr);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.uspWFMDelSingleSkillAgregation")]
-		public int uspWFMDelSingleSkillAgregation([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> iSkillAgregationID)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), iSkillAgregationID);
 			return ((int)(result.ReturnValue));
 		}
 		
@@ -476,6 +427,62 @@ namespace WFM.Common
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), vTenantID, type);
 			return ((ISingleResult<tblChart>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.uspWFMDelSingleAggregation")]
+		public int uspWFMDelSingleAggregation([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> iAggregationID)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), iAggregationID);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.uspWFMGetMinInboundCall")]
+		public ISingleResult<tblChart> uspWFMGetMinInboundCall([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string vTenantID, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string dtST, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string dtEnd, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> iShiftID, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> iInterval, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> iSkillGroupID, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> iAggregationID)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), vTenantID, dtST, dtEnd, iShiftID, iInterval, iSkillGroupID, iAggregationID);
+			return ((ISingleResult<tblChart>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.uspWFMGetSingleAggregation")]
+		public ISingleResult<uspWFMGetSingleAggregationResult> uspWFMGetSingleAggregation([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> iAggregationID)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), iAggregationID);
+			return ((ISingleResult<uspWFMGetSingleAggregationResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.uspWFMGetSingleShift")]
+		public ISingleResult<uspWFMGetSingleShiftResult> uspWFMGetSingleShift([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> iShiftID)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), iShiftID);
+			return ((ISingleResult<uspWFMGetSingleShiftResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.uspWFMGetAggregation")]
+		public ISingleResult<uspWFMGetAggregationResult> uspWFMGetAggregation([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string vTenantID, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(20)")] string vTenantSpecialFlag)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), vTenantID, vTenantSpecialFlag);
+			return ((ISingleResult<uspWFMGetAggregationResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.uspWFMUpdateAggregation")]
+		public int uspWFMUpdateAggregation([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> iAggregationID, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(64)")] string vAggregationName, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(4000)")] string vSkillGroupIDArr)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), iAggregationID, vAggregationName, vSkillGroupIDArr);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.uspWFMInsertAggregation")]
+		public int uspWFMInsertAggregation([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(64)")] string vAggregationName, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(4000)")] string vSkillGroupIDArr, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string vTenantID, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string vTeanantSpeicalFlag)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), vAggregationName, vSkillGroupIDArr, vTenantID, vTeanantSpeicalFlag);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.uspWFMGetSkillGroup")]
+		public ISingleResult<uspWFMGetSkillGroupResult> uspWFMGetSkillGroup([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string vTenantID)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), vTenantID);
+			return ((ISingleResult<uspWFMGetSkillGroupResult>)(result.ReturnValue));
 		}
 	}
 	
@@ -6533,164 +6540,6 @@ namespace WFM.Common
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbWFMSkillAgregation")]
-	public partial class tbWFMSkillAgregation : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _iSkillAgregationID;
-		
-		private string _vAgregationName;
-		
-		private string _vTenantID;
-		
-		private string _vTeanantSpeicalFlag;
-		
-		private System.DateTime _dtCreated;
-		
-    #region 拡張メソッドの定義
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OniSkillAgregationIDChanging(int value);
-    partial void OniSkillAgregationIDChanged();
-    partial void OnvAgregationNameChanging(string value);
-    partial void OnvAgregationNameChanged();
-    partial void OnvTenantIDChanging(string value);
-    partial void OnvTenantIDChanged();
-    partial void OnvTeanantSpeicalFlagChanging(string value);
-    partial void OnvTeanantSpeicalFlagChanged();
-    partial void OndtCreatedChanging(System.DateTime value);
-    partial void OndtCreatedChanged();
-    #endregion
-		
-		public tbWFMSkillAgregation()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_iSkillAgregationID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int iSkillAgregationID
-		{
-			get
-			{
-				return this._iSkillAgregationID;
-			}
-			set
-			{
-				if ((this._iSkillAgregationID != value))
-				{
-					this.OniSkillAgregationIDChanging(value);
-					this.SendPropertyChanging();
-					this._iSkillAgregationID = value;
-					this.SendPropertyChanged("iSkillAgregationID");
-					this.OniSkillAgregationIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_vAgregationName", DbType="VarChar(50)")]
-		public string vAgregationName
-		{
-			get
-			{
-				return this._vAgregationName;
-			}
-			set
-			{
-				if ((this._vAgregationName != value))
-				{
-					this.OnvAgregationNameChanging(value);
-					this.SendPropertyChanging();
-					this._vAgregationName = value;
-					this.SendPropertyChanged("vAgregationName");
-					this.OnvAgregationNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_vTenantID", DbType="VarChar(50)")]
-		public string vTenantID
-		{
-			get
-			{
-				return this._vTenantID;
-			}
-			set
-			{
-				if ((this._vTenantID != value))
-				{
-					this.OnvTenantIDChanging(value);
-					this.SendPropertyChanging();
-					this._vTenantID = value;
-					this.SendPropertyChanged("vTenantID");
-					this.OnvTenantIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_vTeanantSpeicalFlag", DbType="VarChar(50)")]
-		public string vTeanantSpeicalFlag
-		{
-			get
-			{
-				return this._vTeanantSpeicalFlag;
-			}
-			set
-			{
-				if ((this._vTeanantSpeicalFlag != value))
-				{
-					this.OnvTeanantSpeicalFlagChanging(value);
-					this.SendPropertyChanging();
-					this._vTeanantSpeicalFlag = value;
-					this.SendPropertyChanged("vTeanantSpeicalFlag");
-					this.OnvTeanantSpeicalFlagChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dtCreated", DbType="DateTime NOT NULL")]
-		public System.DateTime dtCreated
-		{
-			get
-			{
-				return this._dtCreated;
-			}
-			set
-			{
-				if ((this._dtCreated != value))
-				{
-					this.OndtCreatedChanging(value);
-					this.SendPropertyChanging();
-					this._dtCreated = value;
-					this.SendPropertyChanged("dtCreated");
-					this.OndtCreatedChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbWFMSkillAgregationCall")]
 	public partial class tbWFMSkillAgregationCall : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -11301,6 +11150,8 @@ namespace WFM.Common
 		
 		private int _iCountOfInboundCall;
 		
+		private int _iCountOfCompletedInCall;
+		
 		public tblChart()
 		{
 		}
@@ -11334,6 +11185,204 @@ namespace WFM.Common
 				{
 					this._iCountOfInboundCall = value;
 				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_iCountOfCompletedInCall")]
+		public int iCountOfCompletedInCall
+		{
+			get
+			{
+				return this._iCountOfCompletedInCall;
+			}
+			set
+			{
+				if ((this._iCountOfCompletedInCall != value))
+				{
+					this._iCountOfCompletedInCall = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbWFMAggregation")]
+	public partial class tbWFMAggregation : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _iAggregationID;
+		
+		private string _vAggregationName;
+		
+		private string _vTenantID;
+		
+		private string _vTeanantSpeicalFlag;
+		
+		private System.Nullable<int> _iDeleted;
+		
+		private System.DateTime _dtCreated;
+		
+    #region 拡張メソッドの定義
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OniAggregationIDChanging(int value);
+    partial void OniAggregationIDChanged();
+    partial void OnvAggregationNameChanging(string value);
+    partial void OnvAggregationNameChanged();
+    partial void OnvTenantIDChanging(string value);
+    partial void OnvTenantIDChanged();
+    partial void OnvTeanantSpeicalFlagChanging(string value);
+    partial void OnvTeanantSpeicalFlagChanged();
+    partial void OniDeletedChanging(System.Nullable<int> value);
+    partial void OniDeletedChanged();
+    partial void OndtCreatedChanging(System.DateTime value);
+    partial void OndtCreatedChanged();
+    #endregion
+		
+		public tbWFMAggregation()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_iAggregationID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int iAggregationID
+		{
+			get
+			{
+				return this._iAggregationID;
+			}
+			set
+			{
+				if ((this._iAggregationID != value))
+				{
+					this.OniAggregationIDChanging(value);
+					this.SendPropertyChanging();
+					this._iAggregationID = value;
+					this.SendPropertyChanged("iAggregationID");
+					this.OniAggregationIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_vAggregationName", DbType="VarChar(50)")]
+		public string vAggregationName
+		{
+			get
+			{
+				return this._vAggregationName;
+			}
+			set
+			{
+				if ((this._vAggregationName != value))
+				{
+					this.OnvAggregationNameChanging(value);
+					this.SendPropertyChanging();
+					this._vAggregationName = value;
+					this.SendPropertyChanged("vAggregationName");
+					this.OnvAggregationNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_vTenantID", DbType="VarChar(50)")]
+		public string vTenantID
+		{
+			get
+			{
+				return this._vTenantID;
+			}
+			set
+			{
+				if ((this._vTenantID != value))
+				{
+					this.OnvTenantIDChanging(value);
+					this.SendPropertyChanging();
+					this._vTenantID = value;
+					this.SendPropertyChanged("vTenantID");
+					this.OnvTenantIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_vTeanantSpeicalFlag", DbType="VarChar(50)")]
+		public string vTeanantSpeicalFlag
+		{
+			get
+			{
+				return this._vTeanantSpeicalFlag;
+			}
+			set
+			{
+				if ((this._vTeanantSpeicalFlag != value))
+				{
+					this.OnvTeanantSpeicalFlagChanging(value);
+					this.SendPropertyChanging();
+					this._vTeanantSpeicalFlag = value;
+					this.SendPropertyChanged("vTeanantSpeicalFlag");
+					this.OnvTeanantSpeicalFlagChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_iDeleted", DbType="Int")]
+		public System.Nullable<int> iDeleted
+		{
+			get
+			{
+				return this._iDeleted;
+			}
+			set
+			{
+				if ((this._iDeleted != value))
+				{
+					this.OniDeletedChanging(value);
+					this.SendPropertyChanging();
+					this._iDeleted = value;
+					this.SendPropertyChanged("iDeleted");
+					this.OniDeletedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dtCreated", DbType="DateTime NOT NULL")]
+		public System.DateTime dtCreated
+		{
+			get
+			{
+				return this._dtCreated;
+			}
+			set
+			{
+				if ((this._dtCreated != value))
+				{
+					this.OndtCreatedChanging(value);
+					this.SendPropertyChanging();
+					this._dtCreated = value;
+					this.SendPropertyChanged("dtCreated");
+					this.OndtCreatedChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}
@@ -11488,6 +11537,120 @@ namespace WFM.Common
 		}
 	}
 	
+	public partial class uspWFMGetAgentResult
+	{
+		
+		private string _vLogin;
+		
+		private string _vDisplayName;
+		
+		public uspWFMGetAgentResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_vLogin", DbType="VarChar(64) NOT NULL", CanBeNull=false)]
+		public string vLogin
+		{
+			get
+			{
+				return this._vLogin;
+			}
+			set
+			{
+				if ((this._vLogin != value))
+				{
+					this._vLogin = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_vDisplayName", DbType="VarChar(128) NOT NULL", CanBeNull=false)]
+		public string vDisplayName
+		{
+			get
+			{
+				return this._vDisplayName;
+			}
+			set
+			{
+				if ((this._vDisplayName != value))
+				{
+					this._vDisplayName = value;
+				}
+			}
+		}
+	}
+	
+	public partial class uspWFMGetDataSynchroResult
+	{
+		
+		private System.Nullable<System.DateTime> _dtUpdated;
+		
+		public uspWFMGetDataSynchroResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dtUpdated", DbType="DateTime")]
+		public System.Nullable<System.DateTime> dtUpdated
+		{
+			get
+			{
+				return this._dtUpdated;
+			}
+			set
+			{
+				if ((this._dtUpdated != value))
+				{
+					this._dtUpdated = value;
+				}
+			}
+		}
+	}
+	
+	public partial class uspWFMGetSingleAggregationResult
+	{
+		
+		private int _iAggregationID;
+		
+		private string _vAggregationName;
+		
+		public uspWFMGetSingleAggregationResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_iAggregationID", DbType="Int NOT NULL")]
+		public int iAggregationID
+		{
+			get
+			{
+				return this._iAggregationID;
+			}
+			set
+			{
+				if ((this._iAggregationID != value))
+				{
+					this._iAggregationID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_vAggregationName", DbType="VarChar(50)")]
+		public string vAggregationName
+		{
+			get
+			{
+				return this._vAggregationName;
+			}
+			set
+			{
+				if ((this._vAggregationName != value))
+				{
+					this._vAggregationName = value;
+				}
+			}
+		}
+	}
+	
 	public partial class uspWFMGetSingleShiftResult
 	{
 		
@@ -11568,45 +11731,45 @@ namespace WFM.Common
 		}
 	}
 	
-	public partial class uspWFMGetAgentResult
+	public partial class uspWFMGetAggregationResult
 	{
 		
-		private string _vLogin;
+		private int _iAggregationID;
 		
-		private string _vDisplayName;
+		private string _vAggregationName;
 		
-		public uspWFMGetAgentResult()
+		public uspWFMGetAggregationResult()
 		{
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_vLogin", DbType="VarChar(64) NOT NULL", CanBeNull=false)]
-		public string vLogin
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_iAggregationID", DbType="Int NOT NULL")]
+		public int iAggregationID
 		{
 			get
 			{
-				return this._vLogin;
+				return this._iAggregationID;
 			}
 			set
 			{
-				if ((this._vLogin != value))
+				if ((this._iAggregationID != value))
 				{
-					this._vLogin = value;
+					this._iAggregationID = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_vDisplayName", DbType="VarChar(128) NOT NULL", CanBeNull=false)]
-		public string vDisplayName
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_vAggregationName", DbType="VarChar(50)")]
+		public string vAggregationName
 		{
 			get
 			{
-				return this._vDisplayName;
+				return this._vAggregationName;
 			}
 			set
 			{
-				if ((this._vDisplayName != value))
+				if ((this._vAggregationName != value))
 				{
-					this._vDisplayName = value;
+					this._vAggregationName = value;
 				}
 			}
 		}
@@ -11619,7 +11782,7 @@ namespace WFM.Common
 		
 		private string _vCompany;
 		
-		private System.Nullable<int> _iSkillAgregationID;
+		private System.Nullable<int> _iAggregationID;
 		
 		public uspWFMGetSkillGroupResult()
 		{
@@ -11657,132 +11820,18 @@ namespace WFM.Common
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_iSkillAgregationID", DbType="Int")]
-		public System.Nullable<int> iSkillAgregationID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_iAggregationID", DbType="Int")]
+		public System.Nullable<int> iAggregationID
 		{
 			get
 			{
-				return this._iSkillAgregationID;
+				return this._iAggregationID;
 			}
 			set
 			{
-				if ((this._iSkillAgregationID != value))
+				if ((this._iAggregationID != value))
 				{
-					this._iSkillAgregationID = value;
-				}
-			}
-		}
-	}
-	
-	public partial class uspWFMGetSkillAgregationResult
-	{
-		
-		private int _iSkillAgregationID;
-		
-		private string _vAgregationName;
-		
-		public uspWFMGetSkillAgregationResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_iSkillAgregationID", DbType="Int NOT NULL")]
-		public int iSkillAgregationID
-		{
-			get
-			{
-				return this._iSkillAgregationID;
-			}
-			set
-			{
-				if ((this._iSkillAgregationID != value))
-				{
-					this._iSkillAgregationID = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_vAgregationName", DbType="VarChar(50)")]
-		public string vAgregationName
-		{
-			get
-			{
-				return this._vAgregationName;
-			}
-			set
-			{
-				if ((this._vAgregationName != value))
-				{
-					this._vAgregationName = value;
-				}
-			}
-		}
-	}
-	
-	public partial class uspWFMGetSingleSkillAgregationResult
-	{
-		
-		private int _iSkillAgregationID;
-		
-		private string _vAgregationName;
-		
-		public uspWFMGetSingleSkillAgregationResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_iSkillAgregationID", DbType="Int NOT NULL")]
-		public int iSkillAgregationID
-		{
-			get
-			{
-				return this._iSkillAgregationID;
-			}
-			set
-			{
-				if ((this._iSkillAgregationID != value))
-				{
-					this._iSkillAgregationID = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_vAgregationName", DbType="VarChar(50)")]
-		public string vAgregationName
-		{
-			get
-			{
-				return this._vAgregationName;
-			}
-			set
-			{
-				if ((this._vAgregationName != value))
-				{
-					this._vAgregationName = value;
-				}
-			}
-		}
-	}
-	
-	public partial class uspWFMGetDataSynchroResult
-	{
-		
-		private System.Nullable<System.DateTime> _dtUpdated;
-		
-		public uspWFMGetDataSynchroResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dtUpdated", DbType="DateTime")]
-		public System.Nullable<System.DateTime> dtUpdated
-		{
-			get
-			{
-				return this._dtUpdated;
-			}
-			set
-			{
-				if ((this._dtUpdated != value))
-				{
-					this._dtUpdated = value;
+					this._iAggregationID = value;
 				}
 			}
 		}

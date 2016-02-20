@@ -9,12 +9,12 @@ namespace WFM.Areas.Manager.Models
 {
     public class SkillAgregationModel
     {
-        public int SkillAgregationID { get; set; }
+        public int iAggregationID { get; set; }
 
         [AllowHtml]
         [Required(ErrorMessage = "※スキルアグリゲーション名をご入力ください。")]
         [MaxLength(20)]
         [Display(Name = "スキルアグリゲーション名")]
-        public string SkillAgregationName { get; set; }
+        public string vAggregationName { get; set; }
     }
 }

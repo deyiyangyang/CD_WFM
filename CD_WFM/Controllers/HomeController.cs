@@ -14,16 +14,7 @@ namespace WFM.Controllers
 
         public ActionResult Index()
         {
-            string updatedTime = DateTime.Now.ToString(AppConst.Const_Format_YMD) + " 00:00:00";
-            using (WFMDBDataContext db = new WFMDBDataContext())
-            {
-                List<uspWFMGetDataSynchroResult> lst = db.uspWFMGetDataSynchro(this.TenantID).ToList();
-                if (lst.Count > 0)
-                {
-                    updatedTime = lst[0].dtUpdated.Value.ToString(AppConst.Const_Format_YMDHMS);
-                }
-            }
-            ViewBag.UpdatedTime = updatedTime;
+            GetDataSynchroDate();
             return View();
         }
 
@@ -33,25 +24,38 @@ namespace WFM.Controllers
             List<tblChart> lstCalls = db.uspWFMGetHistoryInboundCallForChart(this.TenantID, type).ToList();
             LineChart line = new LineChart();
             List<Dataset> datasets = new List<Dataset>();
-            Dataset ds = new Dataset();
+            Dataset inCallDs = new Dataset();
+            Dataset inCompletedCallDs = new Dataset();
             string lables = "";
-            int[] datas = new int[lstCalls.Count];
+            int[] dataInCalls = new int[lstCalls.Count];
+            int[] dataCompleteds = new int[lstCalls.Count];
             int index = 0;
             foreach (var item in lstCalls)
             {
                 lables += "," + item.dtCreatedCall.ToString("MM/dd")+"("+AppConst.Const_Weekday[Convert.ToInt16(item.dtCreatedCall.DayOfWeek)]+")";
-                datas[index] = item.iCountOfInboundCall;
+                dataInCalls[index] = item.iCountOfInboundCall;
+                dataCompleteds[index] = item.iCountOfCompletedInCall;
                 index++;
             }
-
-            ds.data = datas;
             line.labels = lables.Substring(1).Split(',');
 
-            ds.fillColor = "rgba(151,187,205,0.2)";
-            ds.strokeColor = "rgba(151,187,205,1)";
-            ds.pointColor = "rgba(151,187,205,1)";
-            ds.pointStrokeColor = "#fff";
-            datasets.Add(ds);
+            inCallDs.data = dataInCalls;
+            inCallDs.fillColor = "rgba(151,187,205,0.2)";
+            inCallDs.strokeColor = "rgba(151,187,205,1)";
+            inCallDs.pointColor = "rgba(151,187,205,1)";
+            inCallDs.pointStrokeColor = "#fff";
+            inCallDs.label = "総着信";
+
+
+            inCompletedCallDs.data = dataCompleteds;
+            inCompletedCallDs.fillColor = "rgba(220,220,220,0.5)";
+            inCompletedCallDs.strokeColor = "rgba(220,220,220,1)";
+            inCompletedCallDs.pointColor = "rgba(220,220,220,1)";
+            inCompletedCallDs.pointStrokeColor = "#fff";
+            inCompletedCallDs.label = "完了呼";
+
+            datasets.Add(inCallDs);
+            datasets.Add(inCompletedCallDs);
             line.datasets = datasets;
 
             return this.Json(line, JsonRequestBehavior.AllowGet);

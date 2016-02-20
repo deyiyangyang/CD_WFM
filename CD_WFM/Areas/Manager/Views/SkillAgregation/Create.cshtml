@@ -1,4 +1,4 @@
-﻿@model WFM.Common.tbWFMSkillAgregation
+﻿@model WFM.Common.tbWFMAggregation
 
 @{
     ViewBag.Title = "Create";
@@ -50,8 +50,8 @@
                                     <label class="control-label col-md-2" for="vAgregationName">スキルアグリゲーション名</label>
                                 </th>
                                 <td>
-                                    @Html.EditorFor(model => model.vAgregationName, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.vAgregationName, "", new { @class = "text-danger" })
+                                    @Html.EditorFor(model => model.vAggregationName, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.vAggregationName, "", new { @class = "text-danger" })
                                 </td>
 
 

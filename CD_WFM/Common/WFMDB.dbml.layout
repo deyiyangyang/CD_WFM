@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 19.875, 33.25" name="WFMDB">
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 20.25, 33.25" name="WFMDB">
   <DataContextMoniker Name="/WFMDBDataContext" />
   <nestedChildShapes>
     <classShape Id="a88f2a8d-b2b4-4bfb-9970-690ba6513a70" absoluteBounds="5.625, 3.25, 2, 4.8635990397135407">
@@ -54,12 +54,6 @@
       <DataClassMoniker Name="/WFMDBDataContext/tbWFMFactorDetail" />
       <nestedChildShapes>
         <elementListCompartment Id="669898e4-ddf2-4b3d-b773-c50275190a57" absoluteBounds="6.765, 14.21, 1.9700000000000002, 18.717539469401039" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="4ce707f3-15c0-4b4f-9d74-569f667ce8b9" absoluteBounds="14.75, 8.75, 2, 1.7220992024739594">
-      <DataClassMoniker Name="/WFMDBDataContext/tbWFMSkillAgregation" />
-      <nestedChildShapes>
-        <elementListCompartment Id="9eee59b0-16ed-481e-aec0-215fc2f0cbfa" absoluteBounds="14.765, 9.21, 1.9700000000000002, 1.1620992024739583" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
     <classShape Id="70ffc91c-c2f2-4fa3-920f-67fa36d61d7c" absoluteBounds="14.75, 11.75, 2, 1.9068933105468737">
@@ -146,10 +140,16 @@
         <elementListCompartment Id="3be3150a-caf0-4b0f-bb4b-4487fb8c21d0" absoluteBounds="4.515, 18.085, 1.9700000000000002, 1.7164815266927083" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="db43920b-8c1e-40dd-a3ff-3fe03864b3ed" absoluteBounds="7.125, 9.625, 2, 1.1677168782552094">
+    <classShape Id="db43920b-8c1e-40dd-a3ff-3fe03864b3ed" absoluteBounds="7.125, 9.625, 2, 1.3525109863281255">
       <DataClassMoniker Name="/WFMDBDataContext/tblChart" />
       <nestedChildShapes>
-        <elementListCompartment Id="5837e5dd-7e95-4784-86be-49f06a6b986b" absoluteBounds="7.14, 10.085, 1.9700000000000002, 0.60771687825520826" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="5837e5dd-7e95-4784-86be-49f06a6b986b" absoluteBounds="7.14, 10.085, 1.9700000000000002, 0.792510986328125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="24cf2524-26e8-4e72-a416-f6bf69dbe739" absoluteBounds="18, 9.875, 2, 1.9068933105468751">
+      <DataClassMoniker Name="/WFMDBDataContext/tbWFMAggregation" />
+      <nestedChildShapes>
+        <elementListCompartment Id="914ce2c2-c087-4a0c-8220-18b6ca6b0ebe" absoluteBounds="18.015, 10.335, 1.9700000000000002, 1.346893310546875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
   </nestedChildShapes>

@@ -13,16 +13,7 @@ namespace WFM.Areas.Data.Controllers
         // GET: Data/DataSynchro
         public ActionResult Index()
         {
-            string updatedTime = DateTime.Now.ToString(AppConst.Const_Format_YMD) + " 00:00:00";
-            using (WFMDBDataContext db = new WFMDBDataContext())
-            {
-                List<uspWFMGetDataSynchroResult> lst = db.uspWFMGetDataSynchro(this.TenantID).ToList();
-                if (lst.Count > 0)
-                {
-                    updatedTime = lst[0].dtUpdated.Value.ToString(AppConst.Const_Format_YMDHMS);
-                }
-            }
-            ViewBag.UpdatedTime = updatedTime;
+            GetDataSynchroDate();
             return View();
         }
 

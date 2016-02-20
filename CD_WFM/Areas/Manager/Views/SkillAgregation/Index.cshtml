@@ -1,7 +1,7 @@
 ﻿@using WFM.Models;
 @using WFM.Common;
 @using System.Web.UI.WebControls
-@model IEnumerable<WFM.Common.uspWFMGetSkillAgregationResult>
+@model IEnumerable<WFM.Common.uspWFMGetAggregationResult>
 
 @{
     ViewBag.Title = "Index";
@@ -77,11 +77,11 @@
                 {
                     <tr>
                         <td style="text-align: center; width: 220px;vertical-align:middle;">
-                            @Html.DisplayFor(modelItem => item.vAgregationName)
+                            @Html.DisplayFor(modelItem => item.vAggregationName)
                         </td>
                         <td>
-                            @Html.ActionLink("変更", "Edit", new { id = item.iSkillAgregationID }) |
-                            <a onclick="deleteSkillAgregation('@item.iSkillAgregationID');" href="javascript:void(0);">削除</a>
+                            @Html.ActionLink("変更", "Edit", new { id = item.iAggregationID }) |
+                            <a onclick="deleteSkillAgregation('@item.iAggregationID');" href="javascript:void(0);">削除</a>
                         </td>
                     </tr>
                 }

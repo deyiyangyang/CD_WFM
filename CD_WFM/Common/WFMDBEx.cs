@@ -82,6 +82,8 @@ namespace WFM.Common
             IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), iN_pageIndex, iN_onePageRows, iN_orderBy, iN_sort, vTenant1, dtSt1, dtEnd1, iSkillGroupID1, vCalleeID1, vCallerID1, iSessionProfileID, iConntype, iCompletedCall);
             return ((IMultipleResults)(result.ReturnValue));
         }
+
+
         //    [Function(Name = "dbo.SearchClientPaged")]
         //    [ResultType(typeof(tbCPFPersonalProfile))]
         //    [ResultType(typeof(tblDataPaged))]

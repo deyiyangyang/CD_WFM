@@ -14,10 +14,10 @@ namespace WFM.Areas.Manager.Controllers
         // GET: SkillAgregation
         public ActionResult Index()
         {
-            List<uspWFMGetSkillAgregationResult> lstSkillAgregation = new List<uspWFMGetSkillAgregationResult>();
+            List<uspWFMGetAggregationResult> lstSkillAgregation = new List<uspWFMGetAggregationResult>();
             using (WFMDBDataContext db = new WFMDBDataContext())
             {
-                lstSkillAgregation = db.uspWFMGetSkillAgregation(this.TenantID, this.TenantSpecialFlag).ToList();
+                lstSkillAgregation = db.uspWFMGetAggregation(this.TenantID, this.TenantSpecialFlag).ToList();
             }
             return View(lstSkillAgregation);
         }
@@ -30,7 +30,7 @@ namespace WFM.Areas.Manager.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(string vAgregationName)
+        public ActionResult Create(string vAggregationName)
         {
             if (ModelState.IsValid)
             {
@@ -38,7 +38,7 @@ namespace WFM.Areas.Manager.Controllers
 
                 using (WFMDBDataContext db = new WFMDBDataContext())
                 {
-                    db.uspWFMInsertSkillAgregation(vAgregationName, skillGroupIDs, this.TenantID, this.TenantSpecialFlag);
+                    db.uspWFMInsertAggregation(vAggregationName, skillGroupIDs, this.TenantID, this.TenantSpecialFlag);
                 }
                 return RedirectToAction("Index");
             }
@@ -47,15 +47,15 @@ namespace WFM.Areas.Manager.Controllers
 
         public ActionResult Edit(int id)
         {
-            uspWFMGetSingleSkillAgregationResult result;
+            uspWFMGetSingleAggregationResult result;
             using (WFMDBDataContext db = new WFMDBDataContext())
             {
-                result = db.uspWFMGetSingleSkillAgregation(id).FirstOrDefault();
+                result = db.uspWFMGetSingleAggregation(id).FirstOrDefault();
             }
             GetSkillGroupListForDDL(id);
             if (result != null)
             {
-                SkillAgregationModel model = new SkillAgregationModel() { SkillAgregationID = result.iSkillAgregationID, SkillAgregationName = result.vAgregationName };
+                SkillAgregationModel model = new SkillAgregationModel() { iAggregationID = result.iAggregationID, vAggregationName = result.vAggregationName };
                 return View(model);
             }
             else
@@ -69,21 +69,21 @@ namespace WFM.Areas.Manager.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (id != skillAgregation.SkillAgregationID)
+                if (id != skillAgregation.iAggregationID)
                 {
                     return RedirectToAction("Message", "Error", new { Error = "スキルアグリゲーション在しません。" });
                 }
             }
             string skillGroupIDs = Request.Form["selectSkillGroup"];
             WFMDBDataContext db = new WFMDBDataContext();
-            db.uspWFMUpdateSkillAgregation(id, skillAgregation.SkillAgregationName, skillGroupIDs);
+            db.uspWFMUpdateAggregation(id, skillAgregation.vAggregationName, skillGroupIDs);
             return RedirectToAction("Index");
         }
 
         public ActionResult Delete_Ajax(string id)
         {
             WFMDBDataContext db = new WFMDBDataContext();
-            db.uspWFMDelSingleSkillAgregation(int.Parse(id));
+            db.uspWFMDelSingleAggregation(int.Parse(id));
 
             return Json(new { StatusCode = AppConst.Enum_JsonStatus.Remove }, JsonRequestBehavior.AllowGet);
         }

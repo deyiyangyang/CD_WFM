@@ -350,7 +350,7 @@ namespace WFM.Controllers
             }
             foreach (var item in lstSkillGroup)
             {
-                lstItem.Add(new SelectListItem { Text = item.vCompany, Value = item.iGroupProfileID.ToString(), Selected = (item.iSkillAgregationID.Equals(skillAgregationID)) });
+                lstItem.Add(new SelectListItem { Text = item.vCompany, Value = item.iGroupProfileID.ToString(), Selected = (item.iAggregationID.Equals(skillAgregationID)) });
             }
             ViewData["lstSkillGroup"] = lstItem;
         }
@@ -386,14 +386,14 @@ namespace WFM.Controllers
             if (string.IsNullOrEmpty(selectedAgregationIDs)) selectedAgregationIDs = "None";
             List<SelectListItem> lstItem = new List<SelectListItem>();
 
-            List<uspWFMGetSkillAgregationResult> lstSkillAgregation = new List<uspWFMGetSkillAgregationResult>();
+            List<uspWFMGetAggregationResult> lstSkillAgregation = new List<uspWFMGetAggregationResult>();
             using (WFMDBDataContext db = new WFMDBDataContext())
             {
-                lstSkillAgregation = db.uspWFMGetSkillAgregation(this.TenantID, this.TenantSpecialFlag).ToList();
+                lstSkillAgregation = db.uspWFMGetAggregation(this.TenantID, this.TenantSpecialFlag).ToList();
             }
             foreach (var item in lstSkillAgregation)
             {
-                lstItem.Add(new SelectListItem { Text = item.vAgregationName, Value = item.iSkillAgregationID.ToString(), Selected = selectedAgregationIDs.Contains(item.iSkillAgregationID.ToString()) });
+                lstItem.Add(new SelectListItem { Text = item.vAggregationName, Value = item.iAggregationID.ToString(), Selected = selectedAgregationIDs.Contains(item.iAggregationID.ToString()) });
             }
             ViewData["lstSkillAgregation"] = lstItem;
         }
@@ -488,6 +488,28 @@ namespace WFM.Controllers
                     lstItem.Add(new SelectListItem { Text = item.vShiftName + " (" + item.vStartTime + "～" + item.vEndTime + ")", Value = item.iShiftID.ToString(), Selected = (item.iShiftID.ToString().Equals(shiftID)) });
             }
             ViewData["lstShift"] = lstItem;
+        }
+
+        /// <summary>
+        /// get data SynchroDate
+        /// </summary>
+        protected void GetDataSynchroDate()
+        {
+            string today = DateTime.Now.ToString(AppConst.Const_Format_YMD) + " 00:00:00";
+            string lastUpdatedTime = today;
+            using (WFMDBDataContext db = new WFMDBDataContext())
+            {
+                List<uspWFMGetDataSynchroResult> lst = db.uspWFMGetDataSynchro(this.TenantID).ToList();
+                if (lst.Count > 0)
+                {
+                    lastUpdatedTime = lst[0].dtUpdated.Value.ToString(AppConst.Const_Format_YMDHMS);
+                    if (string.Compare(today, lastUpdatedTime) > 0)
+                    {
+                        lastUpdatedTime = today;
+                    }
+                }
+            }
+            ViewBag.UpdatedTime = lastUpdatedTime;
         }
     }
 }

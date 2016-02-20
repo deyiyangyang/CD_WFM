@@ -30,7 +30,7 @@
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
-        @Html.HiddenFor(model => model.SkillAgregationID)
+        @Html.HiddenFor(model => model.iAggregationID)
         <div class="row">
             <div class="col-md-9" style="margin-left:15px;">
                 <div class="box box-primary" style="width:950px;">
@@ -48,8 +48,8 @@
                                     スキルアグリゲーション名
                                 </th>
                                 <td>
-                                    @Html.EditorFor(model => model.SkillAgregationName, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.SkillAgregationName, "", new { @class = "text-danger" })
+                                    @Html.EditorFor(model => model.vAggregationName, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.vAggregationName, "", new { @class = "text-danger" })
                                 </td>
 
 

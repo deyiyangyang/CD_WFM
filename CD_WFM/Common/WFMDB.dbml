@@ -274,15 +274,6 @@
       <Column Name="dtCreated" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
     </Type>
   </Table>
-  <Table Name="dbo.tbWFMSkillAgregation" Member="tbWFMSkillAgregation">
-    <Type Name="tbWFMSkillAgregation">
-      <Column Name="iSkillAgregationID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="vAgregationName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="vTenantID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="vTeanantSpeicalFlag" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="dtCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-    </Type>
-  </Table>
   <Table Name="dbo.tbWFMSkillAgregationCall" Member="tbWFMSkillAgregationCall">
     <Type Name="tbWFMSkillAgregationCall">
       <Column Name="iSkillAgregationCallID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -539,8 +530,19 @@
   </Table>
   <Table Name="" Member="tblChart">
     <Type Name="tblChart" Id="ID4">
-      <Column Member="dtCreatedCall" Type="System.DateTime" CanBeNull="false" />
-      <Column Member="iCountOfInboundCall" Type="System.Int32" CanBeNull="false" />
+      <Column Name="dtCreatedCall" Type="System.DateTime" CanBeNull="false" />
+      <Column Name="iCountOfInboundCall" Type="System.Int32" CanBeNull="false" />
+      <Column Name="iCountOfCompletedInCall" Type="System.Int32" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbWFMAggregation" Member="tbWFMAggregation">
+    <Type Name="tbWFMAggregation">
+      <Column Name="iAggregationID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="vAggregationName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="vTenantID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="vTeanantSpeicalFlag" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="iDeleted" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="dtCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
   <Function Name="dbo.uspWFMGetTenantName" Method="uspWFMGetTenantName">
@@ -581,15 +583,6 @@
       <Column Name="vEndTime" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
     </ElementType>
   </Function>
-  <Function Name="dbo.uspWFMGetSingleShift" Method="uspWFMGetSingleShift">
-    <Parameter Name="iShiftID" Type="System.Int32" DbType="Int" />
-    <ElementType Name="uspWFMGetSingleShiftResult">
-      <Column Name="iShiftID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="vShiftName" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="vStartTime" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="vEndTime" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-    </ElementType>
-  </Function>
   <Function Name="dbo.uspWFMGetAgent" Method="uspWFMGetAgent">
     <Parameter Name="vTenantID" Type="System.String" DbType="VarChar(32)" />
     <ElementType Name="uspWFMGetAgentResult">
@@ -605,46 +598,6 @@
     <Parameter Name="vAgentArr" Type="System.String" DbType="VarChar(4000)" />
     <Parameter Name="vWeekDay" Type="System.String" DbType="VarChar(50)" />
     <Parameter Name="iShiftID" Type="System.Int32" DbType="Int" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.uspWFMGetSkillGroup" Method="uspWFMGetSkillGroup">
-    <Parameter Name="vTenantID" Type="System.String" DbType="VarChar(32)" />
-    <ElementType Name="uspWFMGetSkillGroupResult">
-      <Column Name="iGroupProfileID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="vCompany" Type="System.String" DbType="VarChar(64)" CanBeNull="true" />
-      <Column Name="iSkillAgregationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-    </ElementType>
-  </Function>
-  <Function Name="dbo.uspWFMInsertSkillAgregation" Method="uspWFMInsertSkillAgregation">
-    <Parameter Name="vSkillAgregationName" Type="System.String" DbType="VarChar(64)" />
-    <Parameter Name="vSkillGroupIDArr" Type="System.String" DbType="VarChar(4000)" />
-    <Parameter Name="vTenantID" Type="System.String" DbType="VarChar(32)" />
-    <Parameter Name="vTeanantSpeicalFlag" Type="System.String" DbType="VarChar(32)" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.uspWFMGetSkillAgregation" Method="uspWFMGetSkillAgregation">
-    <Parameter Name="vTenantID" Type="System.String" DbType="VarChar(32)" />
-    <Parameter Name="vTenantSpecialFlag" Type="System.String" DbType="VarChar(20)" />
-    <ElementType Name="uspWFMGetSkillAgregationResult">
-      <Column Name="iSkillAgregationID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="vAgregationName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-    </ElementType>
-  </Function>
-  <Function Name="dbo.uspWFMGetSingleSkillAgregation" Method="uspWFMGetSingleSkillAgregation">
-    <Parameter Name="iSkillAgregationID" Type="System.Int32" DbType="Int" />
-    <ElementType Name="uspWFMGetSingleSkillAgregationResult">
-      <Column Name="iSkillAgregationID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="vAgregationName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-    </ElementType>
-  </Function>
-  <Function Name="dbo.uspWFMUpdateSkillAgregation" Method="uspWFMUpdateSkillAgregation">
-    <Parameter Name="iSkillAgregationID" Type="System.Int32" DbType="Int" />
-    <Parameter Name="vSkillAgregationName" Type="System.String" DbType="VarChar(64)" />
-    <Parameter Name="vSkillGroupIDArr" Type="System.String" DbType="VarChar(4000)" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.uspWFMDelSingleSkillAgregation" Method="uspWFMDelSingleSkillAgregation">
-    <Parameter Name="iSkillAgregationID" Type="System.Int32" DbType="Int" />
     <Return Type="System.Int32" />
   </Function>
   <Function Name="dbo.uspWFMInsertOrUpdateShiftAgentSpecial" Method="uspWFMInsertOrUpdateShiftAgentSpecial">
@@ -713,5 +666,64 @@
     <Parameter Name="vTenantID" Type="System.String" DbType="VarChar(32)" />
     <Parameter Name="type" Type="System.String" DbType="VarChar(32)" />
     <ElementType IdRef="ID4" />
+  </Function>
+  <Function Name="dbo.uspWFMDelSingleAggregation" Method="uspWFMDelSingleAggregation">
+    <Parameter Name="iAggregationID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.uspWFMGetMinInboundCall" Method="uspWFMGetMinInboundCall">
+    <Parameter Name="vTenantID" Type="System.String" DbType="VarChar(32)" />
+    <Parameter Name="dtST" Type="System.String" DbType="VarChar(32)" />
+    <Parameter Name="dtEnd" Type="System.String" DbType="VarChar(32)" />
+    <Parameter Name="iShiftID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="iInterval" Type="System.Int32" DbType="Int" />
+    <Parameter Name="iSkillGroupID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="iAggregationID" Type="System.Int32" DbType="Int" />
+    <ElementType IdRef="ID4" />
+  </Function>
+  <Function Name="dbo.uspWFMGetSingleAggregation" Method="uspWFMGetSingleAggregation">
+    <Parameter Name="iAggregationID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="uspWFMGetSingleAggregationResult">
+      <Column Name="iAggregationID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="vAggregationName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.uspWFMGetSingleShift" Method="uspWFMGetSingleShift">
+    <Parameter Name="iShiftID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="uspWFMGetSingleShiftResult">
+      <Column Name="iShiftID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="vShiftName" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="vStartTime" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="vEndTime" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.uspWFMGetAggregation" Method="uspWFMGetAggregation">
+    <Parameter Name="vTenantID" Type="System.String" DbType="VarChar(32)" />
+    <Parameter Name="vTenantSpecialFlag" Type="System.String" DbType="VarChar(20)" />
+    <ElementType Name="uspWFMGetAggregationResult">
+      <Column Name="iAggregationID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="vAggregationName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.uspWFMUpdateAggregation" Method="uspWFMUpdateAggregation">
+    <Parameter Name="iAggregationID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="vAggregationName" Type="System.String" DbType="VarChar(64)" />
+    <Parameter Name="vSkillGroupIDArr" Type="System.String" DbType="VarChar(4000)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.uspWFMInsertAggregation" Method="uspWFMInsertAggregation">
+    <Parameter Name="vAggregationName" Type="System.String" DbType="VarChar(64)" />
+    <Parameter Name="vSkillGroupIDArr" Type="System.String" DbType="VarChar(4000)" />
+    <Parameter Name="vTenantID" Type="System.String" DbType="VarChar(32)" />
+    <Parameter Name="vTeanantSpeicalFlag" Type="System.String" DbType="VarChar(32)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.uspWFMGetSkillGroup" Method="uspWFMGetSkillGroup">
+    <Parameter Name="vTenantID" Type="System.String" DbType="VarChar(32)" />
+    <ElementType Name="uspWFMGetSkillGroupResult">
+      <Column Name="iGroupProfileID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="vCompany" Type="System.String" DbType="VarChar(64)" CanBeNull="true" />
+      <Column Name="iAggregationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
   </Function>
 </Database>
