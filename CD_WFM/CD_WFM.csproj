@@ -215,6 +215,9 @@
     <Content Include="Areas\Report\Views\CallDetail\Index.cshtml" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\chat\Chart.min.js" />
+    <Content Include="Content\chat\legend.css" />
+    <Content Include="Content\chat\legend.js" />
     <Content Include="Content\css\AdminLTE.css" />
     <Content Include="Content\css\bootstrap-slider\slider.css" />
     <Content Include="Content\css\bootstrap-wysihtml5\bootstrap3-wysihtml5.css" />
