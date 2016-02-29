@@ -359,12 +359,15 @@ namespace WFM.Controllers
         /// get all the skill group 
         /// </summary>
         /// <param name="selectedGroupIDs">these group ids are seleted </param>
-        protected void GetSkillGroupListNoWithSkillAgregationForDDL(string selectedGroupIDs)
+        protected void GetSkillGroupListNoWithSkillAgregationForDDL(string selectedGroupIDs, bool hasExtraHeader = false)
         {
             if (string.IsNullOrEmpty(selectedGroupIDs)) selectedGroupIDs = "None";
             List<SelectListItem> lstItem = new List<SelectListItem>();
             List<uspWFMGetSkillGroupResult> lstSkillGroup = new List<uspWFMGetSkillGroupResult>();
-
+            if (hasExtraHeader)
+            {
+                lstItem.Insert(0, new SelectListItem { Text = "指定なし", Value = "0" });
+            }
             using (WFMDBDataContext db = new WFMDBDataContext())
             {
                 lstSkillGroup = db.uspWFMGetSkillGroup(this.TenantID).ToList();
@@ -381,12 +384,16 @@ namespace WFM.Controllers
         /// <summary>
         /// get skill agregation for list box control
         /// </summary>
-        protected void GetSkillAgregationListForDDL(string selectedAgregationIDs)
+        protected void GetSkillAgregationListForDDL(string selectedAgregationIDs, bool hasExtraHeader = false)
         {
             if (string.IsNullOrEmpty(selectedAgregationIDs)) selectedAgregationIDs = "None";
             List<SelectListItem> lstItem = new List<SelectListItem>();
 
             List<uspWFMGetAggregationResult> lstSkillAgregation = new List<uspWFMGetAggregationResult>();
+            if (hasExtraHeader)
+            {
+                lstItem.Insert(0, new SelectListItem { Text = "指定なし", Value = "0" });
+            }
             using (WFMDBDataContext db = new WFMDBDataContext())
             {
                 lstSkillAgregation = db.uspWFMGetAggregation(this.TenantID, this.TenantSpecialFlag).ToList();

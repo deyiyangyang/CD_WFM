@@ -167,6 +167,7 @@
     <Compile Include="Areas\Agent\Controllers\ShiftAgentController.cs" />
     <Compile Include="Areas\Agent\Controllers\ShiftAgentWeekController.cs" />
     <Compile Include="Areas\Agent\Models\ShiftAgentModel.cs" />
+    <Compile Include="Areas\Data\Controllers\ChartController.cs" />
     <Compile Include="Areas\Data\Controllers\DataSynchroController.cs" />
     <Compile Include="Areas\Data\DataAreaRegistration.cs" />
     <Compile Include="Areas\Manager\Controllers\AHTController.cs" />
@@ -908,6 +909,7 @@
     <Content Include="Areas\Report\Views\AgentDetail\Index.cshtml" />
     <Content Include="Areas\Report\Views\ShiftReport\Index.cshtml" />
     <Content Include="Areas\Report\Views\AgentReport\Index.cshtml" />
+    <Content Include="Areas\Data\Views\Chart\PredictionChart.cshtml" />
     <None Include="Properties\PublishProfiles\WFM.pubxml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\common.js" />

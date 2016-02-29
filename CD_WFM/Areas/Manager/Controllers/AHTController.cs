@@ -115,7 +115,7 @@ namespace WFM.Areas.Manager.Controllers
                 }
                 else
                 {
-                    IMultipleResults results = db.uspWFMSearchAHTGroupBySkillAgregationPaged(m_CurPageIndex, m_CurrentPageSize, strSortField, strSort,
+                    IMultipleResults results = db.uspWFMSearchAHTGroupByAggregationPaged(m_CurPageIndex, m_CurrentPageSize, strSortField, strSort,
                     this.TenantID, dtST, dtEnd, this.TenantSpecialFlag, vAgentID);
 
                     result = results.GetResult<tblAgentAHT>().ToList();

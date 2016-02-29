@@ -87,11 +87,12 @@
                 <th>
                     エジェート名
                 </th>
-                <th>
-                    局番グループ
-                </th>
+
                 @if (ViewBag.RadioChecked != "byAgregation")
                 {
+                    <th>
+                        局番グループ
+                    </th>
                     <th>
                         スキルグループ
                     </th>
@@ -158,7 +159,7 @@
                     @if (ViewBag.RadioChecked == "byAgregation")
                     {
                         <td>
-                            @Html.DisplayFor(modelItem => item.vSkillAgregationName)
+                            @Html.DisplayFor(modelItem => item.vAggregationName)
                         </td>
                     }
                     @*<td>

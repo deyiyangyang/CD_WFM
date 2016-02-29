@@ -44,10 +44,10 @@
         <elementListCompartment Id="b8f3a688-9061-45b8-a517-db995292f775" absoluteBounds="11.765, 10.21, 1.9700000000000002, 5.4123636881510411" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="261f4646-870d-4a4a-9734-a7d93b3cf4a9" absoluteBounds="3.75, 13.75, 2, 1.9068933105468737">
+    <classShape Id="261f4646-870d-4a4a-9734-a7d93b3cf4a9" absoluteBounds="4.125, 14.75, 2, 1.9068933105468737">
       <DataClassMoniker Name="/WFMDBDataContext/tbWFMFactor" />
       <nestedChildShapes>
-        <elementListCompartment Id="291946eb-5537-4ff8-8852-5c1575685872" absoluteBounds="3.765, 14.21, 1.9700000000000002, 1.346893310546875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="291946eb-5537-4ff8-8852-5c1575685872" absoluteBounds="4.1400000000000006, 15.21, 1.9700000000000002, 1.346893310546875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
     <classShape Id="280ad518-4950-4776-a65c-fc32f2f331e3" absoluteBounds="6.75, 13.75, 2, 19.277539469401042">

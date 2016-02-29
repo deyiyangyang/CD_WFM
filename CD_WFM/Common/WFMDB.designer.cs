@@ -408,20 +408,6 @@ namespace WFM.Common
 			return ((int)(result.ReturnValue));
 		}
 		
-        //[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.uspWFMGetAgentDetailV3")]
-        //public ISingleResult<tblAgentDetailV3> uspWFMGetAgentDetailV3([global::System.Data.Linq.Mapping.ParameterAttribute(Name="IN_pageIndex", DbType="Int")] System.Nullable<int> iN_pageIndex, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IN_onePageRows", DbType="Int")] System.Nullable<int> iN_onePageRows, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IN_orderBy", DbType="NVarChar(255)")] string iN_orderBy, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IN_sort", DbType="NVarChar(5)")] string iN_sort, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string vTenant1, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string dtSt1, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string dtEnd1, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string vLogin1)
-        //{
-        //    IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), iN_pageIndex, iN_onePageRows, iN_orderBy, iN_sort, vTenant1, dtSt1, dtEnd1, vLogin1);
-        //    return ((ISingleResult<tblAgentDetailV3>)(result.ReturnValue));
-        //}
-		
-        //[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.uspWFMGetCallDetailV3")]
-        //public ISingleResult<tblCallDetailV3> uspWFMGetCallDetailV3([global::System.Data.Linq.Mapping.ParameterAttribute(Name="IN_pageIndex", DbType="Int")] System.Nullable<int> iN_pageIndex, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IN_onePageRows", DbType="Int")] System.Nullable<int> iN_onePageRows, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IN_orderBy", DbType="NVarChar(255)")] string iN_orderBy, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IN_sort", DbType="NVarChar(5)")] string iN_sort, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string vTenant1, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string dtSt1, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string dtEnd1, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> iSkillGroupID1, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string vCalleeID1, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string vCallerID1, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> iSessionProfileID, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> iConntype, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> iCompletedCall)
-        //{
-        //    IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), iN_pageIndex, iN_onePageRows, iN_orderBy, iN_sort, vTenant1, dtSt1, dtEnd1, iSkillGroupID1, vCalleeID1, vCallerID1, iSessionProfileID, iConntype, iCompletedCall);
-        //    return ((ISingleResult<tblCallDetailV3>)(result.ReturnValue));
-        //}
-		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.uspWFMGetHistoryInboundCallForChart")]
 		public ISingleResult<tblChart> uspWFMGetHistoryInboundCallForChart([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string vTenantID, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string type)
 		{
@@ -483,6 +469,27 @@ namespace WFM.Common
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), vTenantID);
 			return ((ISingleResult<uspWFMGetSkillGroupResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.uspWFMcreateCallPrediction")]
+		public int uspWFMcreateCallPrediction([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> dataSouceType, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string vTenantID, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="DateTime")] System.Nullable<System.DateTime> targetDate, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Float")] System.Nullable<double> factor1, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Float")] System.Nullable<double> factor2)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), dataSouceType, vTenantID, targetDate, factor1, factor2);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.uspWFMGetMinInboundCallPrediction")]
+		public ISingleResult<tblChart> uspWFMGetMinInboundCallPrediction([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string vTenantID, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string dtST, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string dtEnd, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> iShiftID, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> iInterval, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> iSkillGroupID, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> iAggregationID)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), vTenantID, dtST, dtEnd, iShiftID, iInterval, iSkillGroupID, iAggregationID);
+			return ((ISingleResult<tblChart>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.uspWFMGetPredictionAndActualInboundCallForChart")]
+		public ISingleResult<tblChart> uspWFMGetPredictionAndActualInboundCallForChart([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string vTenantID, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string dtST, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> iShiftID, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> iSkillGroupID, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> iAggregationID)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), vTenantID, dtST, iShiftID, iSkillGroupID, iAggregationID);
+			return ((ISingleResult<tblChart>)(result.ReturnValue));
 		}
 	}
 	
@@ -8069,7 +8076,7 @@ namespace WFM.Common
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_vSkillAgregationName", CanBeNull=false)]
-		public string vSkillAgregationName
+		public string vAggregationName
 		{
 			get
 			{

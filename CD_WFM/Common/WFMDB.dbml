@@ -371,7 +371,7 @@
       <Column Name="vDisplayName" Type="System.String" CanBeNull="false" />
       <Column Name="vGroupName" Type="System.String" CanBeNull="false" />
       <Column Name="vSkillGroupName" Type="System.String" CanBeNull="false" />
-      <Column Name="vSkillAgregationName" Type="System.String" CanBeNull="false" />
+      <Column Name="vAggregationName" Storage="_vSkillAgregationName" Type="System.String" CanBeNull="false" />
       <Column Name="iTotalInBoundTalkDru" Type="System.Int32" CanBeNull="false" />
       <Column Name="iCountInBoundTalk" Type="System.Int32" CanBeNull="false" />
       <Column Name="iAvgInBoundTalk" Type="System.Int32" CanBeNull="false" />
@@ -498,7 +498,7 @@
     </Type>
   </Table>
   <Table Name="" Member="tblCallDetailV3">
-    <Type Name="tblCallDetailV3" Id="ID3">
+    <Type Name="tblCallDetailV3">
       <Column Name="iSessionProfileID" Type="System.Int32" CanBeNull="false" />
       <Column Name="vGroupName" Type="System.String" CanBeNull="false" />
       <Column Name="vSkillGroupName" Type="System.String" CanBeNull="true" />
@@ -517,7 +517,7 @@
     </Type>
   </Table>
   <Table Name="" Member="tblAgentDetailV3">
-    <Type Name="tblAgentDetailV3" Id="ID2">
+    <Type Name="tblAgentDetailV3">
       <Column Name="vLogin" Type="System.String" CanBeNull="false" />
       <Column Name="vDisplay" Type="System.String" CanBeNull="false" />
       <Column Name="groupName" Type="System.String" CanBeNull="false" />
@@ -529,7 +529,7 @@
     </Type>
   </Table>
   <Table Name="" Member="tblChart">
-    <Type Name="tblChart" Id="ID4">
+    <Type Name="tblChart" Id="ID2">
       <Column Name="dtCreatedCall" Type="System.DateTime" CanBeNull="false" />
       <Column Name="iCountOfInboundCall" Type="System.Int32" CanBeNull="false" />
       <Column Name="iCountOfCompletedInCall" Type="System.Int32" CanBeNull="false" />
@@ -635,37 +635,10 @@
     <Parameter Name="vTenantID" Type="System.String" DbType="VarChar(32)" />
     <Return Type="System.Int32" />
   </Function>
-  <Function Name="dbo.uspWFMGetAgentDetailV3" Method="uspWFMGetAgentDetailV3">
-    <Parameter Name="IN_pageIndex" Parameter="iN_pageIndex" Type="System.Int32" DbType="Int" />
-    <Parameter Name="IN_onePageRows" Parameter="iN_onePageRows" Type="System.Int32" DbType="Int" />
-    <Parameter Name="IN_orderBy" Parameter="iN_orderBy" Type="System.String" DbType="NVarChar(255)" />
-    <Parameter Name="IN_sort" Parameter="iN_sort" Type="System.String" DbType="NVarChar(5)" />
-    <Parameter Name="vTenant1" Type="System.String" DbType="VarChar(32)" />
-    <Parameter Name="dtSt1" Type="System.String" DbType="VarChar(32)" />
-    <Parameter Name="dtEnd1" Type="System.String" DbType="VarChar(32)" />
-    <Parameter Name="vLogin1" Type="System.String" DbType="VarChar(32)" />
-    <ElementType IdRef="ID2" />
-  </Function>
-  <Function Name="dbo.uspWFMGetCallDetailV3" Method="uspWFMGetCallDetailV3">
-    <Parameter Name="IN_pageIndex" Parameter="iN_pageIndex" Type="System.Int32" DbType="Int" />
-    <Parameter Name="IN_onePageRows" Parameter="iN_onePageRows" Type="System.Int32" DbType="Int" />
-    <Parameter Name="IN_orderBy" Parameter="iN_orderBy" Type="System.String" DbType="NVarChar(255)" />
-    <Parameter Name="IN_sort" Parameter="iN_sort" Type="System.String" DbType="NVarChar(5)" />
-    <Parameter Name="vTenant1" Type="System.String" DbType="VarChar(32)" />
-    <Parameter Name="dtSt1" Type="System.String" DbType="VarChar(32)" />
-    <Parameter Name="dtEnd1" Type="System.String" DbType="VarChar(32)" />
-    <Parameter Name="iSkillGroupID1" Type="System.Int32" DbType="Int" />
-    <Parameter Name="vCalleeID1" Type="System.String" DbType="VarChar(32)" />
-    <Parameter Name="vCallerID1" Type="System.String" DbType="VarChar(32)" />
-    <Parameter Name="iSessionProfileID" Type="System.Int32" DbType="Int" />
-    <Parameter Name="iConntype" Type="System.Int32" DbType="Int" />
-    <Parameter Name="iCompletedCall" Type="System.Int32" DbType="Int" />
-    <ElementType IdRef="ID3" />
-  </Function>
   <Function Name="dbo.uspWFMGetHistoryInboundCallForChart" Method="uspWFMGetHistoryInboundCallForChart">
     <Parameter Name="vTenantID" Type="System.String" DbType="VarChar(32)" />
     <Parameter Name="type" Type="System.String" DbType="VarChar(32)" />
-    <ElementType IdRef="ID4" />
+    <ElementType IdRef="ID2" />
   </Function>
   <Function Name="dbo.uspWFMDelSingleAggregation" Method="uspWFMDelSingleAggregation">
     <Parameter Name="iAggregationID" Type="System.Int32" DbType="Int" />
@@ -679,7 +652,7 @@
     <Parameter Name="iInterval" Type="System.Int32" DbType="Int" />
     <Parameter Name="iSkillGroupID" Type="System.Int32" DbType="Int" />
     <Parameter Name="iAggregationID" Type="System.Int32" DbType="Int" />
-    <ElementType IdRef="ID4" />
+    <ElementType IdRef="ID2" />
   </Function>
   <Function Name="dbo.uspWFMGetSingleAggregation" Method="uspWFMGetSingleAggregation">
     <Parameter Name="iAggregationID" Type="System.Int32" DbType="Int" />
@@ -725,5 +698,31 @@
       <Column Name="vCompany" Type="System.String" DbType="VarChar(64)" CanBeNull="true" />
       <Column Name="iAggregationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </ElementType>
+  </Function>
+  <Function Name="dbo.uspWFMcreateCallPrediction" Method="uspWFMcreateCallPrediction">
+    <Parameter Name="dataSouceType" Type="System.Int32" DbType="Int" />
+    <Parameter Name="vTenantID" Type="System.String" DbType="VarChar(32)" />
+    <Parameter Name="targetDate" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="factor1" Type="System.Double" DbType="Float" />
+    <Parameter Name="factor2" Type="System.Double" DbType="Float" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.uspWFMGetMinInboundCallPrediction" Method="uspWFMGetMinInboundCallPrediction">
+    <Parameter Name="vTenantID" Type="System.String" DbType="VarChar(32)" />
+    <Parameter Name="dtST" Type="System.String" DbType="VarChar(32)" />
+    <Parameter Name="dtEnd" Type="System.String" DbType="VarChar(32)" />
+    <Parameter Name="iShiftID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="iInterval" Type="System.Int32" DbType="Int" />
+    <Parameter Name="iSkillGroupID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="iAggregationID" Type="System.Int32" DbType="Int" />
+    <ElementType IdRef="ID2" />
+  </Function>
+  <Function Name="dbo.uspWFMGetPredictionAndActualInboundCallForChart" Method="uspWFMGetPredictionAndActualInboundCallForChart">
+    <Parameter Name="vTenantID" Type="System.String" DbType="VarChar(32)" />
+    <Parameter Name="dtST" Type="System.String" DbType="VarChar(32)" />
+    <Parameter Name="iShiftID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="iSkillGroupID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="iAggregationID" Type="System.Int32" DbType="Int" />
+    <ElementType IdRef="ID2" />
   </Function>
 </Database>
