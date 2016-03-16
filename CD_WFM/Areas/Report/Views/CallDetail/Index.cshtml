@@ -29,7 +29,7 @@
     {
         @Html.Partial("SortHeader", AppConst.Const_Default_SortAction)
         <div class="row">
-            <div class="col-md-10" style="margin-left:15px;">
+            <div class="col-md-12" style="margin-left:15px;">
                 <div class="box box-primary" >
                     <div class="box-header">
                         <i class="fa fa-search"></i>
@@ -41,29 +41,33 @@
                     <div class="box-body" style="display: block;">
                         <table class="table table-bordered">
                             <tr>
-                                <th class="thUpTitle">
+                                <th class="thUpTitle col-md-1">
                                     日付
                                 </th>
-                                <td>
+                                <td class="col-md-2">
                                     @Html.TextBox("dtStart", null, new { maxLength = "10", @readonly = "readonly", style = "width:110px;readonly;margin-right:5px;", @class = "form-control" })
                                     ～
                                     @Html.TextBox("dtEnd", null, new { maxLength = "10", @readonly = "readonly", style = "width:110px;readonly;margin-right:5px;", @class = "form-control" })
                                 </td>
-                                <th class="thUpTitle" style="width: 50px;vertical-align: middle;">スキルグループ</th>
-                                <td>@Html.DropDownList("selectSkillGroup", (List<SelectListItem>)ViewData["lstSkillGroup"], new { @class = "form-control", style = "width:150px" })</td>
-                                <th class="thUpTitle" style="width: 50px;vertical-align: middle;">受信番号</th>
-                                <td>@Html.TextBox("vCalleeid", null, new { maxLength = "15", style = "width:110px;margin-right:5px;", @class = "form-control" })</td>
-                                <td style="vertical-align:middle;text-align:center;" rowspan="2">
+                                <th class="thUpTitle  col-md-1">スキルグループ</th>
+                                <td class=" col-md-1">@Html.DropDownList("selectSkillGroup", (List<SelectListItem>)ViewData["lstSkillGroup"], new { @class = "form-control", style = "width:150px" })</td>
+                                <th class="thUpTitle  col-md-1">受信番号</th>
+                                <td class="col-md-1">@Html.TextBox("vCalleeid", null, new { maxLength = "15", style = "width:110px;margin-right:5px;", @class = "form-control" })</td>
+                                <th class="thUpTitle  col-md-1">発信番号</th>
+                                <td class="col-md-1">@Html.TextBox("vCallerid", null, new { maxLength = "15", style = "width:110px;margin-right:5px;", @class = "form-control" })</td>
+                                <td class="col-md-1" rowspan="2">
                                     <button type="submit" id="Search" name="Search" class="btn btn-primary" style="width: 100px;"><i class="fa fa-search"></i> 検索</button>
                                 </td>
                             </tr>
                             <tr>
-                                <th>iSessionProfileID</th>
+                                <th class="thUpTitle col-md-1">iSessionProfileID</th>
                                 <td><input type="text" value="@ViewBag.iSessionProfileID" name="iSessionProfileID" class = "form-control" /></td>
-                                <th>発着信</th>
+                                <th class="thUpTitle col-md-1">発着信</th>
                                 <td><select id="iConntype" name="iConntype" class = "form-control" style="width:150px" ><option value="-1">指定なし</option><option value="0">着信</option><option value="1">発信</option></select></td>
-                                <th>完了呼</th>
+                                <th class="thUpTitle col-md-1">完了呼</th>
                                 <td><select id="iCompletedCall" name="iCompletedCall" class = "form-control"><option value="-1">指定なし</option><option value="1">完了</option><option value="0">未完了</option></select></td>
+                                <td></td>
+                                <td></td>
                             </tr>
                         </table>
                     </div><!-- /.box-body -->
@@ -91,10 +95,10 @@
                     発信
                 </th>
                 <th>
-                    vCalleeID
+                    受信番号
                 </th>
                 <th>
-                    vCallerID
+                    発信番号
                 </th>
                 <th>
                     待ち呼

@@ -190,6 +190,9 @@
     <Compile Include="Common\CodeManager.cs" />
     <Compile Include="Common\HtmlExtendClass.cs" />
     <Compile Include="Common\ListControlUtil.cs" />
+    <Compile Include="Common\WFMDB.cs">
+      <DependentUpon>WFMDB.dbml</DependentUpon>
+    </Compile>
     <Compile Include="Common\WFMDB.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

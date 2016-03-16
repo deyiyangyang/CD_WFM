@@ -45,15 +45,22 @@
                 </div>
                 <div id="warning"></div>
             </div>
+
         </div>
     }
 </section>
 <script type="text/javascript">
+    $(document).ready(function () {
+        $("#processbar").css("visibility", "hidden");
+    });
+
+
     function doUpdate() {
         var vUrl = '@Url.Content("~/data/datasynchro/Update_Ajax/")';
 
         $.ajax({
             url: vUrl,
+            data:{ r: Math.random()},
             beforeSend: function () {
                 $('#warning').text('processing, please wait!');
             }
@@ -71,5 +78,7 @@
         });
 
     }
+
+
 </script>
 

@@ -45,7 +45,7 @@ namespace WFM.Areas.Report.Controllers
                 if (iCompletedCall == null)
                     iCompletedCall = -1;
 
-                List<tblCallDetailV3> lstData = SearchData("1", m_CurrentPageSize.ToString(), "1", DateTime.Parse(dtStart), DateTime.Parse(dtEnd), "", 0, isessionprofileidValue, iConntype.Value, iCompletedCall.Value);
+                List<tblCallDetailV3> lstData = SearchData("1", m_CurrentPageSize.ToString(), "1", DateTime.Parse(dtStart), DateTime.Parse(dtEnd), "", "", 0, isessionprofileidValue, iConntype.Value, iCompletedCall.Value);
                 //ページ情報
                 CalcPagerData();
 
@@ -66,7 +66,7 @@ namespace WFM.Areas.Report.Controllers
         [HttpPost]
         [ValidateInput(false)]
         [MultiActionAttribute("firstPage,nextPage,prePage,lastPage,pageChanged,pageChanged_Buttom,Search,pageSizeChanged")]
-        public ActionResult Search(string pageIndex, string ddlPageSize, string pageTotal, string sortIndex, string sort, string dtStart, string dtEnd, string vCalleeid, string selectSkillGroup, string iSessionProfileID, int? iConntype, int? iCompletedCall)
+        public ActionResult Search(string pageIndex, string ddlPageSize, string pageTotal, string sortIndex, string sort, string dtStart, string dtEnd, string vCalleeid, string vCallerid, string selectSkillGroup, string iSessionProfileID, int? iConntype, int? iCompletedCall)
         {
             try
             {
@@ -106,9 +106,9 @@ namespace WFM.Areas.Report.Controllers
                 m_Sort = nSort;
 
                 if (string.IsNullOrEmpty(selectSkillGroup))
-                    lstData = SearchData(pageIndex, ddlPageSize, pageTotal, DateTime.Parse(dtStart), DateTime.Parse(dtEnd), vCalleeid, 0, isessionprofileidValue, iConntype.Value, iCompletedCall.Value);
+                    lstData = SearchData(pageIndex, ddlPageSize, pageTotal, DateTime.Parse(dtStart), DateTime.Parse(dtEnd), vCalleeid,vCallerid, 0, isessionprofileidValue, iConntype.Value, iCompletedCall.Value);
                 else
-                    lstData = SearchData(pageIndex, ddlPageSize, pageTotal, DateTime.Parse(dtStart), DateTime.Parse(dtEnd), vCalleeid, int.Parse(selectSkillGroup), isessionprofileidValue, iConntype.Value, iCompletedCall.Value);
+                    lstData = SearchData(pageIndex, ddlPageSize, pageTotal, DateTime.Parse(dtStart), DateTime.Parse(dtEnd), vCalleeid,vCallerid, int.Parse(selectSkillGroup), isessionprofileidValue, iConntype.Value, iCompletedCall.Value);
 
                 //ページ情報
                 CalcPagerData();
@@ -123,7 +123,7 @@ namespace WFM.Areas.Report.Controllers
         }
 
         //検索処理
-        private List<tblCallDetailV3> SearchData(string pageIndex, string pageSize, string pageTotal, DateTime dtST, DateTime dtEnd, string vCalleeid, int skillID,int isessionprofileid,int iConntype, int iCompletedCall)
+        private List<tblCallDetailV3> SearchData(string pageIndex, string pageSize, string pageTotal, DateTime dtST, DateTime dtEnd, string vCalleeid, string vCallerid, int skillID,int isessionprofileid,int iConntype, int iCompletedCall)
         {
             AppLog.WriteLog(string.Format("CallDetailController SearchData paramter is pageIndex:{0},pageSize:{1},pageTotal:{2},dtST:{3},dtEnd:{4},vCalleeid:{5},skillID{6}", pageIndex,pageSize, pageTotal, dtST.ToString(AppConst.Const_Format_YMD)
                 ,dtEnd.ToString(AppConst.Const_Format_YMD),vCalleeid,skillID.ToString()));
@@ -148,7 +148,7 @@ namespace WFM.Areas.Report.Controllers
             using (WFMDBDataContext db = new WFMDBDataContext())
             {
                 IMultipleResults results = db.uspWFMGetCallDetailV3(m_CurPageIndex, m_CurrentPageSize, strSortField, strSort,
-                    this.TenantID, dtST.ToString("yyyy/MM/dd"), dtEnd.ToString("yyyy/MM/dd"), skillID, vCalleeid, null,isessionprofileid, iConntype, iCompletedCall);
+                    this.TenantID, dtST.ToString("yyyy/MM/dd"), dtEnd.ToString("yyyy/MM/dd"), skillID, vCalleeid, vCallerid, isessionprofileid, iConntype, iCompletedCall);
 
                 result = results.GetResult<tblCallDetailV3>().ToList();
                 tblDataPaged tblPage = results.GetResult<tblDataPaged>().FirstOrDefault();

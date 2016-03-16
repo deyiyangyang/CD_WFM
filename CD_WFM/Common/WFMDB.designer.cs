@@ -83,6 +83,7 @@ namespace WFM.Common
 		public WFMDBDataContext() : 
 				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString, mappingSource)
 		{
+            this.CommandTimeout = 360;
 			OnCreated();
 		}
 		
