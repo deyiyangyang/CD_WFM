@@ -1,5 +1,6 @@
 ﻿@using WFM.Common;
 @using WFM.Models;
+@using WFM.Helper;
 @model IEnumerable<tblAgentAHT>
 
 @{
@@ -119,7 +120,7 @@
                         後処理回数
                     </th>*@
                 <th>
-                    平均後処理時間
+                    着信平均後処理時間
                 </th>
                 @*<th>
                         保留時間
@@ -128,7 +129,7 @@
                         保留回数
                     </th>*@
                 <th>
-                    平均保留時間
+                    着信平均保留時間
                 </th>
                 <th>
                     AHT
@@ -169,7 +170,8 @@
                             @Html.DisplayFor(modelItem => item.iCountInBoundTalk)
                         </td>*@
                     <td>
-                        @Html.DisplayFor(modelItem => item.iAvgInBoundTalk)
+                        @*@Html.DisplayFor(modelItem => item.iAvgInBoundTalk)*@
+                        @item.iAvgInBoundTalk.ChangeSecondToHHMMSS()
                     </td>
                     @*<td>
                             @Html.DisplayFor(modelItem => item.iTotalWorktimeDru)
@@ -178,7 +180,8 @@
                             @Html.DisplayFor(modelItem => item.iCountWorktime)
                         </td>*@
                     <td>
-                        @Html.DisplayFor(modelItem => item.iAvgWorktime)
+                        @*@Html.DisplayFor(modelItem => item.iAvgWorktime)*@
+                        @item.iAvgWorktime.ChangeSecondToHHMMSS()
                     </td>
                     @*<td>
                             @Html.DisplayFor(modelItem => item.iTotalHoldDru)
@@ -187,10 +190,12 @@
                             @Html.DisplayFor(modelItem => item.iCountHold)
                         </td>*@
                     <td>
-                        @Html.DisplayFor(modelItem => item.iAvgHold)
+                        @*@Html.DisplayFor(modelItem => item.iAvgHold)*@
+                        @item.iAvgHold.ChangeSecondToHHMMSS()
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.AHT)
+                        @*@Html.DisplayFor(modelItem => item.AHT)*@
+                        @item.AHT.ChangeSecondToHHMMSS()
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.CPH)

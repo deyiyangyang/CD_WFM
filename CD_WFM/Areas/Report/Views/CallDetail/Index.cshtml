@@ -45,18 +45,18 @@
                                     日付
                                 </th>
                                 <td class="col-md-2">
-                                    @Html.TextBox("dtStart", null, new { maxLength = "10", @readonly = "readonly", style = "width:110px;readonly;margin-right:5px;", @class = "form-control" })
+                                    @Html.TextBox("dtStart", null, new { maxLength = "10", @readonly = "readonly", style = "readonly;margin-right:5px;", @class = "form-control" })
                                     ～
-                                    @Html.TextBox("dtEnd", null, new { maxLength = "10", @readonly = "readonly", style = "width:110px;readonly;margin-right:5px;", @class = "form-control" })
+                                    @Html.TextBox("dtEnd", null, new { maxLength = "10", @readonly = "readonly", style = "readonly;margin-right:5px;", @class = "form-control" })
                                 </td>
                                 <th class="thUpTitle  col-md-1">スキルグループ</th>
                                 <td class=" col-md-1">@Html.DropDownList("selectSkillGroup", (List<SelectListItem>)ViewData["lstSkillGroup"], new { @class = "form-control", style = "width:150px" })</td>
                                 <th class="thUpTitle  col-md-1">受信番号</th>
-                                <td class="col-md-1">@Html.TextBox("vCalleeid", null, new { maxLength = "15", style = "width:110px;margin-right:5px;", @class = "form-control" })</td>
+                                <td class="col-md-1">@Html.TextBox("vCalleeid", null, new { maxLength = "15", style = "margin-right:5px;", @class = "form-control" })</td>
                                 <th class="thUpTitle  col-md-1">発信番号</th>
-                                <td class="col-md-1">@Html.TextBox("vCallerid", null, new { maxLength = "15", style = "width:110px;margin-right:5px;", @class = "form-control" })</td>
+                                <td class="col-md-1">@Html.TextBox("vCallerid", null, new { maxLength = "15", style = "margin-right:5px;", @class = "form-control" })</td>
                                 <td class="col-md-1" rowspan="2">
-                                    <button type="submit" id="Search" name="Search" class="btn btn-primary" style="width: 100px;"><i class="fa fa-search"></i> 検索</button>
+                                    <button type="submit" id="Search" name="Search" class="btn btn-primary" ><i class="fa fa-search"></i> 検索</button>
                                 </td>
                             </tr>
                             <tr>

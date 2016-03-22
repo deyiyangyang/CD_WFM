@@ -81,52 +81,61 @@ namespace WFM.Areas.Manager.Controllers
         //検索処理
         private List<tblAgentAHT> SearchData(string pageIndex, string pageSize, string pageTotal, DateTime dtST, DateTime dtEnd, string vAgentID, bool isGroupBySkill)
         {
+            AppLog.WriteLog("AHTController SearchData start");
             List<tblAgentAHT> result = new List<tblAgentAHT>();
 
-            int currentPageIndex = m_CurPageIndex;
-            int currentPageSize = m_CurrentPageSize;
-
-            int.TryParse(pageIndex, out currentPageIndex);
-            int.TryParse(pageSize, out currentPageSize);
-
-            m_CurPageIndex = currentPageIndex;
-            m_CurrentPageSize = currentPageSize;
-
-            string strSortField = GetSortField(m_SortField);
-            string strSort = AppFunction.GetSortDefine(m_Sort);
-            ViewBag.vTenantID = this.TenantID;
-            ViewBag.vTenantSpeciaFlag = this.TenantSpecialFlag;
-            //ページを再計算する
-            CalcPage(pageTotal);
-
-            using (WFMDBDataContext db = new WFMDBDataContext())
+            try
             {
-                if (isGroupBySkill)
+                int currentPageIndex = m_CurPageIndex;
+                int currentPageSize = m_CurrentPageSize;
+
+                int.TryParse(pageIndex, out currentPageIndex);
+                int.TryParse(pageSize, out currentPageSize);
+
+                m_CurPageIndex = currentPageIndex;
+                m_CurrentPageSize = currentPageSize;
+
+                string strSortField = GetSortField(m_SortField);
+                string strSort = AppFunction.GetSortDefine(m_Sort);
+                ViewBag.vTenantID = this.TenantID;
+                ViewBag.vTenantSpeciaFlag = this.TenantSpecialFlag;
+                //ページを再計算する
+                CalcPage(pageTotal);
+
+                using (WFMDBDataContext db = new WFMDBDataContext())
                 {
-                    IMultipleResults results = db.uspWFMSearchAHTGroupBySkillPaged(m_CurPageIndex, m_CurrentPageSize, strSortField, strSort,
-                    this.TenantID, dtST, dtEnd, this.TenantSpecialFlag, vAgentID);
+                    if (isGroupBySkill)
+                    {
+                        IMultipleResults results = db.uspWFMSearchAHTGroupBySkillPaged(m_CurPageIndex, m_CurrentPageSize, strSortField, strSort,
+                        this.TenantID, dtST, dtEnd, this.TenantSpecialFlag, vAgentID);
 
-                    result = results.GetResult<tblAgentAHT>().ToList();
-                    tblDataPaged tblPage = results.GetResult<tblDataPaged>().FirstOrDefault();
+                        result = results.GetResult<tblAgentAHT>().ToList();
+                        tblDataPaged tblPage = results.GetResult<tblDataPaged>().FirstOrDefault();
 
-                    m_TotalRowCount = tblPage.TotalRowCount;
-                    m_CurPageIndex = tblPage.CurPageIndex;
-                    m_TotlePageCount = tblPage.TotalPageCount;
+                        m_TotalRowCount = tblPage.TotalRowCount;
+                        m_CurPageIndex = tblPage.CurPageIndex;
+                        m_TotlePageCount = tblPage.TotalPageCount;
+                    }
+                    else
+                    {
+                        IMultipleResults results = db.uspWFMSearchAHTGroupByAggregationPaged(m_CurPageIndex, m_CurrentPageSize, strSortField, strSort,
+                        this.TenantID, dtST, dtEnd, this.TenantSpecialFlag, vAgentID);
+
+                        result = results.GetResult<tblAgentAHT>().ToList();
+                        tblDataPaged tblPage = results.GetResult<tblDataPaged>().FirstOrDefault();
+
+                        m_TotalRowCount = tblPage.TotalRowCount;
+                        m_CurPageIndex = tblPage.CurPageIndex;
+                        m_TotlePageCount = tblPage.TotalPageCount;
+                    }
+
                 }
-                else
-                {
-                    IMultipleResults results = db.uspWFMSearchAHTGroupByAggregationPaged(m_CurPageIndex, m_CurrentPageSize, strSortField, strSort,
-                    this.TenantID, dtST, dtEnd, this.TenantSpecialFlag, vAgentID);
-
-                    result = results.GetResult<tblAgentAHT>().ToList();
-                    tblDataPaged tblPage = results.GetResult<tblDataPaged>().FirstOrDefault();
-
-                    m_TotalRowCount = tblPage.TotalRowCount;
-                    m_CurPageIndex = tblPage.CurPageIndex;
-                    m_TotlePageCount = tblPage.TotalPageCount;
-                }
-
             }
+            catch(Exception ex)
+            {
+                AppLog.WriteLog("AHTController SearchData system error:"+ex.Message+ex.StackTrace);
+            }
+           
 
             return result;
         }
