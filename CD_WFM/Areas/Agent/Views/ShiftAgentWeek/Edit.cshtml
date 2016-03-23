@@ -1,4 +1,8 @@
-﻿@{
+﻿@using WFM.Common;
+@using WFM.Models;
+@using System.Web.UI.WebControls
+@model tblAgentWeekShift
+@{
     ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -24,7 +28,33 @@
             $(em).on("ifChecked", function () {
                 calculateAllWeekday();
             });
+
         });
+
+
+        if ('@Model.monShift' != '0')
+            $("#chkMon").iCheck('check');
+        if ('@Model.tueShift' != '0')
+            $("#chkTue").iCheck('check');
+        if ('@Model.wedShift' != '0')
+            $("#chkWed").iCheck('check');
+        if ('@Model.thurShift' != '0')
+            $("#chkThur").iCheck('check');
+        if ('@Model.friShift' != '0')
+            $("#chkFri").iCheck('check');
+        if ('@Model.satShift' != '0')
+            $("#chkSat").iCheck('check');
+        if ('@Model.sunShift' != '0')
+            $("#chkSun").iCheck('check');
+        if ('@Model.monShift' != '0' && '@Model.tueShift' != '0' && '@Model.wedShift' != '0' && '@Model.thurShift' != '0' && '@Model.friShift' != '0' && '@Model.satShift' != '0' && '@Model.sunShift' != '0')
+        {
+            $("#chkWeekAll").iCheck('check');
+        }
+        else {
+            $("#chkWeekAll").iCheck('uncheck');
+        }
+
+        $("#ddlShift").val("@ViewBag.shiftID");
     });
 
     function calculateAllWeekday() {
@@ -55,7 +85,7 @@
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
-        <input type="hidden" name="vAgentID" value="@ViewBag.vAgentID" />
+        <input type="hidden" name="vAgentID" value="@Model.vAgentID" />
         <div class="row">
             <div class="col-md-9" style="margin-left:15px;">
                 <div class="box box-primary" style="width:950px;">
@@ -68,14 +98,35 @@
                     </div>
                     <div class="box-body" style="display: block;">
                         <table class="table table-bordered">
-                            <tr><th style="width: 100px;vertical-align: middle;" class="thUpTitle">エジェート</th><td style="vertical-align:middle;">@ViewBag.vAgentID  @ViewBag.vAgentName</td></tr>
+                            <tr><th style="width: 100px;vertical-align: middle;" class="thUpTitle">エジェート</th><td style="vertical-align:middle;">@Model.vAgentID  @Model.vDisplayName</td></tr>
                             <tr>
                                 <th style="width: 100px;vertical-align: middle;" class="thUpTitle">
                                     曜日
                                 </th>
                                 <td>
-                                    <label class="checkbox-inline"><input type="checkbox" class="chkweekAll" id="chkWeekAll" name="chkWeekAll" /> 全部</label>
-                                    <label class="checkbox-inline"><input type="checkbox" class="chkweek" id="chkSun" name="chkSun" value="0" /> 日曜日</label>
+                                    <label class="checkbox-inline"><input type="checkbox" class="chkweekAll" id="chkWeekAll" name="chkWeekAll" checked="" /> 全部</label>                                       
+                                        
+                                    @*<label class="checkbox-inline"> 
+                                    @Html.CheckBox("chkSun", new { @class = "chkweek", id = "chkSun",value="0",@checked=Model.sunShift==0?"":"checked" })日曜日</label>
+                                    <label class="checkbox-inline">
+                                        @Html.CheckBox("chkMon", new { @class = "chkweek", id = "chkMon", value = "1", @checked = Model.monShift == 0 ? "" : "checked" })月曜日</label>
+                                    <label class="checkbox-inline">
+                                        @Html.CheckBox("chkTue", new { @class = "chkweek", id = "chkTue", value = "2", @checked = Model.tueShift == 0 ? "" : "checked" })火曜日
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        @Html.CheckBox("chkWed", new { @class = "chkweek", id = "chkWed", value = "3", @checked = Model.wedShift == 0 ? "" : "checked" })水曜日
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        @Html.CheckBox("chkThur", new { @class = "chkweek", id = "chkThur", value = "4", @checked = Model.thurShift == 0 ? "" : "checked" })木曜日
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        @Html.CheckBox("chkFri", new { @class = "chkweek", id = "chkFri", value = "5", @checked = Model.friShift == 0 ? "" : "checked" })金曜日
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        @Html.CheckBox("chkSat", new { @class = "chkweek", id = "chkSat", value = "6", @checked = Model.satShift == 0 ? "" : "checked" })土曜日
+                                    </label>*@
+          
+                                    <label class="checkbox-inline"><input type="checkbox" class="chkweek" id="chkSun" name="chkSun" value="0" /> 月曜日</label>
                                     <label class="checkbox-inline"><input type="checkbox" class="chkweek" id="chkMon" name="chkMon" value="1" /> 月曜日</label>
                                     <label class="checkbox-inline"><input type="checkbox" class="chkweek" id="chkTue" name="chkTue" value="2" /> 火曜日</label>
                                     <label class="checkbox-inline"><input type="checkbox" class="chkweek" id="chkWed" name="chkWed" value="3" /> 水曜日</label>
@@ -97,7 +148,7 @@
                                 <td style="text-align:center">
                                     <input type="submit" value="保存" class="btn btn-primary" />
 
-                                    <a class="btn btn-primary" href="/agent/shiftAgentWeek">
+                                    <a class="btn btn-primary" href="~/agent/shiftAgentWeek">
                                         <i class="fa  fa-undo"></i><span> 戻る</span>
                                     </a>
                                 </td>

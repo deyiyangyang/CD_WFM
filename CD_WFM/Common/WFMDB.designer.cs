@@ -83,7 +83,6 @@ namespace WFM.Common
 		public WFMDBDataContext() : 
 				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString, mappingSource)
 		{
-            this.CommandTimeout = 360;
 			OnCreated();
 		}
 		
@@ -491,6 +490,13 @@ namespace WFM.Common
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), vTenantID, dtST, iShiftID, iSkillGroupID, iAggregationID);
 			return ((ISingleResult<tblChart>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.uspWFMSearchShiftAgentWeekByAgent")]
+		public ISingleResult<tblAgentWeekShift> uspWFMSearchShiftAgentWeekByAgent([global::System.Data.Linq.Mapping.ParameterAttribute(Name="IN_vAgentID", DbType="VarChar(32)")] string iN_vAgentID)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), iN_vAgentID);
+			return ((ISingleResult<tblAgentWeekShift>)(result.ReturnValue));
 		}
 	}
 	

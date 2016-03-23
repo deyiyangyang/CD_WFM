@@ -114,7 +114,26 @@ namespace WFM.Areas.Agent.Controllers
             GetShiftDDList("-1", false, true);
             ViewBag.vAgentID = vAgentID;
             ViewBag.vAgentName = vAgentName;
-            return View();
+            tblAgentWeekShift result = null;
+            using (WFMDBDataContext db = new WFMDBDataContext())
+            {
+               result= db.uspWFMSearchShiftAgentWeekByAgent(vAgentID).Single();
+            }
+            if (result.monShift != 0)
+                ViewBag.shiftID = result.monShift;
+            else if (result.tueShift != 0)
+                ViewBag.shiftID = result.tueShift;
+            else if (result.wedShift != 0)
+                ViewBag.shiftID = result.wedShift;
+            else if (result.thurShift != 0)
+                ViewBag.shiftID = result.thurShift;
+            else if (result.friShift != 0)
+                ViewBag.shiftID = result.friShift;
+            else if (result.satShift != 0)
+                ViewBag.shiftID = result.satShift;
+            else if (result.sunShift != 0)
+                ViewBag.shiftID = result.sunShift;
+            return View(result);
         }
 
 

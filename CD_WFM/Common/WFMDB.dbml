@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="NGCP0100" Class="WFMDBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="WebSettings" ConnectionString="Data Source=localhost;Initial Catalog=NGCP0100;User ID=sa" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="DefaultConnection" Provider="System.Data.SqlClient" />
+  <Connection Mode="WebSettings" ConnectionString="Data Source=localhost;Initial Catalog=NGCP0100;User ID=sa;Connect Timeout=600" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="DefaultConnection" Provider="System.Data.SqlClient" />
   <Table Name="dbo.tbCpfAgentDetailV3" Member="tbCpfAgentDetailV3">
     <Type Name="tbCpfAgentDetailV3">
       <Column Name="iAgentDetailV3" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -315,7 +315,7 @@
     </Type>
   </Table>
   <Table Name="" Member="tblAgentWeekShift">
-    <Type Name="tblAgentWeekShift">
+    <Type Name="tblAgentWeekShift" Id="ID3">
       <Column Name="vAgentID" Type="System.String" CanBeNull="false" />
       <Column Name="vDisplayName" Type="System.String" CanBeNull="false" />
       <Column Name="sunShift" Type="System.Int32" CanBeNull="false" />
@@ -724,5 +724,9 @@
     <Parameter Name="iSkillGroupID" Type="System.Int32" DbType="Int" />
     <Parameter Name="iAggregationID" Type="System.Int32" DbType="Int" />
     <ElementType IdRef="ID2" />
+  </Function>
+  <Function Name="dbo.uspWFMSearchShiftAgentWeekByAgent" Method="uspWFMSearchShiftAgentWeekByAgent">
+    <Parameter Name="IN_vAgentID" Parameter="iN_vAgentID" Type="System.String" DbType="VarChar(32)" />
+    <ElementType IdRef="ID3" />
   </Function>
 </Database>

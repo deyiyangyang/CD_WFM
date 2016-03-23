@@ -150,68 +150,69 @@
         </div>
         @Html.Partial("PagerHeader", (PagerDataModel)ViewBag.PagerDataModel)
 
-        <table class="table">
-            <tr>
-                <th>
-                    時間Type
-                </th>
+    <table class="table table-bordered table-striped table-hover table-condensed text-center">
+        <tr>
+            <th>
+                時間Type
+            </th>
+
+            @if (ViewBag.RadioChecked != "byAgregation")
+            {
                 <th>
                     局番グループ
                 </th>
-                @if (ViewBag.RadioChecked != "byAgregation")
-                {
-                    <th>
-                        スキルグループ
-                    </th>
-                }
-                @if (ViewBag.RadioChecked == "byAgregation")
-                {
-                    <th>
-                        スキルアグリゲーショ
-                    </th>
-                }
                 <th>
-                    実績着信数
+                    スキルグループ
                 </th>
+            }
+            @if (ViewBag.RadioChecked == "byAgregation")
+            {
                 <th>
-                    予測着信数
+                    スキルアグリゲーショ
                 </th>
-                <th>
-                    達成率
-                </th>
-            </tr>
+            }
+            <th>
+                実績着信数
+            </th>
+            <th>
+                予測着信数
+            </th>
+            <th>
+                達成率
+            </th>
+        </tr>
 
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.vDatepart)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.vCompany)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.vCompany2)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.iRealCountOfInCall)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.iPredictionCountOfInCall)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.vRate)
-                    </td>
-                </tr>
-            }
-            @if (Model.Count() <= 0)
-            {
-                <tr>
-                    <td colspan="10">
-                        @Html.Partial("NoResultFound")
-                    </td>
-                </tr>
-            }
-        </table>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.vDatepart)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.vCompany)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.vCompany2)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.iRealCountOfInCall)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.iPredictionCountOfInCall)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.vRate)
+                </td>
+            </tr>
+        }
+        @if (Model.Count() <= 0)
+        {
+            <tr>
+                <td colspan="10">
+                    @Html.Partial("NoResultFound")
+                </td>
+            </tr>
+        }
+    </table>
     }
 </section>

@@ -11,7 +11,7 @@
     </h1>
     <ol class="breadcrumb">
         <li><a href="@Url.Content("~/")"><i class="fa fa-home"></i>ホーム</a></li>
-        <li class="active"><a href="@Url.Content("~/manager/shift")">シフト情報</a></li>
+        <li class="active"><a href="@Url.Action("index","shift",new{area="manager"})">シフト情報</a></li>
     </ol>
 </section>
 
@@ -69,7 +69,7 @@
                             <th style="width: 100px;vertical-align: middle;" class="thUpTitle"></th>
                             <td style="text-align:center">
                                 <input type="submit" value="変更" class="btn btn-primary" />
-                                <a class="btn btn-primary" href="/Manager/shift">
+                                <a class="btn btn-primary" href="~/Manager/shift">
                                     <i class="fa  fa-undo"></i><span> 戻る</span>
                                 </a>
                             </td>
