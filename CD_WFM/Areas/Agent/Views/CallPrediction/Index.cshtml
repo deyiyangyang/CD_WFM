@@ -65,7 +65,7 @@
                 </td>
                 </tr>
             <tr>
-            <th class="thUpTitle  col-lg-1">普通日/締め日信頼></th>
+            <th class="thUpTitle  col-lg-1">普通日/締め日信頼</th>
             <td class="col-lg-6">
                 <label class="radio-inline">
                     <input type="radio" 　name="radCommonday" id="radCommondayType" value="1"> 普通日
@@ -90,7 +90,7 @@
     </div>
 </section>
 
-<div id="wfm" class="hidden">
+<div id="wfm" >
     <div class="col-md-12">
         <table class="table table-bordered">
             <tr>
@@ -129,18 +129,32 @@
             </tr>
             <tr>
                 <td style="text-align:center" colspan="2">
-                    <input type="submit" value="保存" class="btn btn-primary" />
+                    <input type="submit" onclick="Save();" value="保存" class="btn btn-primary" />
                 </td>
             </tr>
         </table>
     </div>
 
 </div>
+
 <script type="text/javascript">
     $(document).ready(function () {
 
         $('#txtTargetDate').datepicker(opt_datePicker);
         $('#txtTargetDate').datepicker('setDate', (new Date()).DateAdd('d', 1));
+        ShowLineChart("IboundCallPredictionChart", 0);
+        $('#txtTargetDate').change(function () {
+            $("#msg").html("");
+            ShowLineChart("IboundCallPredictionChart", 0);
+        });
+        $('#ddlShift').change(function () {
+            $("#msg").html("");
+            ShowLineChart("IboundCallPredictionChart", 0);
+        });
+        $('#Interval').change(function () {
+            $("#msg").html("");
+            ShowLineChart("IboundCallPredictionChart", 0);
+        });
         //$('#txtTargetDate').datepicker("option", 'maxDate', (new Date()).DateAdd('d', -1));
         $('#agentShift').bootstrapDualListbox({
             nonSelectedListLabel: '未選択',
@@ -207,28 +221,7 @@
             
         });
 
-        $("#Search").click(function () {
-            var vUrl = '@Url.Content("~/CallPrediction/Search_Ajax/")';
-            var ctx = $("#IboundCallPredictionChart").get(0).getContext("2d");
-            var myChart = new Chart(ctx);
-            var options = {
-                legendTemplate: "<table class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><tr><td style=\"background-color:<%=datasets[i].strokeColor%>;width:20px\"></td><%if(datasets[i].label){%><td><%=datasets[i].label%></td><%}%></tr><%}%></table>",
-                datasetFill: false
-            }
-            $.ajax({
-                url: vUrl,
-                data: { txtTargetDate: $("#txtTargetDate").val(), checkType: 1 },
-                dataType: "json",
-                type: "get",
-                beforeSend: function () { $("#msg").html("loading..."); },
-                success: function (data) {
-                    $("#msg").html("");
-                    
-                    var lineChart = myChart.Line(response, options);
-                }
-            });
-        });
-
+        
         function ShowLineChart(element, agentCount) {
             $("#canvas").html("");
             $("#canvas").html("<canvas id='IboundCallPredictionChart' class='col-lg-12' style='height:300px'></canvas>");
@@ -249,7 +242,7 @@
                 cache: false,
                 async: true,
                 url: url,
-                data: { txtTargetDate: $("#txtTargetDate").val(), ddlShift: $("#ddlShift").val(), Interval: 15, agentCount: agentCount },
+                data: { txtTargetDate: $("#txtTargetDate").val(), ddlShift: $("#ddlShift").val(), Interval: $("#Interval").val(), agentCount: agentCount },
                 dataType: "json",
                 type: "get",
 
@@ -264,4 +257,23 @@
             });
         }
     });
+
+    function Save() {
+        var vUrl = '@Url.Content("~/CallPrediction/UpdateAgentShift")';
+        $.ajax({
+            url: vUrl,
+            data: { txtTargetDate: $("#txtTargetDate").val(), ddlShift: $("#ddlShift").val(), agentShift: GetSelectedAgents() },
+            dataType: "json",
+            type: "post",
+            success: function (data) {
+                $.msg("保留しました");
+            }
+        });
+    }
+
+    function GetSelectedAgents()
+    {
+        var str = $("#bootstrap-duallistbox-selected-list_agentShift option").map(function () { return $(this).val(); }).get().join(",");
+        return str;
+    }
 </script>

@@ -20,10 +20,13 @@ namespace WFM.Areas.Agent.Controllers
         }
 
 
-        public JsonResult Search_Ajax(string txtTargetDate, string checkType)
+        public JsonResult UpdateAgentShift(string txtTargetDate, int ddlShift, string agentShift)
         {
-            LineChart line = new LineChart();
-            return this.Json(line, JsonRequestBehavior.AllowGet);
+            using (WFMDBDataContext db = new WFMDBDataContext())
+            {
+                db.uspWFMInsertOrUpdateShiftAgentSpecial(agentShift, DateTime.Parse(txtTargetDate), DateTime.Parse(txtTargetDate), ddlShift);
+            }
+            return this.Json(new { status="ok"}, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult LineChart(string txtTargetDate, int ddlShift, int Interval, int agentCount)
@@ -64,7 +67,7 @@ namespace WFM.Areas.Agent.Controllers
             if (cacheValue == null)
             {
                 WFMDBDataContext db = new WFMDBDataContext();
-                lstCalls = db.uspWFMGetMinInboundCall(this.TenantID, txtTargetDate, txtTargetDate, ddlShift, Interval, 0, 0).ToList();
+                lstCalls = db.uspWFMGetMinInboundCallPrediction(this.TenantID, txtTargetDate, txtTargetDate, ddlShift, Interval, 0, 0).ToList();
             }
             else
             {
@@ -74,13 +77,16 @@ namespace WFM.Areas.Agent.Controllers
             LineChart line = new LineChart();
             List<Dataset> datasets = new List<Dataset>();
             Dataset inCallDs = new Dataset();
+            Dataset zero = new Dataset();
             string lables = "";
             int[] datas = new int[lstCalls.Count];
+            int[] zeroDatas = new int[lstCalls.Count];
             int index = 0;
             foreach (var item in lstCalls)
             {
                 lables += "," + item.dtCreatedCall.ToString("HH:mm");
                 datas[index] = item.iCountOfInboundCall - agentCount;
+                zeroDatas[index] = 0;
                 index++;
             }
 
@@ -92,7 +98,15 @@ namespace WFM.Areas.Agent.Controllers
             inCallDs.pointColor = "rgba(151,187,205,1)";
             inCallDs.pointStrokeColor = "#fff";
             inCallDs.label = "着信数";
+
+            zero.data = zeroDatas;
+            zero.fillColor = "rgba(255,0,0,1)";
+            zero.strokeColor = "rgba(255,0,0,1)";
+            zero.pointColor = "rgba(255,0,0,1)";
+            zero.pointStrokeColor = "#FF0";
+            zero.label = "基准";
             datasets.Add(inCallDs);
+            datasets.Add(zero);
             line.datasets = datasets;
 
             return this.Json(line, JsonRequestBehavior.AllowGet);

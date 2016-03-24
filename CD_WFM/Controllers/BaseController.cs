@@ -469,7 +469,7 @@ namespace WFM.Controllers
                 if (!isShowDisplayName)
                     lstItem.Add(new SelectListItem { Text = item.vAgentID, Value = item.vAgentID, Selected = (item.vAgentID.Equals(strAgentID)) });
                 else
-                    lstItem.Add(new SelectListItem { Text = item.vAgentID + "_" + item.vDisplayName + shiftName, Disabled = !string.IsNullOrEmpty(shiftName), Value = item.vAgentID, Selected = (item.vAgentID.Equals(strAgentID)) });
+                    lstItem.Add(new SelectListItem { Text = item.vAgentID + "_" + item.vDisplayName + shiftName, Value = item.vAgentID, Selected = (item.vAgentID.Equals(strAgentID)) });
             }
             ViewData["lstAgent"] = lstItem;
         }
