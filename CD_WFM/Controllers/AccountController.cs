@@ -432,7 +432,7 @@ namespace WFM.Controllers
        public ActionResult ChangeTenant(string tenant)
        {
            Session["vTenantID"] = tenant;
-           return View();
+           return RedirectToAction("index", "home");
        }
 
         #region ヘルパー
