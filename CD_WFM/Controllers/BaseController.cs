@@ -420,6 +420,7 @@ namespace WFM.Controllers
             lstItem.Add(new SelectListItem { Text = "週別", Value = "ww", Selected = "ww".Equals(dateTypeValue) });
             ViewData["lstDateType"] = lstItem;
         }
+
         protected void GetAgentListWithShiftName(string strAgentID, bool hasExtraHeader, bool isShowDisplayName)
         {
             List<SelectListItem> lstItem = new List<SelectListItem>();
@@ -470,6 +471,60 @@ namespace WFM.Controllers
                     lstItem.Add(new SelectListItem { Text = item.vAgentID, Value = item.vAgentID, Selected = (item.vAgentID.Equals(strAgentID)) });
                 else
                     lstItem.Add(new SelectListItem { Text = item.vAgentID + "_" + item.vDisplayName + shiftName, Value = item.vAgentID, Selected = (item.vAgentID.Equals(strAgentID)) });
+            }
+            ViewData["lstAgent"] = lstItem;
+        }
+
+        protected void GetAgentListWithShiftNameForOneDay(DateTime dtDay,string currentShiftName, bool hasExtraHeader, bool isShowDisplayName)
+        {
+            List<SelectListItem> lstItem = new List<SelectListItem>();
+            List<tblWFMAgentAndShifName> lstAgent = new List<tblWFMAgentAndShifName>();
+            if (hasExtraHeader)
+            {
+                lstItem.Insert(0, new SelectListItem { Text = "指定なし", Value = "" });
+            }
+
+            using (WFMDBDataContext db = new WFMDBDataContext())
+            {
+                lstAgent = db.uspWFMGetAgentAndShiftNameForOneDay(this.TenantID, dtDay).ToList();
+            }
+
+            foreach (var item in lstAgent)
+            {
+                string shiftName = "";
+                if (!string.IsNullOrEmpty(item.vShiftName1))
+                {
+                    shiftName += "," + item.vShiftName1;
+                }
+                if (!string.IsNullOrEmpty(item.vShiftName2))
+                {
+                    shiftName += "," + item.vShiftName2;
+                }
+                if (!string.IsNullOrEmpty(item.vShiftName3))
+                {
+                    shiftName += "," + item.vShiftName3;
+                }
+                if (!string.IsNullOrEmpty(item.vShiftName4))
+                {
+                    shiftName += "," + item.vShiftName4;
+                }
+                if (!string.IsNullOrEmpty(item.vShiftName5))
+                {
+                    shiftName += "," + item.vShiftName5;
+                }
+                if (!string.IsNullOrEmpty(item.vShiftName6))
+                {
+                    shiftName += "," + item.vShiftName6;
+                }
+                if (!string.IsNullOrEmpty(shiftName))
+                {
+                    shiftName = " (" + shiftName.Substring(1) + ")";
+                }
+
+                if (!isShowDisplayName)
+                    lstItem.Add(new SelectListItem { Text = item.vAgentID, Value = item.vAgentID, Selected = (shiftName.Contains(currentShiftName)) });
+                else
+                    lstItem.Add(new SelectListItem { Text = item.vAgentID + "_" + item.vDisplayName + shiftName, Value = item.vAgentID, Selected = (shiftName.Contains(currentShiftName)) });
             }
             ViewData["lstAgent"] = lstItem;
         }

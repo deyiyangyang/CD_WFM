@@ -514,6 +514,7 @@
       <Column Name="dtTalkStart" Type="System.DateTime" CanBeNull="true" />
       <Column Name="dtDroppedCall" Type="System.DateTime" CanBeNull="true" />
       <Column Name="iHasTrans" Type="System.Int32" CanBeNull="true" />
+      <Column Member="vServerName" Type="System.String" CanBeNull="false" />
     </Type>
   </Table>
   <Table Name="" Member="tblAgentDetailV3">
@@ -543,6 +544,16 @@
       <Column Name="vTeanantSpeicalFlag" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="iDeleted" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="dtCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="" Member="tblSingleCallDetail">
+    <Type Name="tblSingleCallDetail" Id="ID4">
+      <Column Member="vFunction" Type="System.String" CanBeNull="false" />
+      <Column Member="dtStart" Type="System.DateTime" CanBeNull="false" />
+      <Column Member="dtEnd" Type="System.DateTime" CanBeNull="false" />
+      <Column Member="vAgentID" Type="System.String" CanBeNull="true" />
+      <Column Member="vAgentName" Type="System.String" CanBeNull="true" />
+      <Column Member="iAgentStatus" Type="System.Int32" CanBeNull="true" />
     </Type>
   </Table>
   <Function Name="dbo.uspWFMGetTenantName" Method="uspWFMGetTenantName">
@@ -728,5 +739,15 @@
   <Function Name="dbo.uspWFMSearchShiftAgentWeekByAgent" Method="uspWFMSearchShiftAgentWeekByAgent">
     <Parameter Name="IN_vAgentID" Parameter="iN_vAgentID" Type="System.String" DbType="VarChar(32)" />
     <ElementType IdRef="ID3" />
+  </Function>
+  <Function Name="dbo.uspWFMGetSingleCallDetail" Method="uspWFMGetSingleCallDetail">
+    <Parameter Name="iSessionprofileId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="vTenantID" Type="System.String" DbType="VarChar(32)" />
+    <ElementType IdRef="ID4" />
+  </Function>
+  <Function Name="dbo.uspWFMGetAgentAndShiftNameForOneDay" Method="uspWFMGetAgentAndShiftNameForOneDay">
+    <Parameter Name="vTenantID" Type="System.String" DbType="VarChar(32)" />
+    <Parameter Name="dtDay" Type="System.DateTime" DbType="DateTime" />
+    <ElementType IdRef="ID1" />
   </Function>
 </Database>

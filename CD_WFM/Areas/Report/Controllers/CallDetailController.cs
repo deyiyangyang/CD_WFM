@@ -112,7 +112,7 @@ namespace WFM.Areas.Report.Controllers
                 m_Sort = nSort;
 
                 if (string.IsNullOrEmpty(selectSkillGroup))
-                    lstData = SearchData(pageIndex, ddlPageSize, pageTotal, DateTime.Parse(dtStart), DateTime.Parse(dtEnd), vCalleeid,vCallerid, 0, isessionprofileidValue, iConntype.Value, iCompletedCall.Value,iQueCall.Value);
+                    lstData = SearchData(pageIndex, ddlPageSize, pageTotal, DateTime.Parse(dtStart), DateTime.Parse(dtEnd), vCalleeid, vCallerid, 0, isessionprofileidValue, iConntype.Value, iCompletedCall.Value, iQueCall.Value);
                 else
                     lstData = SearchData(pageIndex, ddlPageSize, pageTotal, DateTime.Parse(dtStart), DateTime.Parse(dtEnd), vCalleeid, vCallerid, int.Parse(selectSkillGroup), isessionprofileidValue, iConntype.Value, iCompletedCall.Value, iQueCall.Value);
 
@@ -129,10 +129,10 @@ namespace WFM.Areas.Report.Controllers
         }
 
         //検索処理
-        private List<tblCallDetailV3> SearchData(string pageIndex, string pageSize, string pageTotal, DateTime dtST, DateTime dtEnd, string vCalleeid, string vCallerid, int skillID,int isessionprofileid,int iConntype, int iCompletedCall,int iQueCall)
+        private List<tblCallDetailV3> SearchData(string pageIndex, string pageSize, string pageTotal, DateTime dtST, DateTime dtEnd, string vCalleeid, string vCallerid, int skillID, int isessionprofileid, int iConntype, int iCompletedCall, int iQueCall)
         {
-            AppLog.WriteLog(string.Format("CallDetailController SearchData paramter is pageIndex:{0},pageSize:{1},pageTotal:{2},dtST:{3},dtEnd:{4},vCalleeid:{5},skillID{6}", pageIndex,pageSize, pageTotal, dtST.ToString(AppConst.Const_Format_YMD)
-                ,dtEnd.ToString(AppConst.Const_Format_YMD),vCalleeid,skillID.ToString()));
+            AppLog.WriteLog(string.Format("CallDetailController SearchData paramter is pageIndex:{0},pageSize:{1},pageTotal:{2},dtST:{3},dtEnd:{4},vCalleeid:{5},skillID{6}", pageIndex, pageSize, pageTotal, dtST.ToString(AppConst.Const_Format_YMD)
+                , dtEnd.ToString(AppConst.Const_Format_YMD), vCalleeid, skillID.ToString()));
             List<tblCallDetailV3> result = new List<tblCallDetailV3>();
 
             int currentPageIndex = m_CurPageIndex;
@@ -165,6 +165,17 @@ namespace WFM.Areas.Report.Controllers
             }
 
             return result;
+        }
+
+
+        public ActionResult GetSingleCallDetail(int? isessionprofileid,string vServerName)
+        {
+            ViewBag.iSessionID = isessionprofileid.Value;
+            using (WFMDBDataContext db = new WFMDBDataContext())
+            {
+                ISingleResult<tblSingleCallDetail> results = db.uspWFMGetSingleCallDetail(isessionprofileid, vServerName);
+                return PartialView("SignleCallDetail",results.ToList());
+            }
         }
 
         #region ソート

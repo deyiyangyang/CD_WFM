@@ -310,6 +310,14 @@ namespace WFM.Common
 			}
 		}
 		
+		public System.Data.Linq.Table<tblSingleCallDetail> tblSingleCallDetail
+		{
+			get
+			{
+				return this.GetTable<tblSingleCallDetail>();
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.uspWFMGetTenantName")]
 		public ISingleResult<uspWFMGetTenantNameResult> uspWFMGetTenantName([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string vTenantID)
 		{
@@ -497,6 +505,20 @@ namespace WFM.Common
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), iN_vAgentID);
 			return ((ISingleResult<tblAgentWeekShift>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.uspWFMGetSingleCallDetail")]
+		public ISingleResult<tblSingleCallDetail> uspWFMGetSingleCallDetail([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> iSessionprofileId, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string vTenantID)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), iSessionprofileId, vTenantID);
+			return ((ISingleResult<tblSingleCallDetail>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.uspWFMGetAgentAndShiftNameForOneDay")]
+		public ISingleResult<tblWFMAgentAndShifName> uspWFMGetAgentAndShiftNameForOneDay([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string vTenantID, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="DateTime")] System.Nullable<System.DateTime> dtDay)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), vTenantID, dtDay);
+			return ((ISingleResult<tblWFMAgentAndShifName>)(result.ReturnValue));
 		}
 	}
 	
@@ -10758,6 +10780,8 @@ namespace WFM.Common
 		
 		private System.Nullable<int> _iHasTrans;
 		
+		private string _vServerName;
+		
 		public tblCallDetailV3()
 		{
 		}
@@ -10998,6 +11022,22 @@ namespace WFM.Common
 				if ((this._iHasTrans != value))
 				{
 					this._iHasTrans = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_vServerName", CanBeNull=false)]
+		public string vServerName
+		{
+			get
+			{
+				return this._vServerName;
+			}
+			set
+			{
+				if ((this._vServerName != value))
+				{
+					this._vServerName = value;
 				}
 			}
 		}
@@ -11397,6 +11437,123 @@ namespace WFM.Common
 			if ((this.PropertyChanged != null))
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="")]
+	public partial class tblSingleCallDetail
+	{
+		
+		private string _vFunction;
+		
+		private System.DateTime _dtStart;
+		
+		private System.DateTime _dtEnd;
+		
+		private string _vAgentID;
+		
+		private string _vAgentName;
+		
+		private System.Nullable<int> _iAgentStatus;
+		
+		public tblSingleCallDetail()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_vFunction", CanBeNull=false)]
+		public string vFunction
+		{
+			get
+			{
+				return this._vFunction;
+			}
+			set
+			{
+				if ((this._vFunction != value))
+				{
+					this._vFunction = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dtStart")]
+		public System.DateTime dtStart
+		{
+			get
+			{
+				return this._dtStart;
+			}
+			set
+			{
+				if ((this._dtStart != value))
+				{
+					this._dtStart = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dtEnd")]
+		public System.DateTime dtEnd
+		{
+			get
+			{
+				return this._dtEnd;
+			}
+			set
+			{
+				if ((this._dtEnd != value))
+				{
+					this._dtEnd = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_vAgentID")]
+		public string vAgentID
+		{
+			get
+			{
+				return this._vAgentID;
+			}
+			set
+			{
+				if ((this._vAgentID != value))
+				{
+					this._vAgentID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_vAgentName")]
+		public string vAgentName
+		{
+			get
+			{
+				return this._vAgentName;
+			}
+			set
+			{
+				if ((this._vAgentName != value))
+				{
+					this._vAgentName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_iAgentStatus")]
+		public System.Nullable<int> iAgentStatus
+		{
+			get
+			{
+				return this._iAgentStatus;
+			}
+			set
+			{
+				if ((this._iAgentStatus != value))
+				{
+					this._iAgentStatus = value;
+				}
 			}
 		}
 	}
