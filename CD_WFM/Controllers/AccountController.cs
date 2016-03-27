@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using WFM.Models;
+using WFM.Common;
 
 namespace WFM.Controllers
 {
@@ -432,6 +433,11 @@ namespace WFM.Controllers
        public ActionResult ChangeTenant(string tenant)
        {
            Session["vTenantID"] = tenant;
+           using (WFMDBDataContext db = new WFMDBDataContext())
+           {
+               db.uspWFMCreateDefaultShift(tenant);
+               
+           }
            return RedirectToAction("index", "home");
        }
 

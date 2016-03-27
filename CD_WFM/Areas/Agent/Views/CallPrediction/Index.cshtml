@@ -145,7 +145,7 @@
 
         $('#txtTargetDate').change(function () {
             $("#msg").html("");
-            ShowLineChart("IboundCallPredictionChart", 0);
+            ShowLineChart("IboundCallPredictionChart", 0,true);
         });
         $('#ddlShift').change(function () {
             var vUrl = "@Html.Raw(Url.Action("Index"))";
@@ -216,7 +216,7 @@
                 success: function (data) {
                     $("#msg").html("");
                     $("#wfm").removeClass("hidden");
-                    ShowLineChart("IboundCallPredictionChart", 0);
+                    ShowLineChart("IboundCallPredictionChart", 0,true);
                 }
             });
 

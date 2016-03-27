@@ -23,9 +23,11 @@ namespace WFM.Areas.Data.Controllers
             {
                 using (WFMDBDataContext db = new WFMDBDataContext())
                 {
-                    db.uspRptForAgentDetailV3OneDay(this.TenantID, null, null);
-                    db.uspRptForCallDetailV3OneDay(this.TenantID, null, null);
-                    db.uspWFMUpdateOrInsertDataSynchro(this.TenantID);
+                    db.uspWFMDataSynchro(this.TenantID, null, null);
+                    //db.uspRptForAgentDetailV3OneDay(this.TenantID, null, null);
+                    //db.uspRptForCallDetailV3OneDay(this.TenantID, null, null);
+                    
+                    //db.uspWFMUpdateOrInsertDataSynchro(this.TenantID);
                 }
 
                 return Json(new { StatusCode = AppConst.Enum_JsonStatus.Edit }, JsonRequestBehavior.AllowGet);

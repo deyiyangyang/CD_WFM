@@ -514,7 +514,7 @@
       <Column Name="dtTalkStart" Type="System.DateTime" CanBeNull="true" />
       <Column Name="dtDroppedCall" Type="System.DateTime" CanBeNull="true" />
       <Column Name="iHasTrans" Type="System.Int32" CanBeNull="true" />
-      <Column Member="vServerName" Type="System.String" CanBeNull="false" />
+      <Column Name="vServerName" Type="System.String" CanBeNull="false" />
     </Type>
   </Table>
   <Table Name="" Member="tblAgentDetailV3">
@@ -548,12 +548,12 @@
   </Table>
   <Table Name="" Member="tblSingleCallDetail">
     <Type Name="tblSingleCallDetail" Id="ID4">
-      <Column Member="vFunction" Type="System.String" CanBeNull="false" />
-      <Column Member="dtStart" Type="System.DateTime" CanBeNull="false" />
-      <Column Member="dtEnd" Type="System.DateTime" CanBeNull="false" />
-      <Column Member="vAgentID" Type="System.String" CanBeNull="true" />
-      <Column Member="vAgentName" Type="System.String" CanBeNull="true" />
-      <Column Member="iAgentStatus" Type="System.Int32" CanBeNull="true" />
+      <Column Name="vFunction" Type="System.String" CanBeNull="false" />
+      <Column Name="dtStart" Type="System.DateTime" CanBeNull="false" />
+      <Column Name="dtEnd" Type="System.DateTime" CanBeNull="false" />
+      <Column Name="vAgentID" Type="System.String" CanBeNull="true" />
+      <Column Name="vAgentName" Type="System.String" CanBeNull="true" />
+      <Column Name="iAgentStatus" Type="System.Int32" CanBeNull="true" />
     </Type>
   </Table>
   <Function Name="dbo.uspWFMGetTenantName" Method="uspWFMGetTenantName">
@@ -740,14 +740,24 @@
     <Parameter Name="IN_vAgentID" Parameter="iN_vAgentID" Type="System.String" DbType="VarChar(32)" />
     <ElementType IdRef="ID3" />
   </Function>
-  <Function Name="dbo.uspWFMGetSingleCallDetail" Method="uspWFMGetSingleCallDetail">
-    <Parameter Name="iSessionprofileId" Type="System.Int32" DbType="Int" />
-    <Parameter Name="vTenantID" Type="System.String" DbType="VarChar(32)" />
-    <ElementType IdRef="ID4" />
-  </Function>
   <Function Name="dbo.uspWFMGetAgentAndShiftNameForOneDay" Method="uspWFMGetAgentAndShiftNameForOneDay">
     <Parameter Name="vTenantID" Type="System.String" DbType="VarChar(32)" />
     <Parameter Name="dtDay" Type="System.DateTime" DbType="DateTime" />
     <ElementType IdRef="ID1" />
+  </Function>
+  <Function Name="dbo.uspWFMGetSingleCallDetail" Method="uspWFMGetSingleCallDetail">
+    <Parameter Name="iSessionprofileId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="vServerName" Type="System.String" DbType="VarChar(32)" />
+    <ElementType IdRef="ID4" />
+  </Function>
+  <Function Name="dbo.uspWFMDataSynchro" Method="uspWFMDataSynchro">
+    <Parameter Name="vTenantID" Type="System.String" DbType="VarChar(32)" />
+    <Parameter Name="dtST" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="dtEnd" Type="System.DateTime" DbType="DateTime" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.uspWFMCreateDefaultShift" Method="uspWFMCreateDefaultShift">
+    <Parameter Name="vTenantID" Type="System.String" DbType="VarChar(32)" />
+    <Return Type="System.Int32" />
   </Function>
 </Database>

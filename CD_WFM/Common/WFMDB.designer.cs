@@ -507,18 +507,32 @@ namespace WFM.Common
 			return ((ISingleResult<tblAgentWeekShift>)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.uspWFMGetSingleCallDetail")]
-		public ISingleResult<tblSingleCallDetail> uspWFMGetSingleCallDetail([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> iSessionprofileId, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string vTenantID)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), iSessionprofileId, vTenantID);
-			return ((ISingleResult<tblSingleCallDetail>)(result.ReturnValue));
-		}
-		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.uspWFMGetAgentAndShiftNameForOneDay")]
 		public ISingleResult<tblWFMAgentAndShifName> uspWFMGetAgentAndShiftNameForOneDay([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string vTenantID, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="DateTime")] System.Nullable<System.DateTime> dtDay)
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), vTenantID, dtDay);
 			return ((ISingleResult<tblWFMAgentAndShifName>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.uspWFMGetSingleCallDetail")]
+		public ISingleResult<tblSingleCallDetail> uspWFMGetSingleCallDetail([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> iSessionprofileId, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string vServerName)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), iSessionprofileId, vServerName);
+			return ((ISingleResult<tblSingleCallDetail>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.uspWFMDataSynchro")]
+		public int uspWFMDataSynchro([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string vTenantID, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="DateTime")] System.Nullable<System.DateTime> dtST, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="DateTime")] System.Nullable<System.DateTime> dtEnd)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), vTenantID, dtST, dtEnd);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.uspWFMCreateDefaultShift")]
+		public int uspWFMCreateDefaultShift([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string vTenantID)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), vTenantID);
+			return ((int)(result.ReturnValue));
 		}
 	}
 	
