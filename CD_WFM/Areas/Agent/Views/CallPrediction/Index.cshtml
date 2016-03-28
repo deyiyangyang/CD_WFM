@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "呼量予測";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script src="@Url.Content("~/Scripts/Chart.js")" type="text/javascript"></script>
@@ -17,7 +17,7 @@
     </ol>
 </section>
 <section class="content">
-    <div class="col-lg-12">
+    <div class="col-lg-12" style="padding-top:20px">
         <table class="table table-bordered">
             <tr>
                 <th  class="thUpTitle col-lg-1">
@@ -45,17 +45,17 @@
                 <td class="col-lg-6">
 
                     <label class="radio-inline">
-                        <input type="radio" 　name="weekOrweekendDay" id="radWeekdayType" value="1"> 曜日間
+                        <input type="radio" 　name="weekOrweekendDay" id="radWeekdayType" value="1" disabled> 曜日間
                     </label>
                     <label class="radio-inline">
-                        <input type="radio" 　name="weekOrweekendDay" id="radWeekendDayType" value="1"> 休日
+                        <input type="radio" 　name="weekOrweekendDay" id="radWeekendDayType" value="1" disabled> 休日
                     </label>
 
                     <label class="radio-inline">
-                        <input type="radio" 　name="radWeekendday" id="radWeekenddayBefore" value="1"> 休日前
+                        <input type="radio" 　name="radWeekendday" id="radWeekenddayBefore" value="1" disabled> 休日前
                     </label>
                     <label class="radio-inline">
-                        <input type="radio" 　name="radWeekendday" id="radWeekenddayAfter" value="1"> 休日後
+                        <input type="radio" 　name="radWeekendday" id="radWeekenddayAfter" value="1" disabled> 休日後
                     </label>
                 </td>
                 <th class="thUpTitle  col-lg-1">係数</th>
@@ -67,18 +67,18 @@
             <tr>
             <th class="thUpTitle  col-lg-1">普通日/締め日信頼</th>
             <td class="col-lg-6">
-                <label class="radio-inline">
-                    <input type="radio" 　name="radCommonday" id="radCommondayType" value="1"> 普通日
+                <label class="radio-inline ">
+                    <input type="radio" 　name="radCommonday" id="radCommondayType" value="1" disabled> 普通日
                 </label>
                 <label class="radio-inline">
-                    <input type="radio" 　name="radCommonday" id="radAuditingDayType" value="1"> 締め日
+                    <input type="radio" 　name="radCommonday" id="radAuditingDayType" value="1" disabled> 締め日
                 </label>
 
                 <label class="radio-inline">
-                    <input type="radio" 　name="radAuditingDay" id="radAuditingDayBefore" value="1"> 締め日前
+                    <input type="radio" 　name="radAuditingDay" id="radAuditingDayBefore" value="1" disabled> 締め日前
                 </label>
                 <label class="radio-inline">
-                    <input type="radio" 　name="radAuditingDay" id="radAuditingDayAfter" value="1"> 締め日後
+                    <input type="radio" 　name="radAuditingDay" id="radAuditingDayAfter" value="1" disabled> 締め日後
                 </label>
             </td>
             <th class="thUpTitle  col-lg-1">係数</th>
@@ -88,54 +88,56 @@
             </tr>
         </table>
     </div>
+    <div id="wfm">
+        <div class="col-md-12">
+            <table class="table table-bordered">
+                <tr>
+                    <th class="col-md-1 thUpTitle">シフト</th>
+                    <td class="col-md-2">
+                        @Html.DropDownList("ddlShift", (List<SelectListItem>)ViewData["lstShift"], new { @class = "form-control" })
+                    </td>
+                    <th class="col-md-1 thUpTitle">
+                        間隔
+                    </th>
+                    <td class="col-md-2">
+                        <select id="Interval" name="Interval" class="disabled">
+                            <option value="1">1分</option>
+                            <option value="5">5分</option>
+                            <option value="10">10分</option>
+                            <option value="15" selected>15分</option>
+                            <option value="30">30分</option>
+                            <option value="60">60分</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class=" col-lg-11" id="canvas">
+            <canvas id="IboundCallPredictionChart" class=" col-lg-12" style="height:300px"></canvas>
+        </div>
+        <div id="IboundCallPredictionChartLegend" class=" col-lg-1"></div>
+
+        <div class="col-md-12">
+            <table class="table table-bordered">
+                <tr>
+                    <th style="width: 100px;vertical-align: middle;" class="thUpTitle">
+                        エージェントシフト
+                    </th>
+                    <td>@Html.ListBox("agentShift", (List<SelectListItem>)ViewData["lstAgent"], new { style = "height:450px" })</td>
+                </tr>
+                <tr>
+                    <td style="text-align:center" colspan="2">
+                        <input type="submit" onclick="Save();" value="保存" class="btn btn-primary" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+
 </section>
 
-<div id="wfm" >
-    <div class="col-md-12">
-        <table class="table table-bordered">
-            <tr>
-                <th class="col-md-1 thUpTitle">シフト</th>
-                <td class="col-md-2">
-                    @Html.DropDownList("ddlShift", (List<SelectListItem>)ViewData["lstShift"], new { @class = "form-control" })
-                </td>
-                <th class="col-md-1 thUpTitle">
-                    間隔
-                </th>
-                <td class="col-md-2">
-                    <select id="Interval" name="Interval" class="disabled">
-                        <option value="1">1分</option>
-                        <option value="5">5分</option>
-                        <option value="10" >10分</option>
-                        <option value="15" selected>15分</option>
-                        <option value="30">30分</option>
-                        <option value="60">60分</option>
-                    </select>
-                </td>
-            </tr>
-        </table>
-    </div>
-    <div class=" col-lg-11" id="canvas">
-        <canvas id="IboundCallPredictionChart" class=" col-lg-12" style="height:300px"></canvas>
-    </div>
-    <div id="IboundCallPredictionChartLegend" class=" col-lg-1"></div>
 
-    <div class="col-md-12">
-        <table class="table table-bordered">
-            <tr>
-                <th style="width: 100px;vertical-align: middle;" class="thUpTitle">
-                    エージェントシフト
-                </th>
-                <td>@Html.ListBox("agentShift", (List<SelectListItem>)ViewData["lstAgent"], new { style = "height:450px" })</td>
-            </tr>
-            <tr>
-                <td style="text-align:center" colspan="2">
-                    <input type="submit" onclick="Save();" value="保存" class="btn btn-primary" />
-                </td>
-            </tr>
-        </table>
-    </div>
-
-</div>
 
 <script type="text/javascript">
     $(document).ready(function () {
@@ -150,8 +152,6 @@
         $('#ddlShift').change(function () {
             var vUrl = "@Html.Raw(Url.Action("Index"))";
             location.href = vUrl + "?currentShiftID=" + $('#ddlShift').val();
-            //$("#msg").html("");
-            //ShowLineChart("IboundCallPredictionChart", 0);
         });
         $('#Interval').change(function () {
             var agentCount = $('#bootstrap-duallistbox-selected-list_agentShift option').size();
@@ -172,37 +172,36 @@
             ShowLineChart("IboundCallPredictionChart", agentCount,false);
         });
 
-        //休日checked
-        $("#radWeekendDayType").click(function () {
-            if ($(this).attr("checked") == "checked") {
-                $("#radWeekenddayBefore").css("disabled", "disabled");
-                $("#radWeekenddayAfter").css("disabled", "disabled");
-            }
-        });
+        ////休日checked
 
-        // 曜日間 checked
-        $("#radWeekdayType").click(function () {
-            if ($(this).attr("checked") == "checked") {
-                $("#radWeekenddayBefore").css("disabled", "");
-                $("#radWeekenddayAfter").css("disabled", "");
-            }
-        });
+        //$("#radWeekendDayType").on("ifChecked", function () {
+        //    $("#radWeekenddayBefore").css("disabled", "disabled");
+        //    $("#radWeekenddayAfter").css("disabled", "disabled");
+        //});
 
-        //締め日checked
-        $("#radAuditingDayType").click(function () {
-            if ($(this).attr("checked") == "checked") {
-                $("#radAuditingDayBefore").css("disabled", "disabled");
-                $("#radAuditingDayAfter").css("disabled", "disabled");
-            }
-        });
+        //// 曜日間 checked
+        //$("#radWeekdayType").click(function () {
+        //    if ($(this).attr("checked") == "checked") {
+        //        $("#radWeekenddayBefore").css("disabled", "");
+        //        $("#radWeekenddayAfter").css("disabled", "");
+        //    }
+        //});
 
-        // 普通日checked
-        $("#radCommondayType").click(function () {
-            if ($(this).attr("checked") == "checked") {
-                $("#radAuditingDayBefore").css("disabled", "");
-                $("#radAuditingDayAfter").css("disabled", "");
-            }
-        });
+        ////締め日checked
+        //$("#radAuditingDayType").click(function () {
+        //    if ($(this).attr("checked") == "checked") {
+        //        $("#radAuditingDayBefore").css("disabled", "disabled");
+        //        $("#radAuditingDayAfter").css("disabled", "disabled");
+        //    }
+        //});
+
+        //// 普通日checked
+        //$("#radCommondayType").click(function () {
+        //    if ($(this).attr("checked") == "checked") {
+        //        $("#radAuditingDayBefore").css("disabled", "");
+        //        $("#radAuditingDayAfter").css("disabled", "");
+        //    }
+        //});
 
         //予測 start
         $("#callPredict").click(function () {

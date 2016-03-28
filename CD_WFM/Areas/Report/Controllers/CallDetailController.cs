@@ -174,7 +174,7 @@ namespace WFM.Areas.Report.Controllers
             using (WFMDBDataContext db = new WFMDBDataContext())
             {
                 ISingleResult<tblSingleCallDetail> results = db.uspWFMGetSingleCallDetail(isessionprofileid, vServerName);
-                return PartialView("SignleCallDetail",results.ToList());
+                return PartialView("SignleCallDetail", results.ToList());
             }
         }
 
