@@ -43,55 +43,59 @@
                 <h3 class="box-title">シフト</h3>
             </div>
             <div class="box-body">
-                <table class="table table-bordered table-hover" style="margin-bottom: 0px;width:auto;">
-                    <tr>
-                        <th style="text-align: center; width: 120px;vertical-align:middle;">
-                            @*@Html.DisplayNameFor(model => model.vShiftName)*@
-                            シフト名
-                        </th>
-                        <th style="text-align: center; width: 120px;vertical-align:middle;">
-                            @*@Html.DisplayNameFor(model => model.vStartTime)*@
-                            開始時間
-                        </th>
-                        <th style="text-align: center; width: 120px;vertical-align:middle;">
+                <div class="row">
+                    <div class="col-md-7">
+                        <table class="table table-bordered table-hover text-center" style="margin-bottom: 0px;width:auto;">
+                            <tr>
+                                <th class="col-md-1">
+                                    @*@Html.DisplayNameFor(model => model.vShiftName)*@
+                                    シフト名
+                                </th>
+                                <th class="col-md-1">
+                                    @*@Html.DisplayNameFor(model => model.vStartTime)*@
+                                    開始時間
+                                </th>
+                                <th class="col-md-1">
 
-                            @*@Html.DisplayNameFor(model => model.vEndTime)*@
-                            終了時間
-                        </th>
-                        <th></th>
-                    </tr>
+                                    @*@Html.DisplayNameFor(model => model.vEndTime)*@
+                                    終了時間
+                                </th>
+                                <th class="col-md-1">変更</th>
+                            </tr>
 
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.vShiftName)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.vStartTime)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.vEndTime)
-                            </td>
-                            <td>
-                               
-                                <a class="btn btn-app" href="~/manager/Shift/Edit/@item.iShiftID">
-                                    <i class="fa fa-edit"></i>
-                                </a>
-                            </td>
-                        </tr>
-                    }
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.vShiftName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.vStartTime)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.vEndTime)
+                                    </td>
+                                    <td>
 
-                    @if (Model.Count() <= 0)
-                    {
-                        <tr>
-                            <td colspan="10">
-                                @Html.Partial("NoResultFound")
-                            </td>
-                        </tr>
-                    }
+                                        <a class="btn btn-app" href="~/manager/Shift/Edit/@item.iShiftID">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
 
-                </table>
+                            @if (Model.Count() <= 0)
+                            {
+                                <tr>
+                                    <td colspan="4">
+                                        @Html.Partial("NoResultFound")
+                                    </td>
+                                </tr>
+                            }
+
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     }

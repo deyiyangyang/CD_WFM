@@ -17,124 +17,137 @@
     </ol>
 </section>
 <section class="content">
-    <div class="col-lg-12" style="padding-top:20px">
-        <table class="table table-bordered">
-            <tr>
-                <th  class="thUpTitle col-lg-1">
-                    データ由来
-                </th>
-                <td class="col-lg-6">
-                    <select id="dataSouceType" name="dataSouceType">
-                        <option value="1">週平均</option>
-                        <option value="2">月平均</option>
-                        <option value="3">週土日外平均</option>
-                        <option value="4">月間土日平均</option>
-                        <option value="5">月間曜日平均</option>
-                    </select>
-                </td>
-                <th class="thUpTitle  col-lg-1">
-                    予測日付
-                </th>
-                <td colspan="2" class="col-lg-3">
-                    @Html.TextBox("txtTargetDate", null, new { maxLength = "10", @readonly = "readonly", style = "width:110px;readonly;margin-right:5px;", @class = "form-control" })
-                </td>
-                
-            </tr>
-            <tr>
-                <th class="thUpTitle  col-lg-1">曜日間/休日信頼</th>
-                <td class="col-lg-6">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="box">
+                <table class="table table-bordered">
+                    <tr>
+                        <th class="thUpTitle col-lg-1">
+                            データ由来
+                        </th>
+                        <td class="col-lg-6">
+                            <select id="dataSouceType" name="dataSouceType">
+                                <option value="1">週平均</option>
+                                <option value="2">月平均</option>
+                                <option value="3">週土日外平均</option>
+                                <option value="4">月間土日平均</option>
+                                <option value="5">月間曜日平均</option>
+                            </select>
+                        </td>
+                        <th class="thUpTitle  col-lg-1">
+                            予測日付
+                        </th>
+                        <td colspan="2" class="col-lg-3">
+                            @Html.TextBox("txtTargetDate", null, new { maxLength = "10", @readonly = "readonly", style = "width:110px;readonly;margin-right:5px;", @class = "form-control" })
+                        </td>
 
-                    <label class="radio-inline">
-                        <input type="radio" 　name="weekOrweekendDay" id="radWeekdayType" value="1" disabled> 曜日間
-                    </label>
-                    <label class="radio-inline">
-                        <input type="radio" 　name="weekOrweekendDay" id="radWeekendDayType" value="1" disabled> 休日
-                    </label>
+                    </tr>
+                    <tr>
+                        <th class="thUpTitle  col-lg-1">曜日間/休日信頼</th>
+                        <td class="col-lg-6">
 
-                    <label class="radio-inline">
-                        <input type="radio" 　name="radWeekendday" id="radWeekenddayBefore" value="1" disabled> 休日前
-                    </label>
-                    <label class="radio-inline">
-                        <input type="radio" 　name="radWeekendday" id="radWeekenddayAfter" value="1" disabled> 休日後
-                    </label>
-                </td>
-                <th class="thUpTitle  col-lg-1">係数</th>
-                <td class="col-lg-1"><input type="text" id="factor1" value="1" /></td>
-                <td class="col-lg-2" rowspan="2">
-                    <button type="button" id="callPredict" name="callPredict" class="btn btn-primary"><i class="fa fa-search"></i> 予測</button>
-                </td>
-                </tr>
-            <tr>
-            <th class="thUpTitle  col-lg-1">普通日/締め日信頼</th>
-            <td class="col-lg-6">
-                <label class="radio-inline ">
-                    <input type="radio" 　name="radCommonday" id="radCommondayType" value="1" disabled> 普通日
-                </label>
-                <label class="radio-inline">
-                    <input type="radio" 　name="radCommonday" id="radAuditingDayType" value="1" disabled> 締め日
-                </label>
+                            <label class="radio-inline">
+                                <input type="radio" 　name="weekOrweekendDay" id="radWeekdayType" value="1" disabled> 曜日間
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" 　name="weekOrweekendDay" id="radWeekendDayType" value="1" disabled> 休日
+                            </label>
 
-                <label class="radio-inline">
-                    <input type="radio" 　name="radAuditingDay" id="radAuditingDayBefore" value="1" disabled> 締め日前
-                </label>
-                <label class="radio-inline">
-                    <input type="radio" 　name="radAuditingDay" id="radAuditingDayAfter" value="1" disabled> 締め日後
-                </label>
-            </td>
-            <th class="thUpTitle  col-lg-1">係数</th>
-            <td class="col-lg-1"><input type="text" id="factor2" value="1" /></td>
+                            <label class="radio-inline">
+                                <input type="radio" 　name="radWeekendday" id="radWeekenddayBefore" value="1" disabled> 休日前
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" 　name="radWeekendday" id="radWeekenddayAfter" value="1" disabled> 休日後
+                            </label>
+                        </td>
+                        <th class="thUpTitle  col-lg-1">係数</th>
+                        <td class="col-lg-1"><input type="text" id="factor1" value="1" /></td>
+                        <td class="col-lg-2" rowspan="2">
+                            <button type="button" id="callPredict" name="callPredict" class="btn btn-primary"><i class="fa fa-search"></i> 予測</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="thUpTitle  col-lg-1">普通日/締め日信頼</th>
+                        <td class="col-lg-6">
+                            <label class="radio-inline ">
+                                <input type="radio" 　name="radCommonday" id="radCommondayType" value="1" disabled> 普通日
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" 　name="radCommonday" id="radAuditingDayType" value="1" disabled> 締め日
+                            </label>
+
+                            <label class="radio-inline">
+                                <input type="radio" 　name="radAuditingDay" id="radAuditingDayBefore" value="1" disabled> 締め日前
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" 　name="radAuditingDay" id="radAuditingDayAfter" value="1" disabled> 締め日後
+                            </label>
+                        </td>
+                        <th class="thUpTitle  col-lg-1">係数</th>
+                        <td class="col-lg-1"><input type="text" id="factor2" value="1" /></td>
 
 
-            </tr>
-        </table>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div id="wfm">
+            <div class="col-md-12">
+                <div class="box">
+                    <div class="box-header with-border">
+                        <table class="table table-bordered">
+                            <tr>
+                                <th class="col-md-1 thUpTitle">シフト</th>
+                                <td class="col-md-2">
+                                    @Html.DropDownList("ddlShift", (List<SelectListItem>)ViewData["lstShift"], new { @class = "form-control" })
+                                </td>
+                                <th class="col-md-1 thUpTitle">
+                                    間隔
+                                </th>
+                                <td class="col-md-2">
+                                    <select id="Interval" name="Interval" class="disabled">
+                                        <option value="1">1分</option>
+                                        <option value="5">5分</option>
+                                        <option value="10">10分</option>
+                                        <option value="15" selected>15分</option>
+                                        <option value="30">30分</option>
+                                        <option value="60">60分</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="box-body">
+                        <div class="row">
+                            <div class=" col-md-11" id="canvas">
+                                <canvas id="IboundCallPredictionChart" class=" col-md-12" style="height:300px"></canvas>
+                            </div>
+                            <div id="IboundCallPredictionChartLegend" class=" col-md-1"></div>
+                            <div class="col-md-12">
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <th style="width: 100px;vertical-align: middle;" class="thUpTitle">
+                                            エージェントシフト
+                                        </th>
+                                        <td>@Html.ListBox("agentShift", (List<SelectListItem>)ViewData["lstAgent"], new { style = "height:450px" })</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:center" colspan="2">
+                                            <input type="submit" onclick="Save();" value="保存" class="btn btn-primary" />
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+
+        </div>
     </div>
-    <div id="wfm">
-        <div class="col-md-12">
-            <table class="table table-bordered">
-                <tr>
-                    <th class="col-md-1 thUpTitle">シフト</th>
-                    <td class="col-md-2">
-                        @Html.DropDownList("ddlShift", (List<SelectListItem>)ViewData["lstShift"], new { @class = "form-control" })
-                    </td>
-                    <th class="col-md-1 thUpTitle">
-                        間隔
-                    </th>
-                    <td class="col-md-2">
-                        <select id="Interval" name="Interval" class="disabled">
-                            <option value="1">1分</option>
-                            <option value="5">5分</option>
-                            <option value="10">10分</option>
-                            <option value="15" selected>15分</option>
-                            <option value="30">30分</option>
-                            <option value="60">60分</option>
-                        </select>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div class=" col-lg-11" id="canvas">
-            <canvas id="IboundCallPredictionChart" class=" col-lg-12" style="height:300px"></canvas>
-        </div>
-        <div id="IboundCallPredictionChartLegend" class=" col-lg-1"></div>
-
-        <div class="col-md-12">
-            <table class="table table-bordered">
-                <tr>
-                    <th style="width: 100px;vertical-align: middle;" class="thUpTitle">
-                        エージェントシフト
-                    </th>
-                    <td>@Html.ListBox("agentShift", (List<SelectListItem>)ViewData["lstAgent"], new { style = "height:450px" })</td>
-                </tr>
-                <tr>
-                    <td style="text-align:center" colspan="2">
-                        <input type="submit" onclick="Save();" value="保存" class="btn btn-primary" />
-                    </td>
-                </tr>
-            </table>
-        </div>
-
-    </div>
-
 </section>
 
 

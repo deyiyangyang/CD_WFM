@@ -80,7 +80,8 @@
             </div>
         </div>
         @Html.Partial("PagerHeader", (PagerDataModel)ViewBag.PagerDataModel)
-        <table class="table table-bordered table-hover" style="margin-bottom: 0px;width:auto;" id="weekSch">
+    <div class="box ">
+        <table class="table table-bordered table-hover"  id="weekSch">
             <tr>
                 <th>
                     エジェートID
@@ -104,30 +105,14 @@
                         スキルアグリゲーショ
                     </th>
                 }
-                @*<th>
-                        着信通話時間
-                    </th>
-                    <th>
-                        着信通話回数
-                    </th>*@
+
                 <th>
                     着信平均通話時間
                 </th>
-                @*<th>
-                        後処理時間
-                    </th>
-                    <th>
-                        後処理回数
-                    </th>*@
+
                 <th>
                     着信平均後処理時間
                 </th>
-                @*<th>
-                        保留時間
-                    </th>
-                    <th>
-                        保留回数
-                    </th>*@
                 <th>
                     着信平均保留時間
                 </th>
@@ -148,7 +133,7 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.vDisplayName)
                     </td>
-                   
+
                     @if (ViewBag.RadioChecked != "byAgregation")
                     {
                         <td>
@@ -164,45 +149,30 @@
                             @Html.DisplayFor(modelItem => item.vAggregationName)
                         </td>
                     }
-                    @*<td>
-                            @Html.DisplayFor(modelItem => item.iTotalInBoundTalkDru)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.iCountInBoundTalk)
-                        </td>*@
+
                     <td>
-                        @*@Html.DisplayFor(modelItem => item.iAvgInBoundTalk)*@
+
                         @item.iAvgInBoundTalk.ChangeSecondToHHMMSS()
                     </td>
-                    @*<td>
-                            @Html.DisplayFor(modelItem => item.iTotalWorktimeDru)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.iCountWorktime)
-                        </td>*@
+
                     <td>
-                        @*@Html.DisplayFor(modelItem => item.iAvgWorktime)*@
+
                         @item.iAvgWorktime.ChangeSecondToHHMMSS()
                     </td>
-                    @*<td>
-                            @Html.DisplayFor(modelItem => item.iTotalHoldDru)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.iCountHold)
-                        </td>*@
+
                     <td>
-                        @*@Html.DisplayFor(modelItem => item.iAvgHold)*@
+
                         @item.iAvgHold.ChangeSecondToHHMMSS()
                     </td>
                     <td>
-                        @*@Html.DisplayFor(modelItem => item.AHT)*@
+
                         @item.AHT.ChangeSecondToHHMMSS()
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.CPH)
                     </td>
                 </tr>
-            }        
+            }
             @if (Model.Count() <= 0)
             {
                 <tr>
@@ -212,6 +182,7 @@
                 </tr>
             }
         </table>
+    </div>
         @Html.Partial("PageFooter", (PagerDataModel)ViewBag.PagerDataModel)
     }
 

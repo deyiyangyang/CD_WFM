@@ -42,20 +42,22 @@
     }
 </script>
 
-<div style="width:100%;height:100%;position:relative">
-    <h2>月間着信回数 @ViewBag.UpdatedTime まで </h2>
-    <div class=" col-lg-11">
-        <canvas id="IboundCallChartMM" class=" col-lg-12" style="height:300px"></canvas>
+<div class="row1">
+    <div class="col-lg-12">
+        <h2>月間着信回数 @ViewBag.UpdatedTime まで </h2>
+        <div class=" col-lg-11">
+            <canvas id="IboundCallChartMM" class=" col-lg-12" style="height:300px"></canvas>
+        </div>
+        <div id="IboundCallChartMMLegend" class=" col-lg-1"></div>
+        <h3 class="col-lg-6">同じ日の着信回数</h3>
+        <h3 class="col-lg-6">同じ曜日の着信回数</h3>
+        <div class=" col-lg-5">
+            <canvas id="IboundCallChartDay" class=" col-lg-12"></canvas>
+        </div>
+        <div id="IboundCallChartDayLegend" class=" col-lg-1"></div>
+        <div class=" col-lg-5">
+            <canvas id="IboundCallChartWeekDay" class=" col-lg-12" ></canvas>
+        </div>
+        <div id="IboundCallChartWeekDayLegend" class=" col-lg-1"></div>
     </div>
-    <div id="IboundCallChartMMLegend" class=" col-lg-1"></div>
-    <h3 class="col-lg-6">同じ日の着信回数</h3>
-    <h3 class="col-lg-6">同じ曜日の着信回数</h3>
-    <div class=" col-lg-5">
-        <canvas id="IboundCallChartDay" class=" col-lg-12" style="height:300px"></canvas>
-    </div>
-    <div id="IboundCallChartDayLegend" class=" col-lg-1"></div>
-    <div class=" col-lg-5">
-        <canvas id="IboundCallChartWeekDay" class=" col-lg-12" style="height:300px"></canvas>
-    </div>
-    <div id="IboundCallChartWeekDayLegend" class=" col-lg-1"></div>
 </div>

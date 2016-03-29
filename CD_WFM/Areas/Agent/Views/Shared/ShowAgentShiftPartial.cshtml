@@ -91,80 +91,88 @@
                 </div>
             </div>
         </div>
-        @Html.Partial("PagerHeader", (PagerDataModel)ViewBag.PagerDataModel)
-        <table class="table table-bordered table-hover" style="margin-bottom: 0px;width:auto;" id="weekSch">
-            <tr>
-                <th>
-                    エージェントID
-                </th>
-                <th>
-                    エージェント名
-                </th>
-                <th id="sun">日曜日</th>
-                <th id="mon">月曜日</th>
-                <th id="tue">火曜日</th>
-                <th id="wed">水曜日</th>
-                <th id="thur">木曜日</th>
-                <th id="fri">金曜日</th>
-                <th id="sat">土曜日</th>
+        
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box no-border">
+                    @Html.Partial("PagerHeader", (PagerDataModel)ViewBag.PagerDataModel)
+                    <table class="table table-bordered table-hover" id="weekSch">
+                        <tr>
+                            <th>
+                                エージェントID
+                            </th>
+                            <th>
+                                エージェント名
+                            </th>
+                            <th id="sun">日曜日</th>
+                            <th id="mon">月曜日</th>
+                            <th id="tue">火曜日</th>
+                            <th id="wed">水曜日</th>
+                            <th id="thur">木曜日</th>
+                            <th id="fri">金曜日</th>
+                            <th id="sat">土曜日</th>
 
-                <th></th>
-            </tr>
+                            <th>操作</th>
+                        </tr>
 
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.vAgentID)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.vDisplayName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.sunShiftName)
-                        @*@Html.RadioButtonListFor(modelItem => item.sunShift, item.vAgentID, "Shift", TenantID, TenantFlag, RepeatDirection.Vertical)*@
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.vAgentID)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.vDisplayName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.sunShiftName)
+                                    @*@Html.RadioButtonListFor(modelItem => item.sunShift, item.vAgentID, "Shift", TenantID, TenantFlag, RepeatDirection.Vertical)*@
 
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.monShiftName)
-                        @*@Html.RadioButtonListFor(modelItem => item.monShift, item.vAgentID, "Shift", TenantID, TenantFlag, RepeatDirection.Vertical)*@
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.tueShiftName)
-                        @*@Html.RadioButtonListFor(modelItem => item.tueShift, item.vAgentID, "Shift", TenantID, TenantFlag, RepeatDirection.Vertical)*@
-                    </td>
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.monShiftName)
+                                    @*@Html.RadioButtonListFor(modelItem => item.monShift, item.vAgentID, "Shift", TenantID, TenantFlag, RepeatDirection.Vertical)*@
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.tueShiftName)
+                                    @*@Html.RadioButtonListFor(modelItem => item.tueShift, item.vAgentID, "Shift", TenantID, TenantFlag, RepeatDirection.Vertical)*@
+                                </td>
 
-                    <td>
-                        @Html.DisplayFor(modelItem => item.wedShiftName)
-                        @*@Html.RadioButtonListFor(modelItem => item.wedShift, item.vAgentID, "Shift", TenantID, TenantFlag, RepeatDirection.Vertical)*@
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.thurShiftName)
-                        @*@Html.RadioButtonListFor(modelItem => item.thurShift, item.vAgentID, "Shift", TenantID, TenantFlag, RepeatDirection.Vertical)*@
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.friShiftName)
-                        @*@Html.RadioButtonListFor(modelItem => item.friShift, item.vAgentID, "Shift", TenantID, TenantFlag, RepeatDirection.Vertical)*@
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.satShiftName)
-                        @*@Html.RadioButtonListFor(modelItem => item.satShift, item.vAgentID, "Shift", TenantID, TenantFlag, RepeatDirection.Vertical)*@
-                    </td>
-                    <td>
-                        @Html.ActionLink("変更", "Edit", new { vAgentID = item.vAgentID, vAgentName = item.vDisplayName })
-                    </td>
-                </tr>
-            }
-            @if (Model.Count() <= 0)
-            {
-                <tr>
-                    <td colspan="10">
-                        @Html.Partial("NoResultFound")
-                    </td>
-                </tr>
-            }
-        </table>
-        @Html.Partial("PageFooter", (PagerDataModel)ViewBag.PagerDataModel)
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.wedShiftName)
+                                    @*@Html.RadioButtonListFor(modelItem => item.wedShift, item.vAgentID, "Shift", TenantID, TenantFlag, RepeatDirection.Vertical)*@
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.thurShiftName)
+                                    @*@Html.RadioButtonListFor(modelItem => item.thurShift, item.vAgentID, "Shift", TenantID, TenantFlag, RepeatDirection.Vertical)*@
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.friShiftName)
+                                    @*@Html.RadioButtonListFor(modelItem => item.friShift, item.vAgentID, "Shift", TenantID, TenantFlag, RepeatDirection.Vertical)*@
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.satShiftName)
+                                    @*@Html.RadioButtonListFor(modelItem => item.satShift, item.vAgentID, "Shift", TenantID, TenantFlag, RepeatDirection.Vertical)*@
+                                </td>
+                                <td>
+                                    @Html.ActionLink("変更", "Edit", new { vAgentID = item.vAgentID, vAgentName = item.vDisplayName })
+                                </td>
+                            </tr>
+                        }
+                        @if (Model.Count() <= 0)
+                        {
+                            <tr>
+                                <td colspan="10">
+                                    @Html.Partial("NoResultFound")
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                    @Html.Partial("PageFooter", (PagerDataModel)ViewBag.PagerDataModel)
+                </div>
+            </div>
+        </div>
+
     }
 
 </section>

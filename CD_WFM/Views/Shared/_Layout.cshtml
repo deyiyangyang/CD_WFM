@@ -163,18 +163,18 @@
                         if (areaName.ToLower() == "data") { strCss = "active"; } else { strCss = ""; }
                         <li class="@strCss  treeview">
                             <a href="#">
-                                <i class="fa fa-laptop"></i>
+                                <i class="fa fa-database"></i>
                                 <span>同期&チャート</span>
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
                                 @if (controllerName == "DataSynchro")
                                 {
-                                    <li class="active"><a href="~/data/DataSynchro"><i class="fa fa-database"></i> データ同期</a></li>
+                                    <li class="active"><a href="~/data/DataSynchro"><i class="fa fa-circle-o"></i> データ同期</a></li>
                                 }
                                 else
                                 {
-                                    <li><a href="~/data/DataSynchro"><i class="fa fa-database"></i> データ同期</a></li>
+                                    <li><a href="~/data/DataSynchro"><i class="fa fa-circle-o"></i> データ同期</a></li>
                                 }
                                 @if (controllerName == "Chart")
                                 {
