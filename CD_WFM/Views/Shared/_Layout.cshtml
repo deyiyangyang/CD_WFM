@@ -129,7 +129,8 @@
         <aside class="left-side sidebar-offcanvas">
             <!-- sidebar: style can be found in sidebar.less -->
             <section class="sidebar">
-                @if (true)//Request.IsAuthenticated)
+                @*@if (true)//Request.IsAuthenticated)*@
+                 @if(Request.IsAuthenticated)
                 {
                     <!-- Sidebar user panel -->
                     <div class="user-panel">
@@ -137,7 +138,8 @@
                             <img src="@Url.Content("~/Content/img/avatar5.png")" class="img-circle" alt="User Image" />
                         </div>
                         <div class="pull-left info">
-                            <p>@Html.ActionLink("ようこそ " + @WFM.Common.AppFunction.GetUserName(Session["vTenantID"].ToString()) + " さん！", "Index", "Account")</p>
+                          
+                              <p>@Html.ActionLink("ようこそ " + @WFM.Common.AppFunction.GetUserName(Session["vTenantID"].ToString()) + " さん！", "Index", "Account")</p>
                         </div>
                     </div>
                 }

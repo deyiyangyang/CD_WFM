@@ -10,10 +10,12 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using WFM.Models;
 using WFM.Common;
+using System.Collections.Generic;
+using System.Web.Security;
 
 namespace WFM.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
@@ -62,35 +64,115 @@ namespace WFM.Controllers
             return View();
         }
 
-        //
-        // POST: /Account/Login
         [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
+        public ActionResult Login(LogOnModel model, string returnUrl)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                return View(model);
+                AuthDBDataContext db = new AuthDBDataContext();
+                List<ValidateUserLoginResult> lstStaff = db.ValidateUserLogin(model.LoginId, model.Password).ToList();
+
+                //アクセスログ用情報
+                short iSat = 0;
+                int? iUserId = null;
+                //string strIP = AppFunction.GetClientIpAddress(Request);
+                string strPort = Request.Url.Port.ToString();
+                string strUserAgent = Request.ServerVariables.Get("HTTP_USER_AGENT");
+                string strSessionId = Session.SessionID;
+
+                if (lstStaff.Count > 0)
+                {
+                    //ログイン成功                    
+                    iSat = 1;
+                    iUserId = lstStaff[0].iUserID;
+                    //try
+                    //{
+                    //    db.InsertAccessLog(iSat, iUserId, strIP, strPort, strUserAgent, DateTime.Now, strSessionId, "認証ok", iUserId.ToString());
+                    //}
+                    //catch (Exception ex)
+                    //{
+                    //    AppLog.TraceLog(ex);
+                    //}
+
+                    //権限
+                    string roles = string.Empty;
+                    if (lstStaff[0].iAccess == 1)
+                    {
+                        roles += "," + AppConst.RolesInSite.Level_Admin;
+                    }
+                    else
+                    {
+                        roles += "," + AppConst.RolesInSite.Level_Normal;
+                    }
+
+                    if (roles.Length > 0) roles = roles.Substring(1);
+
+                    FormsAuthenticationTicket authTicket = new FormsAuthenticationTicket(1, lstStaff[0].vEmail.ToString(), DateTime.Now, DateTime.Now.AddMinutes(120), true, roles);
+                    string encTicket = FormsAuthentication.Encrypt(authTicket);
+                    this.Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, encTicket));
+                    //FormsAuthentication.SetAuthCookie(lstStaff[0].vEmail,true);
+
+                    if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
+                        && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
+                    {
+                        Session["NeedLoginAgent"] = true;
+                        return Redirect(returnUrl);
+                    }
+                    else
+                    {
+                        Session["NeedLoginAgent"] = true;
+                        return RedirectToAction("Index", "Home");
+                    }
+                }
+                else
+                {
+                    iSat = 2;
+                    //try
+                    //{
+                    //    db.InsertAccessLog(iSat, iUserId, strIP, strPort, strUserAgent, DateTime.Now, strSessionId, "認証NG", "");
+                    //}
+                    //catch (Exception ex)
+                    //{
+                    //    AppLog.TraceLog(ex);
+                    //}
+
+                    ModelState.AddModelError("", "※ユーザー名またはパスワードが正しくありません。");
+                }
             }
 
-            // これは、アカウント ロックアウトの基準となるログイン失敗回数を数えません。
-            // パスワード入力失敗回数に基づいてアカウントがロックアウトされるように設定するには、shouldLockout: true に変更してください。
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-            switch (result)
-            {
-                case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-                case SignInStatus.Failure:
-                default:
-                    ModelState.AddModelError("", "無効なログイン試行です。");
-                    return View(model);
-            }
+            // ここで問題が発生した場合はフォームを再表示します
+            return View(model);
         }
+
+        //
+        // POST: /Account/Login
+        //[HttpPost]
+        //[AllowAnonymous]
+        //[ValidateAntiForgeryToken]
+        //public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return View(model);
+        //    }
+
+        //    // これは、アカウント ロックアウトの基準となるログイン失敗回数を数えません。
+        //    // パスワード入力失敗回数に基づいてアカウントがロックアウトされるように設定するには、shouldLockout: true に変更してください。
+        //    var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+        //    switch (result)
+        //    {
+        //        case SignInStatus.Success:
+        //            return RedirectToLocal(returnUrl);
+        //        case SignInStatus.LockedOut:
+        //            return View("Lockout");
+        //        case SignInStatus.RequiresVerification:
+        //            return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+        //        case SignInStatus.Failure:
+        //        default:
+        //            ModelState.AddModelError("", "無効なログイン試行です。");
+        //            return View(model);
+        //    }
+        //}
 
         //
         // GET: /Account/VerifyCode

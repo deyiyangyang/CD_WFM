@@ -62,6 +62,23 @@ namespace WFM.Models
         public bool RememberMe { get; set; }
     }
 
+    public class LogOnModel
+    {
+        [Required(ErrorMessage = "※ユーザーIDをご入力ください。")]
+        [MaxLength(100)]
+        [Display(Name = "ユーザーID(メールアドレス)")]
+        public string LoginId { get; set; }
+
+        [Required(ErrorMessage = "※パスワードをご入力ください。")]
+        [DataType(DataType.Password)]
+        [MaxLength(10)]
+        [Display(Name = "パスワード")]
+        public string Password { get; set; }
+
+        [Display(Name = "サインイン状態を保持")]
+        public bool RememberMe { get; set; }
+    }
+
     public class RegisterViewModel
     {
         [Required]

@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="NGCP0100" Class="AuthDBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=localhost;Initial Catalog=NGCP0100;Persist Security Info=True;User ID=sa" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="NGCP0100ConnectionString1" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.tblUser" Member="tblUser">
+    <Type Name="tblUser">
+      <Column Name="iUserID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="vName" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="vEmail" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="vPassword" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="iAccess" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="dtLastLogin" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="vMemo" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="createdDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="createdUser" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="updatedDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="updatedUser" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Function Name="dbo.GetSingleUser" Method="GetSingleUser">
+    <Parameter Name="IN_iUserID" Parameter="iN_iUserID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="GetSingleUserResult">
+      <Column Name="iUserID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="vName" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="vEmail" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="vPassword" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="iAccess" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="dtLastLogin" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="vMemo" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="createdDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="createdUser" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="updatedDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="updatedUser" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.ValidateUserLogin" Method="ValidateUserLogin">
+    <Parameter Name="IN_vEmail" Parameter="iN_vEmail" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="IN_vPassword" Parameter="iN_vPassword" Type="System.String" DbType="NVarChar(10)" />
+    <ElementType Name="ValidateUserLoginResult">
+      <Column Name="iUserID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="vName" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="vEmail" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="vPassword" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="iAccess" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="dtLastLogin" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="vMemo" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="createdDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="createdUser" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="updatedDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="updatedUser" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+</Database>

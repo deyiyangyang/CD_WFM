@@ -10,6 +10,7 @@ using WFM.Common;
 namespace WFM.Controllers
 {
     //共通機能を実装したコントローラ
+    [Authorize]
     public abstract class BaseController : Controller
     {
         #region TenantID

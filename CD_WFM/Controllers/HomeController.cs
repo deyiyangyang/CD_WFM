@@ -9,6 +9,7 @@ using WFM.Models;
 
 namespace WFM.Controllers
 {
+    [Authorize]
     public class HomeController : BaseController
     {
 
