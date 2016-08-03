@@ -15,17 +15,18 @@ namespace WFM.Areas.Report.Controllers
         private static string[] const_SortFields = { "dtCreatedCall" };
 
         // GET: Report/CallDetail
-        public ActionResult Index(string dtStart, string dtEnd, string vCalleeid, string iSessionProfileID, int? iConntype, int? iCompletedCall, int? iQueCall)
+        public ActionResult Index(string dtStart, string dtEnd, string vCalleeid, string iSessionProfileID, int? iConntype, int? iCompletedCall, int? iQueCall, int? iHasTransfer)
         {
             try
             {
                 GetSkillGroupListForDDL(0, true);
 
+
                 if (dtStart == null)
                     dtStart = DateTime.Now.ToString(AppConst.Const_Format_YMD);
 
                 if (dtEnd == null)
-                    dtEnd = DateTime.Now.ToString(AppConst.Const_Format_YMD);
+                    dtEnd = DateTime.Now.ToString(AppConst.Const_Format_YMD)+" 23:59:59";
 
                 int isessionprofileidValue = 0;
                 if (!string.IsNullOrEmpty(iSessionProfileID))
@@ -46,8 +47,10 @@ namespace WFM.Areas.Report.Controllers
                     iCompletedCall = -1;
                 if (iQueCall == null)
                     iQueCall = -1;
+                if (iHasTransfer == null)
+                    iHasTransfer = -1;
 
-                List<tblCallDetailV3> lstData = SearchData("1", m_CurrentPageSize.ToString(), "1", DateTime.Parse(dtStart), DateTime.Parse(dtEnd), "", "", 0, isessionprofileidValue, iConntype.Value, iCompletedCall.Value, iQueCall.Value);
+                List<tblCallDetailV3> lstData = SearchData("1", m_CurrentPageSize.ToString(), "1", DateTime.Parse(dtStart), DateTime.Parse(dtEnd), "", "", 0, isessionprofileidValue, iConntype.Value, iCompletedCall.Value, iQueCall.Value, iHasTransfer.Value);
                 //ページ情報
                 CalcPagerData();
 
@@ -69,7 +72,7 @@ namespace WFM.Areas.Report.Controllers
         [HttpPost]
         [ValidateInput(false)]
         [MultiActionAttribute("firstPage,nextPage,prePage,lastPage,pageChanged,pageChanged_Buttom,Search,pageSizeChanged")]
-        public ActionResult Search(string pageIndex, string ddlPageSize, string pageTotal, string sortIndex, string sort, string dtStart, string dtEnd, string vCalleeid, string vCallerid, string selectSkillGroup, string iSessionProfileID, int? iConntype, int? iCompletedCall, int? iQueCall)
+        public ActionResult Search(string pageIndex, string ddlPageSize, string pageTotal, string sortIndex, string sort, string dtStart, string dtEnd, string vCalleeid, string vCallerid, string selectSkillGroup, string iSessionProfileID, int? iConntype, int? iCompletedCall, int? iQueCall,int? iHasTransfer)
         {
             try
             {
@@ -79,7 +82,8 @@ namespace WFM.Areas.Report.Controllers
                     iCompletedCall = -1;
                 if (iQueCall == null)
                     iQueCall = -1;
-
+                if (iHasTransfer == null)
+                    iHasTransfer = -1;
                 ViewBag.iSessionProfileID = iSessionProfileID;
                 ViewBag.iConntype = iConntype.Value;
                 ViewBag.iCompletedCall = iCompletedCall.Value;
@@ -112,9 +116,9 @@ namespace WFM.Areas.Report.Controllers
                 m_Sort = nSort;
 
                 if (string.IsNullOrEmpty(selectSkillGroup))
-                    lstData = SearchData(pageIndex, ddlPageSize, pageTotal, DateTime.Parse(dtStart), DateTime.Parse(dtEnd), vCalleeid, vCallerid, 0, isessionprofileidValue, iConntype.Value, iCompletedCall.Value, iQueCall.Value);
+                    lstData = SearchData(pageIndex, ddlPageSize, pageTotal, DateTime.Parse(dtStart), DateTime.Parse(dtEnd), vCalleeid, vCallerid, 0, isessionprofileidValue, iConntype.Value, iCompletedCall.Value, iQueCall.Value, iHasTransfer.Value);
                 else
-                    lstData = SearchData(pageIndex, ddlPageSize, pageTotal, DateTime.Parse(dtStart), DateTime.Parse(dtEnd), vCalleeid, vCallerid, int.Parse(selectSkillGroup), isessionprofileidValue, iConntype.Value, iCompletedCall.Value, iQueCall.Value);
+                    lstData = SearchData(pageIndex, ddlPageSize, pageTotal, DateTime.Parse(dtStart), DateTime.Parse(dtEnd), vCalleeid, vCallerid, int.Parse(selectSkillGroup), isessionprofileidValue, iConntype.Value, iCompletedCall.Value, iQueCall.Value, iHasTransfer.Value);
 
                 //ページ情報
                 CalcPagerData();
@@ -129,10 +133,11 @@ namespace WFM.Areas.Report.Controllers
         }
 
         //検索処理
-        private List<tblCallDetailV3> SearchData(string pageIndex, string pageSize, string pageTotal, DateTime dtST, DateTime dtEnd, string vCalleeid, string vCallerid, int skillID, int isessionprofileid, int iConntype, int iCompletedCall, int iQueCall)
+        private List<tblCallDetailV3> SearchData(string pageIndex, string pageSize, string pageTotal, DateTime dtST, DateTime dtEnd, string vCalleeid, string vCallerid, int skillID, int isessionprofileid, int iConntype, int iCompletedCall, int iQueCall, int iHasTransfer)
         {
-            AppLog.WriteLog(string.Format("CallDetailController SearchData paramter is pageIndex:{0},pageSize:{1},pageTotal:{2},dtST:{3},dtEnd:{4},vCalleeid:{5},skillID{6}", pageIndex, pageSize, pageTotal, dtST.ToString(AppConst.Const_Format_YMD)
-                , dtEnd.ToString(AppConst.Const_Format_YMD), vCalleeid, skillID.ToString()));
+            
+            AppLog.WriteLog(string.Format("CallDetailController SearchData paramter is pageIndex:{0},pageSize:{1},pageTotal:{2},dtST:{3},dtEnd:{4},vCalleeid:{5},skillID{6}", pageIndex, pageSize, pageTotal, dtST.ToString(AppConst.Const_Format_YMDHMS)
+                , dtEnd.ToString(AppConst.Const_Format_YMDHMS), vCalleeid, skillID.ToString()));
             List<tblCallDetailV3> result = new List<tblCallDetailV3>();
 
             int currentPageIndex = m_CurPageIndex;
@@ -154,7 +159,7 @@ namespace WFM.Areas.Report.Controllers
             using (WFMDBDataContext db = new WFMDBDataContext())
             {
                 IMultipleResults results = db.uspWFMGetCallDetailV3(m_CurPageIndex, m_CurrentPageSize, strSortField, strSort,
-                    this.TenantID, dtST.ToString("yyyy/MM/dd"), dtEnd.ToString("yyyy/MM/dd"), skillID, vCalleeid, vCallerid, isessionprofileid, iConntype, iCompletedCall, iQueCall);
+                    this.TenantID, dtST.ToString(AppConst.Const_Format_YMDHMS), dtEnd.ToString(AppConst.Const_Format_YMDHMS), skillID, vCalleeid, vCallerid, isessionprofileid, iConntype, iCompletedCall, iQueCall,iHasTransfer);
 
                 result = results.GetResult<tblCallDetailV3>().ToList();
                 tblDataPaged tblPage = results.GetResult<tblDataPaged>().FirstOrDefault();

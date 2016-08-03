@@ -22,7 +22,7 @@ namespace WFM.Areas.Report.Controllers
                 dtStart = DateTime.Now.ToString(AppConst.Const_Format_YMD);
 
             if (dtEnd == null)
-                dtEnd = DateTime.Now.ToString(AppConst.Const_Format_YMD);
+                dtEnd = DateTime.Now.ToString(AppConst.Const_Format_YMD) + " 23:59:59";
 
             List<tblAgentDetailV3> lstData = SearchData("1", m_CurrentPageSize.ToString(), "1", DateTime.Parse(dtStart), DateTime.Parse(dtEnd), null);
             //ページ情報
@@ -82,7 +82,7 @@ namespace WFM.Areas.Report.Controllers
             using (WFMDBDataContext db = new WFMDBDataContext())
             {
                 IMultipleResults results = db.uspWFMGetAgentDetailV3(m_CurPageIndex, m_CurrentPageSize, strSortField, strSort,
-                    this.TenantID, dtST.ToString("yyyy/MM/dd"), dtEnd.ToString("yyyy/MM/dd"), vLogin);
+                    this.TenantID, dtST.ToString(AppConst.Const_Format_YMDHMS), dtEnd.ToString(AppConst.Const_Format_YMDHMS), vLogin);
 
                 result = results.GetResult<tblAgentDetailV3>().ToList();
                 tblDataPaged tblPage = results.GetResult<tblDataPaged>().FirstOrDefault();

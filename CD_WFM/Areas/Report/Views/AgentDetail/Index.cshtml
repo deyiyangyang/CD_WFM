@@ -11,13 +11,15 @@
 @Html.Partial("SortScript")
 <script type="text/javascript">
     $(document).ready(function () {
-        $('#dtStart').datepicker(opt_datePicker);
-        $('#dtEnd').datepicker(opt_datePicker);
+        $('#dtStart').datetimepicker(opt_datePicker);
+        $('#dtEnd').datetimepicker(opt_datePicker);
         if (!$('#dtStart').val()) {
-            $('#dtStart').datepicker('setDate', new Date());
+            $('#dtStart').datetimepicker('setDate', new Date().GetDateWithHHmmSS(0,0,0)); 
         }
         if (!$('#dtEnd').val())
-            $('#dtEnd').datepicker('setDate', new Date());
+        {            $('#dtEnd').datetimepicker('setDate', new Date().GetDateWithHHmmSS(23, 59, 59));
+        }
+          
     });
 
 </script>
@@ -42,9 +44,9 @@
                                     日付
                                 </th>
                                 <td style="vertical-align:middle;">
-                                    @Html.TextBox("dtStart", null, new { maxLength = "10", @readonly = "readonly", style = "width:110px;readonly;margin-right:5px;", @class = "form-control" })
+                                    @Html.TextBox("dtStart", null, new { maxLength = "20", @readonly = "readonly", style = "readonly;margin-right:5px;", @class = "form-control" })
                                     ～
-                                    @Html.TextBox("dtEnd", null, new { maxLength = "10", @readonly = "readonly", style = "width:110px;readonly;margin-right:5px;", @class = "form-control" })
+                                    @Html.TextBox("dtEnd", null, new { maxLength = "20", @readonly = "readonly", style = "readonly;margin-right:5px;", @class = "form-control" })
                                 </td>
                                 <th class="thUpTitle" style="width: 50px;vertical-align: middle;">エージェント</th>
                                 <td>@Html.DropDownList("lstAgent", (List<SelectListItem>)ViewData["lstAgent"], new { @class = "form-control" })</td>

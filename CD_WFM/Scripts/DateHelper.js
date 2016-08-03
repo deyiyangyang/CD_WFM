@@ -11,3 +11,8 @@
         case 'y': return new Date((dtTmp.getFullYear() + Number), dtTmp.getMonth(), dtTmp.getDate(), dtTmp.getHours(), dtTmp.getMinutes(), dtTmp.getSeconds());
     }
 }
+
+Date.prototype.GetDateWithHHmmSS = function (hh, mm, ss) {
+    var now = new Date();
+    return new Date(now.getFullYear(), now.getMonth(), now.getDate(), hh, mm, ss);
+}

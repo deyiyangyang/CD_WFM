@@ -1,5 +1,6 @@
 ﻿<!-- JavaScriptファイルの読み込み -->
 <script src="@Url.Content("~/Scripts/jquery.ui.datepicker-ja.min.js")"></script>
+<script src="@Url.Content("~/Scripts/jquery-ui-timepicker-addon.js")"></script>
 <style type="text/css">
     .ui-datepicker select.ui-datepicker-month, .ui-datepicker select.ui-datepicker-year
     {
@@ -15,9 +16,12 @@
             changeMonth: true,
             showMonthAfterYear: true,
             changeYear: true,
+            showSecond: true,
+            timeFormat: 'HH:mm:ss',
             showOn: "button",
             buttonImage: "@Url.Content("~/Content/img/calendar.gif")",
             buttonImageOnly: true,
+           
             beforeShow: function (input) {
                 setTimeout(function () {
                     var buttonPane = $(input)
