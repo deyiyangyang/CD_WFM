@@ -16,5 +16,12 @@ namespace WFM.Helper
                 return hour.ToString().PadLeft(2, '0') + ":" + minute.ToString().PadLeft(2, '0') + ":" + second.ToString().PadLeft(2, '0');
 
         }
+
+        public static int GetDuration(this DateTime dtEnd,DateTime dtST)
+        {
+            TimeSpan ts = dtEnd - dtST;
+            return (int)ts.TotalSeconds;
+
+        }
     }
 }

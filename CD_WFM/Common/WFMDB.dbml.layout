@@ -134,10 +134,10 @@
         <elementListCompartment Id="27a021a4-4764-4fb3-ad75-5ea090f8e1dc" absoluteBounds="0.76500000000000012, 17.335, 1.9700000000000002, 3.1948343912760415" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="4a227653-7e3f-4a78-810c-3db7d4e612b4" absoluteBounds="4.5, 17.625, 2, 2.2764815266927094">
+    <classShape Id="4a227653-7e3f-4a78-810c-3db7d4e612b4" absoluteBounds="4.5, 17.625, 2, 2.4612756347656273">
       <DataClassMoniker Name="/WFMDBDataContext/tblAgentDetailV3" />
       <nestedChildShapes>
-        <elementListCompartment Id="3be3150a-caf0-4b0f-bb4b-4487fb8c21d0" absoluteBounds="4.515, 18.085, 1.9700000000000002, 1.7164815266927083" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="3be3150a-caf0-4b0f-bb4b-4487fb8c21d0" absoluteBounds="4.515, 18.085, 1.9700000000000002, 1.901275634765625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
     <classShape Id="db43920b-8c1e-40dd-a3ff-3fe03864b3ed" absoluteBounds="7.125, 9.625, 2, 1.3525109863281255">

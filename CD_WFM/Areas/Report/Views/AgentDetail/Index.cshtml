@@ -1,5 +1,6 @@
 ﻿@using WFM.Common;
 @using WFM.Models;
+@using WFM.Helper;
 @model IEnumerable<WFM.Common.tblAgentDetailV3>
 @{
     ViewBag.Title = "エージェント詳細";
@@ -72,6 +73,9 @@
                                 ID
                             </th>
                             <th>
+                                CCP
+                            </th>
+                            <th>
                                 vLogin
                             </th>
                             <th>
@@ -93,6 +97,9 @@
                                 dtStatusEnd
                             </th>
                             <th>
+                                Duration
+                            </th>
+                            <th>
                                 iCallSessionProfileID
                             </th>
                         </tr>
@@ -104,6 +111,9 @@
                             <tr>
                                 <td>
                                     @currentIndex
+                                </td>
+                                <td>
+                                    @item.vServerName
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.vLogin)
@@ -128,14 +138,25 @@
                                     @Html.DisplayFor(modelItem => item.dtStatusEnd)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.iCallSessionProfileID)
+                                    @item.dtStatusEnd.GetDuration(item.dtStatusStart).ChangeSecondToHHMMSS()
+                                </td>
+                                <td>
+                                    @if (item.iCallSessionProfileID > 0)
+                                    {
+                                        <a href="javascript:void(0)" onclick="showDetial(@item.iCallSessionProfileID,'@item.vServerName')">@item.iCallSessionProfileID</a>
+                                    }
+                                    else
+                                    {
+                                        @Html.DisplayFor(modelItem => item.iCallSessionProfileID)
+                                    }
+                                    
                                 </td>
                             </tr>
                         }
                         @if (Model.Count() <= 0)
                         {
                             <tr>
-                                <td colspan="10">
+                                <td colspan="11">
                                     @Html.Partial("NoResultFound")
                                 </td>
                             </tr>
@@ -145,5 +166,21 @@
                 </div>
             </div>
         </div>
+    <div id="dialog_container"></div>
     }
 </section>
+
+<script>
+    function showDetial(id, ccp) {
+        var url = "@Html.Raw(Url.Action("GetSingleCallDetail", "CallDetail"))";
+        $.get(url, { isessionprofileid: id, vServerName: ccp }).success(function (data) {
+            $("#dialog_container").html(data);
+            $.validator.unobtrusive.parse("form");
+
+            $('#singleCall').modal('show');
+            $('#singleCall').on('hidden.bs.modal', function (e) {
+                //context.redirect("/tag/");
+            });
+        });
+    }
+</script>

@@ -527,6 +527,7 @@
       <Column Name="dtStatusStart" Type="System.DateTime" CanBeNull="false" />
       <Column Name="dtStatusEnd" Type="System.DateTime" CanBeNull="false" />
       <Column Name="iCallSessionProfileID" Type="System.Int32" CanBeNull="false" />
+      <Column Name="vServerName" Type="System.String" CanBeNull="false" />
     </Type>
   </Table>
   <Table Name="" Member="tblChart">

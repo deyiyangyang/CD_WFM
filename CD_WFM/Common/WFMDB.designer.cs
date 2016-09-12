@@ -11077,6 +11077,8 @@ namespace WFM.Common
 		
 		private int _iCallSessionProfileID;
 		
+		private string _vServerName;
+		
 		public tblAgentDetailV3()
 		{
 		}
@@ -11205,6 +11207,22 @@ namespace WFM.Common
 				if ((this._iCallSessionProfileID != value))
 				{
 					this._iCallSessionProfileID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_vServerName", CanBeNull=false)]
+		public string vServerName
+		{
+			get
+			{
+				return this._vServerName;
+			}
+			set
+			{
+				if ((this._vServerName != value))
+				{
+					this._vServerName = value;
 				}
 			}
 		}
