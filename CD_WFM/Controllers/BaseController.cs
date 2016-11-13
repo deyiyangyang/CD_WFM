@@ -357,6 +357,30 @@ namespace WFM.Controllers
         }
 
         /// <summary>
+        /// get all the 局番 group 
+        /// </summary>
+        /// <param name="skillAgregationID">skill group in current skill agregation </param>
+        protected void GetKyoGroupListForDDL(int groupID,bool hasExtraHeader = false)
+        {
+            List<SelectListItem> lstItem = new List<SelectListItem>();
+            List<uspWFMGetKyokuGroupResult> lstSkillGroup = new List<uspWFMGetKyokuGroupResult>();
+
+            using (WFMDBDataContext db = new WFMDBDataContext())
+            {
+                lstSkillGroup = db.uspWFMGetKyokuGroup(this.TenantID).ToList();
+            }
+            if (hasExtraHeader)
+            {
+                lstItem.Insert(0, new SelectListItem { Text = "指定なし", Value = "0" });
+            }
+            foreach (var item in lstSkillGroup)
+            {
+                lstItem.Add(new SelectListItem { Text = item.vCompany, Value = item.iGroupProfileID.ToString(), Selected = (item.iGroupProfileID.Equals(groupID)) });
+            }
+            ViewData["selectJuGroup"] = lstItem;
+        }
+
+        /// <summary>
         /// get all the skill group 
         /// </summary>
         /// <param name="selectedGroupIDs">these group ids are seleted </param>

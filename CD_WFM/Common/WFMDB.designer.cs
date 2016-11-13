@@ -534,6 +534,13 @@ namespace WFM.Common
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), vTenantID);
 			return ((int)(result.ReturnValue));
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.uspWFMGetKyokuGroup")]
+		public ISingleResult<uspWFMGetKyokuGroupResult> uspWFMGetKyokuGroup([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string vTenantID)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), vTenantID);
+			return ((ISingleResult<uspWFMGetKyokuGroupResult>)(result.ReturnValue));
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbCpfAgentDetailV3")]
@@ -12035,6 +12042,50 @@ namespace WFM.Common
 				if ((this._iAggregationID != value))
 				{
 					this._iAggregationID = value;
+				}
+			}
+		}
+	}
+	
+	public partial class uspWFMGetKyokuGroupResult
+	{
+		
+		private int _iGroupProfileID;
+		
+		private string _vCompany;
+		
+		public uspWFMGetKyokuGroupResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_iGroupProfileID", DbType="Int NOT NULL")]
+		public int iGroupProfileID
+		{
+			get
+			{
+				return this._iGroupProfileID;
+			}
+			set
+			{
+				if ((this._iGroupProfileID != value))
+				{
+					this._iGroupProfileID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_vCompany", DbType="VarChar(64)")]
+		public string vCompany
+		{
+			get
+			{
+				return this._vCompany;
+			}
+			set
+			{
+				if ((this._vCompany != value))
+				{
+					this._vCompany = value;
 				}
 			}
 		}

@@ -23,6 +23,7 @@
         $("#iConntype").val("@ViewBag.iConntype");
         $("#iCompletedCall").val("@ViewBag.iCompletedCall");
         $("#iQueCall").val("@ViewBag.iQueCall");
+        $("#ihasACD").val("@ViewBag.ihasACD");
     });
 
 </script>
@@ -51,6 +52,8 @@
                                     ～
                                     @Html.TextBox("dtEnd", null, new { maxLength = "20", @readonly = "readonly", style = "readonly;margin-right:5px;", @class = "form-control" })
                                 </td>
+                                <th class="thUpTitle  col-md-1">局番</th>
+                                <td class=" col-md-1">@Html.DropDownList("selectJuGroup", (List<SelectListItem>)ViewData["lstJuGroup"], new { style = "width:100%", @class = "form-control" })</td>
                                 <th class="thUpTitle  col-md-1">スキル</th>
                                 <td class=" col-md-1">@Html.DropDownList("selectSkillGroup", (List<SelectListItem>)ViewData["lstSkillGroup"], new { style = "width:100%", @class = "form-control" })</td>
                                 <th class="thUpTitle  col-md-1">受信番号</th>
@@ -68,6 +71,8 @@
                                 <td><select id="iHasTransfer" name="iHasTransfer" class="form-control"><option value="-1">指定なし</option><option value="1">転送完了</option><option value="0">非転送完了</option></select></td>
                                 <th class="thUpTitle">発着信</th>
                                 <td><select id="iConntype" name="iConntype" class="form-control" style="width:100%"><option value="-1">指定なし</option><option value="0">着信</option><option value="1">発信</option></select></td>
+                                <th class="thUpTitle">ACD分配</th>
+                                <td><select id="ihasACD" name="ihasACD" class="form-control" style="width:100%"><option value="-1">指定なし</option><option value="1">ACD分配</option><option value="0">分配なし</option></select></td>
                                 <th class="thUpTitle">完了呼</th>
                                 <td><select id="iCompletedCall" name="iCompletedCall" class="form-control" style="width:100%"><option value="-1">指定なし</option><option value="1">完了</option><option value="0">未完了</option></select></td>
                                 <th class="thUpTitle">待ち呼</th>

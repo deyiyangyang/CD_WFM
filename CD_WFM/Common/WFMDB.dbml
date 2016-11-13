@@ -761,4 +761,11 @@
     <Parameter Name="vTenantID" Type="System.String" DbType="VarChar(32)" />
     <Return Type="System.Int32" />
   </Function>
+  <Function Name="dbo.uspWFMGetKyokuGroup" Method="uspWFMGetKyokuGroup">
+    <Parameter Name="vTenantID" Type="System.String" DbType="VarChar(32)" />
+    <ElementType Name="uspWFMGetKyokuGroupResult">
+      <Column Name="iGroupProfileID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="vCompany" Type="System.String" DbType="VarChar(64)" CanBeNull="true" />
+    </ElementType>
+  </Function>
 </Database>
