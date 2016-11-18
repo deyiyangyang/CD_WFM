@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
 using WFM.Models;
 using WFM.Common;
 
@@ -43,6 +42,21 @@ namespace WFM.Controllers
                 else
                 {
                     return Session[const_Session_TenantSpecial_Key].ToString();
+                }
+            }
+        }
+
+        public string DBServer
+        {
+            get
+            {
+                if (Session[AppConst.Const_Session_DBServer_Key] == null)
+                {
+                    return "CDDB004";
+                }
+                else
+                {
+                    return Session[AppConst.Const_Session_DBServer_Key].ToString();
                 }
             }
         }
@@ -582,9 +596,11 @@ namespace WFM.Controllers
         /// </summary>
         protected void GetDataSynchroDate()
         {
+            AppLog.WriteLog("current connection:" + string.Format(System.Configuration.ConfigurationManager.ConnectionStrings["SpecialConnection"].ConnectionString, DBServer));
             string today = DateTime.Now.ToString(AppConst.Const_Format_YMD) + " 00:00:00";
             string lastUpdatedTime = today;
-            using (WFMDBDataContext db = new WFMDBDataContext())
+            //using (WFMDBDataContext db = new WFMDBDataContext())
+            using (WFMDBDataContext db = new WFMDBDataContext(string.Format(System.Configuration.ConfigurationManager.ConnectionStrings["SpecialConnection"].ConnectionString, DBServer)))
             {
                 List<uspWFMGetDataSynchroResult> lst = db.uspWFMGetDataSynchro(this.TenantID).ToList();
                 if (lst.Count > 0)

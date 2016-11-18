@@ -25,7 +25,7 @@ namespace WFM.Controllers
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -37,9 +37,9 @@ namespace WFM.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -203,7 +203,7 @@ namespace WFM.Controllers
             // ユーザーが誤ったコードを入力した回数が指定の回数に達すると、ユーザー アカウントは
             // 指定の時間が経過するまでロックアウトされます。
             // アカウント ロックアウトの設定は IdentityConfig の中で構成できます。
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -238,8 +238,8 @@ namespace WFM.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
                     // アカウント確認とパスワード リセットを有効にする方法の詳細については、http://go.microsoft.com/fwlink/?LinkID=320771 を参照してください
                     // このリンクを含む電子メールを送信します
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
@@ -505,23 +505,25 @@ namespace WFM.Controllers
 
             base.Dispose(disposing);
         }
-         [AllowAnonymous]
-       public ActionResult ChangeTenant()
+        [AllowAnonymous]
+        public ActionResult ChangeTenant()
         {
             return View();
         }
-         [AllowAnonymous]
+        [AllowAnonymous]
         [HttpPost]
-       public ActionResult ChangeTenant(string tenant)
-       {
-           Session["vTenantID"] = tenant;
-           using (WFMDBDataContext db = new WFMDBDataContext())
-           {
-               db.uspWFMCreateDefaultShift(tenant);
-               
-           }
-           return RedirectToAction("index", "home");
-       }
+        public ActionResult ChangeTenant(string tenant)
+        {
+            Session["vTenantID"] = tenant;
+            using (WFMDBDataContext db = new WFMDBDataContext())
+            {
+                db.uspWFMCreateDefaultShift(tenant);
+                var result = db.uspWFMGetDBServerByTenant(tenant);
+                Session[AppConst.Const_Session_DBServer_Key] = result.FirstOrDefault().Column1;  
+            }
+
+            return RedirectToAction("index", "home");
+        }
 
         #region ヘルパー
         // 外部ログインの追加時に XSRF の防止に使用します

@@ -21,7 +21,9 @@ namespace WFM.Controllers
 
         public JsonResult LineChart(string type)
         {
-            WFMDBDataContext db = new WFMDBDataContext();
+            
+            //WFMDBDataContext db = new WFMDBDataContext();
+            WFMDBDataContext db = new WFMDBDataContext(string.Format(System.Configuration.ConfigurationManager.ConnectionStrings["SpecialConnection"].ConnectionString, DBServer));
             List<tblChart> lstCalls = db.uspWFMGetHistoryInboundCallForChart(this.TenantID, type).ToList();
             LineChart line = new LineChart();
             List<Dataset> datasets = new List<Dataset>();

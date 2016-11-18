@@ -541,6 +541,13 @@ namespace WFM.Common
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), vTenantID);
 			return ((ISingleResult<uspWFMGetKyokuGroupResult>)(result.ReturnValue));
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.uspWFMGetDBServerByTenant")]
+		public ISingleResult<uspWFMGetDBServerByTenantResult> uspWFMGetDBServerByTenant([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(32)")] string vTenantID)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), vTenantID);
+			return ((ISingleResult<uspWFMGetDBServerByTenantResult>)(result.ReturnValue));
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbCpfAgentDetailV3")]
@@ -12086,6 +12093,32 @@ namespace WFM.Common
 				if ((this._vCompany != value))
 				{
 					this._vCompany = value;
+				}
+			}
+		}
+	}
+	
+	public partial class uspWFMGetDBServerByTenantResult
+	{
+		
+		private string _Column1;
+		
+		public uspWFMGetDBServerByTenantResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="", Storage="_Column1", DbType="VarChar(7) NOT NULL", CanBeNull=false)]
+		public string Column1
+		{
+			get
+			{
+				return this._Column1;
+			}
+			set
+			{
+				if ((this._Column1 != value))
+				{
+					this._Column1 = value;
 				}
 			}
 		}

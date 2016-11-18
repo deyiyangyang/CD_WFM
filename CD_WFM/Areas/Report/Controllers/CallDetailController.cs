@@ -62,6 +62,7 @@ namespace WFM.Areas.Report.Controllers
                 ViewBag.iCompletedCall = -1;
                 ViewBag.iQueCall = -1;
                 ViewBag.ihasACD = -1;
+                ViewBag.iHasTrans = -1;
                 return View(lstData);
             }
             catch (Exception ex)
@@ -88,11 +89,14 @@ namespace WFM.Areas.Report.Controllers
                     iQueCall = -1;
                 if (iHasTransfer == null)
                     iHasTransfer = -1;
+                if (ihasACD == null)
+                    ihasACD = -1;
                 ViewBag.iSessionProfileID = iSessionProfileID;
                 ViewBag.iConntype = iConntype.Value;
                 ViewBag.iCompletedCall = iCompletedCall.Value;
                 ViewBag.iQueCall = iQueCall.Value;
                 ViewBag.ihasACD = ihasACD.Value;
+                ViewBag.iHasTrans = iHasTransfer.Value;
                 int isessionprofileidValue = 0;
                 if (!string.IsNullOrEmpty(iSessionProfileID))
                 {
@@ -178,7 +182,7 @@ namespace WFM.Areas.Report.Controllers
             //ページを再計算する
             CalcPage(pageTotal);
 
-            using (WFMDBDataContext db = new WFMDBDataContext())
+            using (WFMDBDataContext db = new WFMDBDataContext(string.Format(System.Configuration.ConfigurationManager.ConnectionStrings["SpecialConnection"].ConnectionString,DBServer)))
             {
                 IMultipleResults results = db.uspWFMGetCallDetailV3(m_CurPageIndex, m_CurrentPageSize, strSortField, strSort,
                     this.TenantID, dtST.ToString(AppConst.Const_Format_YMDHMS), dtEnd.ToString(AppConst.Const_Format_YMDHMS), skillID, vCalleeid, vCallerid, isessionprofileid, iConntype, iCompletedCall, iQueCall, iHasTransfer, iHasACD, iGroupID);
@@ -198,7 +202,7 @@ namespace WFM.Areas.Report.Controllers
         public ActionResult GetSingleCallDetail(int? isessionprofileid, string vServerName)
         {
             ViewBag.iSessionID = isessionprofileid.Value;
-            using (WFMDBDataContext db = new WFMDBDataContext())
+            using (WFMDBDataContext db = new WFMDBDataContext(string.Format(System.Configuration.ConfigurationManager.ConnectionStrings["SpecialConnection"].ConnectionString, DBServer)))
             {
                 ISingleResult<tblSingleCallDetail> results = db.uspWFMGetSingleCallDetail(isessionprofileid, vServerName);
                 return PartialView("SignleCallDetail", results.ToList());

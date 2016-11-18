@@ -768,4 +768,10 @@
       <Column Name="vCompany" Type="System.String" DbType="VarChar(64)" CanBeNull="true" />
     </ElementType>
   </Function>
+  <Function Name="dbo.uspWFMGetDBServerByTenant" Method="uspWFMGetDBServerByTenant">
+    <Parameter Name="vTenantID" Type="System.String" DbType="VarChar(32)" />
+    <ElementType Name="uspWFMGetDBServerByTenantResult">
+      <Column Name="" Member="Column1" Type="System.String" DbType="VarChar(7) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
 </Database>

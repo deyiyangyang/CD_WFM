@@ -79,7 +79,7 @@ namespace WFM.Areas.Report.Controllers
             //ページを再計算する
             CalcPage(pageTotal);
 
-            using (WFMDBDataContext db = new WFMDBDataContext())
+            using (WFMDBDataContext db = new WFMDBDataContext(string.Format(System.Configuration.ConfigurationManager.ConnectionStrings["SpecialConnection"].ConnectionString, DBServer)))
             {
                 IMultipleResults results = db.uspWFMGetAgentDetailV3(m_CurPageIndex, m_CurrentPageSize, strSortField, strSort,
                     this.TenantID, dtST.ToString(AppConst.Const_Format_YMDHMS), dtEnd.ToString(AppConst.Const_Format_YMDHMS), vLogin);

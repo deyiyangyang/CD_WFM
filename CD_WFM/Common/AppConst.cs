@@ -41,6 +41,8 @@ namespace WFM.Common
         //デフォルトのページサイズ
         public static int[] Const_PAGESIZE_DEFINES = { 5, 10, 50, 100 };
 
+        public const string Const_Session_DBServer_Key = "DBServer";
+
         //並び順定義
         public enum SortMethod : int
         {

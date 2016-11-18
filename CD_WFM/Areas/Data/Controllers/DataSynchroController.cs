@@ -21,7 +21,8 @@ namespace WFM.Areas.Data.Controllers
         {
             try
             {
-                using (WFMDBDataContext db = new WFMDBDataContext())
+                //using (WFMDBDataContext db = new WFMDBDataContext())
+                using (WFMDBDataContext db = new WFMDBDataContext(string.Format(System.Configuration.ConfigurationManager.ConnectionStrings["SpecialConnection"].ConnectionString, DBServer)))
                 {
                     db.uspWFMDataSynchro(this.TenantID, null, null);
                     //db.uspRptForAgentDetailV3OneDay(this.TenantID, null, null);
