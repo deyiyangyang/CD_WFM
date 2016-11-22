@@ -15,12 +15,14 @@
         $('#dtStart').datetimepicker(opt_datePicker);
         $('#dtEnd').datetimepicker(opt_datePicker);
         if (!$('#dtStart').val()) {
-            $('#dtStart').datetimepicker('setDate', new Date().GetDateWithHHmmSS(0,0,0)); 
+            $('#dtStart').datetimepicker('setDate', new Date().GetDateWithHHmmSS(0, 0, 0));
         }
-        if (!$('#dtEnd').val())
-        {            $('#dtEnd').datetimepicker('setDate', new Date().GetDateWithHHmmSS(23, 59, 59));
+        if (!$('#dtEnd').val()) {
+            $('#dtEnd').datetimepicker('setDate', new Date().GetDateWithHHmmSS(23, 59, 59));
         }
-          
+
+        $("#iAgentStatus").val("@ViewBag.iAgentStatus");
+
     });
 
 </script>
@@ -29,7 +31,7 @@
     {
         @Html.Partial("SortHeader", AppConst.Const_Default_SortAction)
         <div class="row">
-            <div class="col-md-12" >
+            <div class="col-md-12">
                 <div class="box box-primary" style="width:1050px;">
                     <div class="box-header">
                         <i class="fa fa-search"></i>
@@ -51,7 +53,25 @@
                                 </td>
                                 <th class="thUpTitle" style="width: 50px;vertical-align: middle;">エージェント</th>
                                 <td>@Html.DropDownList("lstAgent", (List<SelectListItem>)ViewData["lstAgent"], new { @class = "form-control" })</td>
-
+                                <th class="thUpTitle">状態</th>
+                                <td>
+                                    <select id="iAgentStatus" name="iAgentStatus" class="form-control" style="width:100%">
+                                        <option value="-1">指定なし</option>
+                                        <option value="0">受付可(0)</option>
+                                        <option value="1">接続準備(1)</option>
+                                        <option value="3">オファリング(3)</option>
+                                        <option value="4">通話(4)</option>
+                                        <option value="5">後処理(5)</option>
+                                        <option value="6">離席(6)</option>
+                                        <option value="11">相手端末呼出(11)</option>
+                                        <option value="12">自端末呼出(12)</option>
+                                        <option value="20">保留(20)</option>
+                                        <option value="30">転送先との通話(30)</option>
+                                        <option value="31">転送先と転送元の通話の切り替え(31)</option>
+                                        <option value="32">転送元との通話(32)</option>
+                                        <option value="35">転送(35)</option>
+                                    </select>
+                                </td>
                                 <td style="vertical-align:middle;text-align:center;">
                                     <button type="submit" id="Search" name="Search" class="btn btn-primary" style="width: 100px;"><i class="fa fa-search"></i> 検索</button>
                                 </td>
@@ -149,7 +169,7 @@
                                     {
                                         @Html.DisplayFor(modelItem => item.iCallSessionProfileID)
                                     }
-                                    
+
                                 </td>
                             </tr>
                         }
@@ -166,7 +186,7 @@
                 </div>
             </div>
         </div>
-    <div id="dialog_container"></div>
+        <div id="dialog_container"></div>
     }
 </section>
 

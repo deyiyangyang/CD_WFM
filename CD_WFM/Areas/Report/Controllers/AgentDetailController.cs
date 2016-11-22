@@ -24,7 +24,8 @@ namespace WFM.Areas.Report.Controllers
             if (dtEnd == null)
                 dtEnd = DateTime.Now.ToString(AppConst.Const_Format_YMD) + " 23:59:59";
 
-            List<tblAgentDetailV3> lstData = SearchData("1", m_CurrentPageSize.ToString(), "1", DateTime.Parse(dtStart), DateTime.Parse(dtEnd), null);
+            ViewBag.iAgentStatus = -1;
+            List<tblAgentDetailV3> lstData = SearchData("1", m_CurrentPageSize.ToString(), "1", DateTime.Parse(dtStart), DateTime.Parse(dtEnd), null,-1);
             //ページ情報
             CalcPagerData();
             return View(lstData);
@@ -35,7 +36,7 @@ namespace WFM.Areas.Report.Controllers
         [HttpPost]
         [ValidateInput(false)]
         [MultiActionAttribute("firstPage,nextPage,prePage,lastPage,pageChanged,pageChanged_Buttom,Search,pageSizeChanged")]
-        public ActionResult Search(string pageIndex, string ddlPageSize, string pageTotal, string sortIndex, string sort, string dtStart, string dtEnd, string lstAgent)
+        public ActionResult Search(string pageIndex, string ddlPageSize, string pageTotal, string sortIndex, string sort, string dtStart, string dtEnd, string lstAgent, int? iAgentStatus)
         {
             List<tblAgentDetailV3> lstData = new List<tblAgentDetailV3>();
             int nSortIndex = 0;
@@ -49,8 +50,11 @@ namespace WFM.Areas.Report.Controllers
                 GetAgentListForDDL("-1", true, false);
             m_SortField = nSortIndex;
             m_Sort = nSort;
+            if (iAgentStatus == null)
+                iAgentStatus = -1;
+            ViewBag.iAgentStatus = iAgentStatus.Value;
 
-                lstData = SearchData(pageIndex, ddlPageSize, pageTotal, DateTime.Parse(dtStart), DateTime.Parse(dtEnd), vlogin);
+            lstData = SearchData(pageIndex, ddlPageSize, pageTotal, DateTime.Parse(dtStart), DateTime.Parse(dtEnd), vlogin, iAgentStatus.Value);
 
             //ページ情報
             CalcPagerData();
@@ -59,7 +63,7 @@ namespace WFM.Areas.Report.Controllers
         }
 
         //検索処理
-        private List<tblAgentDetailV3> SearchData(string pageIndex, string pageSize, string pageTotal, DateTime dtST, DateTime dtEnd, string vLogin)
+        private List<tblAgentDetailV3> SearchData(string pageIndex, string pageSize, string pageTotal, DateTime dtST, DateTime dtEnd, string vLogin, int iAgentStatus)
         {
             List<tblAgentDetailV3> result = new List<tblAgentDetailV3>();
 
@@ -82,7 +86,7 @@ namespace WFM.Areas.Report.Controllers
             using (WFMDBDataContext db = new WFMDBDataContext(string.Format(System.Configuration.ConfigurationManager.ConnectionStrings["SpecialConnection"].ConnectionString, DBServer)))
             {
                 IMultipleResults results = db.uspWFMGetAgentDetailV3(m_CurPageIndex, m_CurrentPageSize, strSortField, strSort,
-                    this.TenantID, dtST.ToString(AppConst.Const_Format_YMDHMS), dtEnd.ToString(AppConst.Const_Format_YMDHMS), vLogin);
+                    this.TenantID, dtST.ToString(AppConst.Const_Format_YMDHMS), dtEnd.ToString(AppConst.Const_Format_YMDHMS), vLogin, iAgentStatus);
 
                 result = results.GetResult<tblAgentDetailV3>().ToList();
                 tblDataPaged tblPage = results.GetResult<tblDataPaged>().FirstOrDefault();
