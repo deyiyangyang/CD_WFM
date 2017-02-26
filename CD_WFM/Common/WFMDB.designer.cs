@@ -11608,6 +11608,8 @@ namespace WFM.Common
 	{
 		
 		private string _vDisplayName;
+
+        private string _vPassword;
 		
 		public uspWFMGetTenantNameResult()
 		{
@@ -11628,6 +11630,22 @@ namespace WFM.Common
 				}
 			}
 		}
+
+        [global::System.Data.Linq.Mapping.ColumnAttribute(Storage = "_vPassword", DbType = "VarChar(128) NOT NULL", CanBeNull = false)]
+        public string vPassword
+        {
+            get
+            {
+                return this._vPassword;
+            }
+            set
+            {
+                if ((this._vPassword != value))
+                {
+                    this._vPassword = value;
+                }
+            }
+        }
 	}
 	
 	public partial class uspWFMGetOneWeekInboundCallResult

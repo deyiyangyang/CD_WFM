@@ -23,6 +23,21 @@ namespace WFM.Common
 
             return strRet;
         }
+
+        public static string GetUserPassword(string vTenantID)
+        {
+            string strRet = string.Empty;
+
+            WFMDBDataContext db = new WFMDBDataContext();
+            List<uspWFMGetTenantNameResult> lstUsers = db.uspWFMGetTenantName(vTenantID).ToList();
+
+            if (lstUsers.Count > 0)
+            {
+                strRet = lstUsers[0].vPassword;
+            }
+
+            return strRet;
+        }
         #endregion
 
         #region SORTの文字列を取得

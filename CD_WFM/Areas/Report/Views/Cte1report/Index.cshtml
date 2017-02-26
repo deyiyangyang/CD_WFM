@@ -1,0 +1,52 @@
+﻿
+@using WFM.Common;
+@using WFM.Models;
+@model IEnumerable<WFM.Areas.Report.Models.Cte1ReportViewModel>
+@{
+    ViewBag.Title = "Cte1帳票";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int index = 0;
+
+}
+
+<section class="content">
+    @using (Html.BeginForm())
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box no-border">
+
+                    <table class="table table-bordered table-striped table-hover table-condensed text-left">
+                        <tr>
+                            <th>
+                                ID
+                            </th>
+                            <th>
+                                ReportID
+                            </th>
+                            <th>
+                                ReportName
+                            </th>
+                        </tr>
+
+                        @foreach (var item in Model)
+                        {
+                            index++;
+                            <tr>
+                                <td>
+                                    @index
+                                </td>
+                                <td>
+                                    @item.ReportID
+                                </td>
+                                <td>@item.ReportName</td>
+
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div id="dialog_container"></div>
+    }
+</section>
