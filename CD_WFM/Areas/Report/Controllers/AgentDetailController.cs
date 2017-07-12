@@ -17,18 +17,26 @@ namespace WFM.Areas.Report.Controllers
         // GET: Report/CallDetail
         public ActionResult Index(string dtStart, string dtEnd, string vCalleeid)
         {
-            GetAgentListForDDL("-1", true, false);
-            if (dtStart == null)
-                dtStart = DateTime.Now.ToString(AppConst.Const_Format_YMD);
+            try
+            {
+                GetAgentListForDDL("-1", true, false);
+                if (dtStart == null)
+                    dtStart = DateTime.Now.ToString(AppConst.Const_Format_YMD);
 
-            if (dtEnd == null)
-                dtEnd = DateTime.Now.ToString(AppConst.Const_Format_YMD) + " 23:59:59";
+                if (dtEnd == null)
+                    dtEnd = DateTime.Now.ToString(AppConst.Const_Format_YMD) + " 23:59:59";
 
-            ViewBag.iAgentStatus = -1;
-            List<tblAgentDetailV3> lstData = SearchData("1", m_CurrentPageSize.ToString(), "1", DateTime.Parse(dtStart), DateTime.Parse(dtEnd), null,-1);
-            //ページ情報
-            CalcPagerData();
-            return View(lstData);
+                ViewBag.iAgentStatus = -1;
+                List<tblAgentDetailV3> lstData = SearchData("1", m_CurrentPageSize.ToString(), "1", DateTime.Parse(dtStart), DateTime.Parse(dtEnd), null, -1);
+                //ページ情報
+                CalcPagerData();
+                return View(lstData);
+            }
+            catch(Exception ex)
+            {
+                AppLog.WriteLog("AgentDetailController Index system error:" + ex.Message + ex.StackTrace);
+                throw ex;
+            }
         }
 
 

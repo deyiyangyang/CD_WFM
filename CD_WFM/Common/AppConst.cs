@@ -8,6 +8,7 @@ namespace WFM.Common
     public class AppConst
     {
         public static string Const_SiteName = System.Configuration.ConfigurationManager.AppSettings["SiteName"];
+        public static string Const_Cte1ReportUrl = System.Configuration.ConfigurationManager.AppSettings["Cte1ReportUrl"];
 
         public struct RolesInSite
         {

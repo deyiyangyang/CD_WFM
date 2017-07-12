@@ -121,7 +121,8 @@ namespace WFM.Controllers
                     else
                     {
                         Session["NeedLoginAgent"] = true;
-                        return RedirectToAction("Index", "Home");
+                        //return RedirectToAction("Index", "Home");
+                        return RedirectToAction("index", "calldetail", new { area = "report" });
                     }
                 }
                 else
@@ -522,7 +523,7 @@ namespace WFM.Controllers
                 Session[AppConst.Const_Session_DBServer_Key] = result.FirstOrDefault().Column1;  
             }
 
-            return RedirectToAction("index", "home");
+            return RedirectToAction("index", "calldetail",new { area="report"});
         }
 
         #region ヘルパー
